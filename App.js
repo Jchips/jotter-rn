@@ -1,12 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import './gesture-handler';
+import { StyleSheet } from 'react-native';
+import { AuthProvider } from './src/contexts/AuthContext';
+import { MarkdownProvider } from './src/contexts/MDContext';
+import Router from './src/routing/Router';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <MarkdownProvider>
+        <Router />
+      </MarkdownProvider>
+    </AuthProvider>
   );
 }
 
