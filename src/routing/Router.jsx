@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth } from '../contexts/AuthContext';
-// import Dashboard from '../components/Dashboard';
 import DrawerNav from './DrawerNav';
 import Login from '../auth/Login';
 import ViewNote from '../components/Note/ViewNote';
@@ -27,8 +26,13 @@ const Routing = () => {
                 headerShown: false,
               }}
             />
-            {/* <Stack.Screen name='Dashboard' component={Dashboard} /> */}
-            <Stack.Screen name='View' component={ViewNote} />
+            <Stack.Screen
+              name='View'
+              component={ViewNote}
+              options={{
+                headerShadowVisible: false,
+              }}
+            />
           </>
         ) : (
           <>
@@ -51,6 +55,13 @@ const Routing = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
+});
 
 export default Routing;

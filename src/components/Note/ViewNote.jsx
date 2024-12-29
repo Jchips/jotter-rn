@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import app from '../../styles/default';
 
 const ViewNote = ({ route }) => {
   const { note } = route.params;
   return (
-    <View>
+    <View style={app.container}>
       <Text>{note.title}</Text>
     </View>
   );
