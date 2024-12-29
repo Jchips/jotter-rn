@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { BORDER, FONT, FONTSIZE } from './constants/styles';
-// import COLORS from './constants/colors';
+import COLORS from './constants/colors';
 
 const app = StyleSheet.create({
   newPageText: {
@@ -10,8 +10,8 @@ const app = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginVertical: 10,
-    marginHorizontal: 20
+    padding: 20,
+    backgroundColor: COLORS.themeWhite,
   },
   text: {
     fontSize: FONTSIZE.regular,
@@ -41,16 +41,17 @@ const app = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    // backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.themePurple, // change based on theme
     borderRadius: BORDER.radius,
     height: 48,
     justifyContent: 'center',
     margin: 10,
+    paddingHorizontal: 20
   },
   buttonText: {
-    // color: COLORS.white,
+    color: COLORS.themeWhite,
     fontSize: FONTSIZE.regular,
-    // fontFamily: FONT.regular,
+    fontFamily: FONT.regular,
     lineHeight: 20,
   },
   errorAlert: {

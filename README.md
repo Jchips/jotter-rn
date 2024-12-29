@@ -26,8 +26,8 @@ TLDR: Jotter is a mobile app for Android and IOS designed for note-taking with M
 ## Architecture
 
 - Built with React Native
-- Languages used: JavaScript.
-- Backend uses MySQL, Sequelize, Nodejs, Jsonwebtoken, Bcrypt, and base-64.
+- Languages used: JavaScript
+- Backend uses MySQL, Sequelize, Nodejs, Jsonwebtoken, Bcrypt, and base-64
 
 ## Changelog
 

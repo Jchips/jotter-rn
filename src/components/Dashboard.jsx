@@ -3,9 +3,11 @@ import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext';
 import { useMarkdown } from '../contexts/MDContext';
+import Loading from './Loading';
 import DisplayFolders from './Display/DisplayFolders';
-import api from '../util/api';
 import DisplayNotes from './Display/DisplayNotes';
+import api from '../util/api';
+import COLORS from '../styles/constants/colors';
 
 const Dashboard = ({ route }) => {
   const { folderId, folderTitle } = route.params;
@@ -16,8 +18,6 @@ const Dashboard = ({ route }) => {
   const { token, logout } = useAuth();
   const { setMarkdown } = useMarkdown();
   const navigation = useNavigation();
-
-  console.log('folderId:', folderId); // delete later
 
   // Set up bearer auth for user
   useEffect(() => {
@@ -79,8 +79,13 @@ const Dashboard = ({ route }) => {
     logout();
   };
 
+  // Loading circle
+  if (loading) {
+    return <Loading />;
+  }
+
   return !loading ? (
-    <View>
+    <View style={styles.container}>
       {folders ? <DisplayFolders folders={folders} error={error} /> : null}
       {notes ? (
         <DisplayNotes notes={notes} folders={folders} error={error} />
@@ -89,6 +94,12 @@ const Dashboard = ({ route }) => {
   ) : null;
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: COLORS.themeWhite,
+  },
+});
 
 export default Dashboard;
