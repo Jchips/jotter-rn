@@ -4,11 +4,11 @@
     "slug": "jotter-rn",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/jotter-round.png",
+    "icon": "./assets/imgs/jotter-round.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/jotter4.gif",
+      "image": "./assets/imgs/jotter4.gif",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,12 +17,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/jotter.png",
+        "foregroundImage": "./assets/imgs/jotter.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/imgs/jotter-circle.png"
     },
     "plugins": [
       [

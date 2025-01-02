@@ -17,7 +17,7 @@ function DrawerNav({ navigation }) {
       <View style={styles.drawerContainer}>
         <View style={styles.header}>
           <Image
-            source={require('../../assets/jotter-circle.png')}
+            source={require('../../assets/imgs/jotter-circle.png')}
             alt='Jotter logo'
             style={styles.jotterLogo}
           />

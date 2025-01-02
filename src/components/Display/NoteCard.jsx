@@ -1,24 +1,65 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
+import Popover from 'react-native-popover-view';
 import formatDate from '../../util/formatDate';
-import { FONT, FONTSIZE } from '../../styles/constants/styles';
+import { BORDER, FONT, FONTSIZE } from '../../styles/constants/styles';
 import COLORS from '../../styles/constants/colors';
 import app from '../../styles/default';
+import buttons from '../../styles/constants/buttons';
 
-const NoteCard = ({ navigation, note }) => {
+const NoteCard = ({ note, setSelectedNote, setOpenRename }) => {
+  const popoverRef = useRef();
+
   return (
     <View style={styles.container}>
       <View style={styles.h1Container}>
         <Text style={styles.h1}>{note.title}</Text>
-        <Pressable>
-          <Image
-            source={{
-              uri: `https://img.icons8.com/material-outlined/100/more.png`,
-            }}
-            alt='more-icon'
-            style={styles.img}
-          />
-        </Pressable>
+        <Popover
+          ref={popoverRef}
+          from={
+            <Pressable>
+              <Image
+                source={{
+                  uri: `https://img.icons8.com/material-outlined/100/more.png`,
+                }}
+                alt='more-icon'
+                style={styles.img}
+              />
+            </Pressable>
+          }
+          arrowSize={{ width: 0, height: 0 }}
+          popoverStyle={styles.popover}
+        >
+          <View style={styles.popoverContainer}>
+            <Pressable
+              style={styles.button}
+              onPress={() => {
+                setSelectedNote(note);
+                setOpenRename(true);
+                popoverRef.current.requestClose();
+              }}
+            >
+              <Image
+                source={{
+                  uri: `https://img.icons8.com/material-outlined/24/${COLORS.textNoHash}/rename.png`,
+                }}
+                alt='rename-icon'
+                style={styles.img}
+              />
+              <Text style={buttons.btnText2}>Rename</Text>
+            </Pressable>
+            <Pressable style={styles.button}>
+              <Image
+                source={{
+                  uri: `https://img.icons8.com/material-outlined/24/${COLORS.textNoHash}/left.png`,
+                }}
+                alt='rename-icon'
+                style={styles.img}
+              />
+              <Text style={buttons.btnText2}>Move</Text>
+            </Pressable>
+          </View>
+        </Popover>
       </View>
       <Text style={styles.metaData}>{formatDate(note.createdAt)}</Text>
       <Text style={styles.metaData}>{formatDate(note.updatedAt)}</Text>
@@ -48,6 +89,24 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZE.smaller,
     fontFamily: FONT.regular,
     color: COLORS.mutedtext,
+  },
+  popover: {
+    borderRadius: BORDER.radius,
+    minHeight: 115,
+    width: 140,
+  },
+  popoverContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+  },
+  button: {
+    ...buttons.btn3,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 40,
+    paddingHorizontal: 10,
+    marginVertical: 0,
   },
 });
 

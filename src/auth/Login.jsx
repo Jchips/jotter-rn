@@ -19,7 +19,7 @@ const Login = ({ navigation }) => {
         <Text style={styles.header}>J</Text>
         <Image
           style={styles.img}
-          source={require('../../assets/jotter-circle.png')}
+          source={require('../../assets/imgs/jotter-circle.png')}
           alt='Jotter logo'
         />
         <Text style={styles.header}>tter</Text>

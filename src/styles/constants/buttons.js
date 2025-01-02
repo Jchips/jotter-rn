@@ -27,6 +27,10 @@ const buttons = StyleSheet.create({
     ...button,
     backgroundColor: COLORS.black
   },
+  btn3: {
+    ...button,
+    backgroundColor: COLORS.graySubtle,
+  },
   outlineBtn1: {
     ...button,
     backgroundColor: COLORS.themeWhite,
