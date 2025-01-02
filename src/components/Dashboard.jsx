@@ -24,21 +24,10 @@ const Dashboard = ({ route }) => {
     api.setTokenGetter(() => token);
   }, [token]);
 
-  // useEffect(() => {
-  //   navigation.setOptions({ headerTitle: folderTitle });
-  // }, [navigation]);
-
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
         headerTitle: folderTitle,
-        // headerTitle: folderId ? folderTitle : 'Home',
-        // headerLeft: () =>
-        //   folderId ? (
-        //     <Pressable onPress={() => navigation.goBack()}>
-        //       <Text>back</Text>
-        //     </Pressable>
-        //   ) : null,
       });
     }, [navigation])
   );
@@ -87,7 +76,12 @@ const Dashboard = ({ route }) => {
     <View style={styles.container}>
       {folders ? <DisplayFolders folders={folders} error={error} /> : null}
       {notes ? (
-        <DisplayNotes notes={notes} folders={folders} error={error} />
+        <DisplayNotes
+          notes={notes}
+          setNotes={setNotes}
+          folders={folders}
+          error={error}
+        />
       ) : null}
     </View>
   ) : null;

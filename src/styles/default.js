@@ -3,11 +3,6 @@ import { BORDER, FONT, FONTSIZE } from './constants/styles';
 import COLORS from './constants/colors';
 
 const app = StyleSheet.create({
-  newPageText: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   container: {
     flex: 1,
     padding: 20,
@@ -59,26 +54,30 @@ const app = StyleSheet.create({
     height: 25,
     width: 25,
   },
-  button: {
-    alignItems: 'center',
-    backgroundColor: COLORS.themePurple, // change based on theme
-    borderRadius: BORDER.radius,
-    height: 48,
-    justifyContent: 'center',
-    margin: 10,
-    paddingHorizontal: 20
-  },
-  buttonText: {
-    color: COLORS.themeWhite,
-    fontSize: FONTSIZE.regular,
-    fontFamily: FONT.regular,
-    lineHeight: 20,
-  },
   errorAlert: {
     backgroundColor: 'rgb(248, 215, 218)',
     padding: 16,
     borderRadius: 8,
     margin: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modal: {
+    margin: 20,
+    width: '90%',
+    backgroundColor: COLORS.themeWhite,
+    borderRadius: BORDER.radius,
+    padding: 10,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
   },
   singleLineInput: {
     // backgroundColor: COLORS.white,

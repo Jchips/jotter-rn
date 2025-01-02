@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, FlatList, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NoteCard from './NoteCard';
+import Rename from '../Modals/Rename';
 
-const DisplayNotes = ({ notes, folders, error }) => {
+const DisplayNotes = ({ notes, setNotes, folders, error }) => {
+  const [openRename, setOpenRename] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
   const navigation = useNavigation();
 
   const renderItem = ({ item }) => {
@@ -14,7 +17,11 @@ const DisplayNotes = ({ notes, folders, error }) => {
           navigation.navigate('View', { note: note });
         }}
       >
-        <NoteCard note={note} />
+        <NoteCard
+          note={note}
+          setSelectedNote={setSelectedNote}
+          setOpenRename={setOpenRename}
+        />
       </Pressable>
     );
   };
@@ -37,13 +44,15 @@ const DisplayNotes = ({ notes, folders, error }) => {
             numColumns={1}
             keyExtractor={(item) => item.id}
           />
-          {/* <Grid templateColumns='repeat(3, 1fr)' gap={6}>
-            {notes.map((note) => (
-              <NoteCard note={note} key={note.id} />
-            ))}
-          </Grid> */}
         </View>
       )}
+      <Rename
+        openRename={openRename}
+        setOpenRename={setOpenRename}
+        notes={notes}
+        setNotes={setNotes}
+        note={selectedNote}
+      />
     </View>
   );
 };
