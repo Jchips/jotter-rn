@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import { useMarkdown } from '../../contexts/MDContext';
 import Preview from './Preview';
 import SaveButton from '../Buttons/SaveButton';
+import TogglePreview from '../Buttons/TogglePreview';
 import app from '../../styles/default';
+import COLORS from '../../styles/constants/colors';
+import buttons from '../../styles/constants/buttons';
+import { BORDER } from '../../styles/constants/styles';
 
 const Editor = ({ navigation, route }) => {
   const { note } = route.params;
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [noteDB, setNoteDB] = useState(note);
+  const [showPreview, setShowPreview] = useState(true);
   const { markdown, setMarkdown } = useMarkdown();
 
   useEffect(() => {
@@ -24,16 +29,24 @@ const Editor = ({ navigation, route }) => {
       headerTitle: note.title,
       headerRight: () => {
         return (
-          <SaveButton
-            note={note}
-            markdown={markdown}
-            setNoteDB={setNoteDB}
-            setError={setError}
-          />
+          <>
+            <Pressable
+              onPress={() => setShowPreview(!showPreview)}
+              style={styles.showPreviewBtn}
+            >
+              <TogglePreview showPreview={showPreview} />
+            </Pressable>
+            <SaveButton
+              note={note}
+              markdown={markdown}
+              setNoteDB={setNoteDB}
+              setError={setError}
+            />
+          </>
         );
       },
     });
-  }, [navigation, markdown]);
+  }, [navigation, markdown, showPreview]);
 
   const update = (value) => {
     const lines = value.split('\n');
@@ -82,7 +95,7 @@ const Editor = ({ navigation, route }) => {
               <Text>{error}</Text>
             </View>
           ) : null}
-          <Preview markdown={markdown} />
+          {showPreview ? <Preview markdown={markdown} /> : null}
           <View style={styles.editorContainer}>
             <TextInput
               style={styles.editor}
@@ -103,12 +116,19 @@ const styles = StyleSheet.create({
     ...app.container,
     flexDirection: 'column',
   },
+  showPreviewBtn: {
+    marginHorizontal: 10,
+  },
   editorContainer: {
     flex: 1,
-    // margin: 10,
-    // padding: 10,
+    backgroundColor: COLORS.graySubtle,
+    borderRadius: BORDER.radius,
+    padding: 5,
   },
   editor: {},
+  // previewWrapper: {
+  //   display:
+  // },
 });
 
 export default Editor;
