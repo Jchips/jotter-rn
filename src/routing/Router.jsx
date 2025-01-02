@@ -6,6 +6,8 @@ import { useAuth } from '../contexts/AuthContext';
 import DrawerNav from './DrawerNav';
 import Login from '../auth/Login';
 import ViewNote from '../components/Note/ViewNote';
+import EditButton from '../components/Buttons/EditButton';
+import Editor from '../components/Note/Editor';
 // import Settings from './Settings';
 
 const Stack = createStackNavigator();
@@ -31,8 +33,12 @@ const Routing = () => {
               component={ViewNote}
               options={{
                 headerShadowVisible: false,
+                // headerRight: () => {
+                //   return <EditButton />;
+                // },
               }}
             />
+            <Stack.Screen name='Editor' component={Editor} />
           </>
         ) : (
           <>

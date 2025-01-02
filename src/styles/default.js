@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { BORDER, FONT, FONTSIZE } from './constants/styles';
 import COLORS from './constants/colors';
 
@@ -13,27 +13,47 @@ const app = StyleSheet.create({
     padding: 20,
     backgroundColor: COLORS.themeWhite,
   },
+  itemCard: {
+    flex: 1,
+    padding: 15,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: BORDER.color, // change based on theme
+    borderRadius: BORDER.radius,
+    marginVertical: 5,
+    marginHorizontal: 10,
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+      },
+      android: {
+        elevation: 0,
+      },
+    }),
+  },
   text: {
     fontSize: FONTSIZE.regular,
     marginVertical: 3,
-    // fontFamily: FONT.regular,
+    fontFamily: FONT.regular,
     lineHeight: 20
   },
   smallText: {
     fontSize: FONTSIZE.xsmall,
     marginVertical: 1,
-    // fontFamily: FONT.regular,
+    fontFamily: FONT.regular,
     lineHeight: 20
   },
   boldText: {
     // color: COLORS.primary,
-    // fontWeight: '500',
-    // fontFamily: FONT.bold,
+    fontFamily: FONT.bold,
   },
   header: {
     fontSize: FONTSIZE.large,
     margin: 10,
-    // fontFamily: FONT.bold
+    fontFamily: FONT.bold
   },
   icon: {
     height: 25,

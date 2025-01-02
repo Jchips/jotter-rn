@@ -1,14 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import formatDate from '../../util/formatDate';
-import { BORDER } from '../../styles/constants/styles';
 import { FONT, FONTSIZE } from '../../styles/constants/styles';
 import COLORS from '../../styles/constants/colors';
+import app from '../../styles/default';
 
 const NoteCard = ({ navigation, note }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.h1}>{note.title}</Text>
+      <View style={styles.h1Container}>
+        <Text style={styles.h1}>{note.title}</Text>
+        <Pressable>
+          <Image
+            source={{
+              uri: `https://img.icons8.com/material-outlined/100/more.png`,
+            }}
+            alt='more-icon'
+            style={styles.img}
+          />
+        </Pressable>
+      </View>
       <Text style={styles.metaData}>{formatDate(note.createdAt)}</Text>
       <Text style={styles.metaData}>{formatDate(note.updatedAt)}</Text>
     </View>
@@ -17,35 +28,26 @@ const NoteCard = ({ navigation, note }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#e4e4e7', // change based on theme
-    borderRadius: BORDER.radius,
-    marginVertical: 5,
-    marginHorizontal: 10,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 1,
-      },
-      android: {
-        elevation: 0,
-      },
-    }),
+    ...app.itemCard,
   },
-  h1: {
-    fontSize: FONTSIZE.large,
-    fontFamily: FONT.bold,
+  h1Container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 1,
     marginBottom: 10,
   },
+  h1: {
+    fontSize: FONTSIZE.regular,
+    fontFamily: FONT.bold,
+  },
+  img: {
+    height: 23,
+    width: 23,
+  },
   metaData: {
-    fontSize: FONTSIZE.small,
+    fontSize: FONTSIZE.smaller,
     fontFamily: FONT.regular,
-    color: '#a1a1aa',
+    color: COLORS.mutedtext,
   },
 });
 

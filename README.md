@@ -21,7 +21,7 @@ TLDR: Jotter is a mobile app for Android and IOS designed for note-taking with M
 
 ## Creator & developer: Jelani R
 
-## Version: 0.0.1
+## Version: 0.0.2
 
 ## Architecture
 
@@ -31,4 +31,5 @@ TLDR: Jotter is a mobile app for Android and IOS designed for note-taking with M
 
 ## Changelog
 
-- 0.0.1 (2024-12-28, 9:48pm) - Auth
+- 0.0.2 (2025-01-01, 9:01pm) - Users can preview and edit notes.
+- 0.0.1 (2024-12-28, 9:48pm) - Auth.

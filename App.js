@@ -14,6 +14,7 @@ export default function App() {
   Text.defaultProps.textBreakStrategy = 'simple'; // Adjust text break strategy
   const [fontsLoaded, error] = useFonts({
     'Inter-Regular': require('./assets/fonts/Inter-Regular.ttf'),
+    'Inter-Italic': require('./assets/fonts/Inter-Italic.ttf'),
     'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
     'Inter-SemiBold': require('./assets/fonts/Inter-SemiBold.ttf'),
     'Inter-ExtraBold': require('./assets/fonts/Inter-ExtraBold.ttf'),

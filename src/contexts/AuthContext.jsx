@@ -74,6 +74,7 @@ export function AuthProvider({ children }) {
       await axios.post(requestUrl, {}, { withCredentials: true });
       setUser(null);
       setIsLoggedIn(false);
+      setToken(null);
       // clearToken();
       delete axios.defaults.headers.common['Authorization'];
     } catch (err) {

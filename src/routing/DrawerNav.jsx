@@ -9,7 +9,7 @@ import { BORDER, FONT, FONTSIZE } from '../styles/constants/styles';
 
 const Drawer = createDrawerNavigator();
 
-function DrawerNav() {
+function DrawerNav({ navigation }) {
   const { user } = useAuth();
   const DrawerContent = (props) => {
     const { state, descriptors, navigation } = props;
@@ -17,12 +17,12 @@ function DrawerNav() {
       <View style={styles.drawerContainer}>
         <View style={styles.header}>
           <Image
-            source={require('../../assets/jotter-round.png')}
+            source={require('../../assets/jotter-circle.png')}
             alt='Jotter logo'
             style={styles.jotterLogo}
           />
           <Text style={styles.headerText}>Jotter</Text>
-          <Text style={styles.headerEmail}>{user.email}</Text>
+          <Text style={styles.headerEmail}>{user?.email}</Text>
         </View>
         <DrawerContentScrollView {...props}>
           {state.routes.map((route, index) => {
