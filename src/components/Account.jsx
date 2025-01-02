@@ -2,16 +2,16 @@ import React from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
 import app from '../styles/default';
-import { FONT, FONTSIZE } from '../styles/constants/styles';
 import COLORS from '../styles/constants/colors';
+import { FONT, FONTSIZE } from '../styles/constants/styles';
 
-const Account = ({ navigation }) => {
+const Account = () => {
   const { user, logout } = useAuth();
 
   const logUserOut = () => {
-    // navigation.navigate('Login');
     logout();
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.h1}>{user?.email}</Text>

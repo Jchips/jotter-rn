@@ -75,7 +75,6 @@ const Dashboard = ({ route }) => {
   );
 
   const logUserOut = () => {
-    navigation.navigate('Login');
     logout();
   };
 
