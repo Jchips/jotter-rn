@@ -45,9 +45,11 @@ const MARKDOWN = {
   },
   bullet_list: {
     fontFamily: FONT.regular,
+    lineHeight: 20,
   },
   ordered_list: {
     fontFamily: FONT.regular,
+    lineHeight: 20,
   },
 
   // list_item: {
@@ -82,7 +84,8 @@ const MARKDOWN = {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     width: '100%',
-    fontFamily: FONT.regular
+    fontFamily: FONT.regular,
+    lineHeight: 20,
   },
   hr: {
     marginBottom: 20,

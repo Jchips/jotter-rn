@@ -1,96 +1,110 @@
 import React, { useState } from 'react';
 import {
+  Modal,
   StyleSheet,
   View,
-  Modal,
   Text,
-  TextInput,
   Pressable,
+  TextInput,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
+import { useAuth } from '../../contexts/AuthContext';
+import { ROOT_FOLDER } from '../../hooks/useFolder';
 import api from '../../util/api';
 import { BORDER } from '../../styles/constants/styles';
 import app from '../../styles/default';
 import buttons from '../../styles/constants/buttons';
 import COLORS from '../../styles/constants/colors';
 
-const Rename = ({
-  openRename,
-  setOpenRename,
-  notes,
-  setNotes,
-  note,
-  folders,
-  setFolders,
-  folder,
-}) => {
+const AddTitle = (props) => {
+  const {
+    openAddTitle,
+    setOpenAddTitle,
+    type,
+    notes,
+    setNotes,
+    folders,
+    setFolders,
+  } = props;
+  let { currentFolder } = props;
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
+  const { user } = useAuth();
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: '',
+    },
+  });
 
-  const onSubmit = async (title) => {
+  const onSubmit = async (titleControl) => {
+    if (currentFolder === null) return;
+    currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
+    console.log('currentFolder', currentFolder); // delete later
+    let path = currentFolder === ROOT_FOLDER ? [] : [ROOT_FOLDER];
+    let currentFolderPath =
+      currentFolder !== ROOT_FOLDER ? JSON.parse(currentFolder.path) : path; // parse from db
+    path = [...currentFolderPath];
+
+    // Adds current folder to the path
+    if (currentFolder !== ROOT_FOLDER) {
+      path.push({
+        id: currentFolder.id,
+        title: currentFolder.title,
+      });
+    }
     try {
       setError('');
       setSaving(true);
       let res;
-      if (note) {
-        res = await api.updateNote(
-          {
-            title: title.rename,
-            updatedAt: Date.now(),
-          },
-          note.id
-        );
-        console.log('res.data:', res.data); // delete later
-        let notesCopy = [...notes];
-        notesCopy.splice(notes.indexOf(note), 1, res.data);
-        setNotes(notesCopy);
-      } else if (folder) {
-        res = await api.updateFolder(
-          {
-            title: title.rename,
-            updatedAt: Date.now(),
-          },
-          folder.id
-        );
-        console.log('res.data:', res.data); // delete later
-        let foldersCopy = [...folders];
-        foldersCopy.splice(folders.indexOf(folder), 1, res.data);
-        setFolders(foldersCopy);
+      switch (type) {
+        // add note
+        case 'note':
+          res = await api.addNote({
+            title: titleControl.title,
+            content: '',
+            userId: user.id,
+            folderId: currentFolder.id,
+          });
+          setNotes([...notes, res.data]);
+          break;
+        // add folder
+        case 'folder':
+          res = await api.addFolder({
+            title: titleControl.title,
+            userId: user.id,
+            parentId: currentFolder.id,
+            path,
+          });
+          setFolders([...folders, res.data]);
+          break;
       }
+      setOpenAddTitle(false);
     } catch (err) {
-      setError('Failed to rename');
-      console.error('Failed to rename: ', err);
+      setError('Failed to create ' + type);
+      console.error(err);
     }
     reset({
       title: '',
     });
-    setOpenRename(false);
     setSaving(false);
   };
-
   return (
     <Modal
       animationType='fade'
       transparent={true}
-      visible={openRename}
+      visible={openAddTitle}
       onRequestClose={() => {
-        setOpenRename(!openRename);
+        setOpenAddTitle(!openAddTitle);
       }}
     >
       <View style={app.centeredView}>
         <View style={app.modal}>
-          <Text style={app.header}>
-            Rename{' '}
-            <Text style={{ color: COLORS.themePurpleText }}>
-              {note ? note?.title : folder?.title}
-            </Text>
-          </Text>
+          <Text style={app.header}>Add {type}</Text>
           {error ? (
             <View style={app.errorAlert}>
               <Text>{error}</Text>
@@ -98,7 +112,7 @@ const Rename = ({
           ) : null}
           <View style={styles.controllerContainer}>
             <Controller
-              name='rename'
+              name='title'
               control={control}
               rules={{
                 required: true,
@@ -106,9 +120,9 @@ const Rename = ({
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   value={value}
-                  defaultValue={note ? note?.title : folder?.title}
                   onChangeText={onChange}
                   onBlur={onBlur}
+                  placeholder={`Give ${type} a title`}
                   style={styles.input}
                   autoCapitalize='none'
                   autoCorrect={false}
@@ -116,17 +130,14 @@ const Rename = ({
                 />
               )}
             />
-            {errors.rename && (
+            {errors.title && (
               <Text style={app.errorText}>This field is required.</Text>
             )}
           </View>
           <View style={styles.buttons}>
             <Pressable
               style={[buttons.outlineBtn1, styles.button]}
-              onPress={() => {
-                setOpenRename(!openRename);
-                setError('');
-              }}
+              onPress={() => setOpenAddTitle(!openAddTitle)}
             >
               <Text style={buttons.btnText2}>Cancel</Text>
             </Pressable>
@@ -135,7 +146,7 @@ const Rename = ({
               onPress={handleSubmit(onSubmit)}
               disabled={saving}
             >
-              <Text style={buttons.btnText1}>Rename</Text>
+              <Text style={buttons.btnText1}>Create {type}</Text>
             </Pressable>
           </View>
         </View>
@@ -163,4 +174,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Rename;
+export default AddTitle;

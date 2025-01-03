@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext';
+import { useFolder } from '../hooks/useFolder';
 import { useMarkdown } from '../contexts/MDContext';
 import Loading from './Loading';
 import DisplayFolders from './Display/DisplayFolders';
 import DisplayNotes from './Display/DisplayNotes';
 import api from '../util/api';
 import COLORS from '../styles/constants/colors';
+import AddButton from './Buttons/AddButton';
+import AddTitle from './Modals/AddTitle';
 
 const Dashboard = ({ route }) => {
   const { folderId, folderTitle } = route.params;
@@ -15,9 +22,16 @@ const Dashboard = ({ route }) => {
   const [folders, setFolders] = useState();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [type, setType] = useState(null);
+  const [openAddTitle, setOpenAddTitle] = useState(false);
   const { token, logout } = useAuth();
   const { setMarkdown } = useMarkdown();
   const navigation = useNavigation();
+  // const theRoute = useRoute();
+  // const { name = {} } = useRoute();
+  const { folder } = useFolder(folderId);
+
+  console.log('folder', folder?.data); // delete later
 
   // Set up bearer auth for user
   useEffect(() => {
@@ -60,7 +74,7 @@ const Dashboard = ({ route }) => {
         }
       };
       fetchContent();
-    }, [])
+    }, [setMarkdown, folderId])
   );
 
   const logUserOut = () => {
@@ -74,7 +88,13 @@ const Dashboard = ({ route }) => {
 
   return !loading ? (
     <View style={styles.container}>
-      {folders ? <DisplayFolders folders={folders} error={error} /> : null}
+      {folders ? (
+        <DisplayFolders
+          folders={folders}
+          setFolders={setFolders}
+          error={error}
+        />
+      ) : null}
       {notes ? (
         <DisplayNotes
           notes={notes}
@@ -83,6 +103,17 @@ const Dashboard = ({ route }) => {
           error={error}
         />
       ) : null}
+      <AddButton setOpenAddTitle={setOpenAddTitle} setType={setType} />
+      <AddTitle
+        openAddTitle={openAddTitle}
+        setOpenAddTitle={setOpenAddTitle}
+        type={type}
+        notes={notes}
+        setNotes={setNotes}
+        folders={folders}
+        setFolders={setFolders}
+        currentFolder={folder}
+      />
     </View>
   ) : null;
 };

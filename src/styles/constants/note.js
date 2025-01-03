@@ -5,7 +5,7 @@ const noteView = StyleSheet.create({
     flex: 1,
     height: '100%',
     padding: 10,
-    marginBottom: 20,
+    marginBottom: 10,
   }
 });
 

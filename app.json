@@ -42,7 +42,8 @@
             "./assets/fonts/Inter-Bold.ttf",
             "./assets/fonts/Inter-SemiBold.ttf",
             "./assets/fonts/Inter-ExtraBold.ttf",
-            "./assets/fonts/Inter-BoldItalic.ttf"
+            "./assets/fonts/Inter-BoldItalic.ttf",
+            "./assets/fonts/RobotoMono-Regular.ttf"
           ]
         }
       ]

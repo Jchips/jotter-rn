@@ -1,6 +1,6 @@
 # Jotter
 
-<center><img src='./src/assets/imgs/jotter-circle.png#jotter' alt='Jotter logo' height='50px' width='50px'/></center>
+<center><img src='./assets/imgs/jotter-circle.png#jotter' alt='Jotter logo' height='50px' width='50px'/></center>
 
 Tired of searching for the perfect private, accessible tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking app that combines the simplicity of Markdown with the power of organization.
 
@@ -21,7 +21,7 @@ TLDR: Jotter is a mobile app for Android and IOS designed for note-taking with M
 
 ## Creator & developer: Jelani R
 
-## Version: 0.0.2
+## Version: 0.0.3
 
 ## Architecture
 
@@ -29,7 +29,18 @@ TLDR: Jotter is a mobile app for Android and IOS designed for note-taking with M
 - Languages used: JavaScript
 - Backend uses MySQL, Sequelize, Nodejs, Jsonwebtoken, Bcrypt, and base-64
 
+## Resources
+
+- [React Navigation](https://reactnavigation.org/)
+- [React hook form](https://react-hook-form.com/)
+- [react-native-markdown-display](https://github.com/iamacup/react-native-markdown-display/tree/master)
+- [react-native-popover-view](https://www.npmjs.com/package/react-native-popover-view?activeTab=readme#from)
+- [icons8](https://icons8.com/)
+- ['Inter' Google font by Rasmus Andersson](https://fonts.google.com/specimen/Inter)
+- ['RobotoMono' Google font by Christian Robertson](https://fonts.google.com/specimen/Roboto+Mono)
+
 ## Changelog
 
+- 0.0.3 (2025-01-02, 2:38pm) - Users can add new notes and folders. Preview toggle.
 - 0.0.2 (2025-01-01, 11:11pm) - Users can preview and edit notes.
 - 0.0.1 (2024-12-28, 9:48pm) - Auth.

@@ -59,6 +59,7 @@ const app = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     margin: 10,
+    width: '100%'
   },
   centeredView: {
     flex: 1,

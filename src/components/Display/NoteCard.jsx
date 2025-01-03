@@ -41,22 +41,22 @@ const NoteCard = ({ note, setSelectedNote, setOpenRename }) => {
             >
               <Image
                 source={{
-                  uri: `https://img.icons8.com/material-outlined/24/${COLORS.textNoHash}/rename.png`,
+                  uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/rename.png`,
                 }}
                 alt='rename-icon'
                 style={styles.img}
               />
-              <Text style={buttons.btnText2}>Rename</Text>
+              <Text style={buttons.btnText2}>Rename note</Text>
             </Pressable>
             <Pressable style={styles.button}>
               <Image
                 source={{
-                  uri: `https://img.icons8.com/material-outlined/24/${COLORS.textNoHash}/left.png`,
+                  uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/reorder.png`,
                 }}
-                alt='rename-icon'
+                alt='move-icon'
                 style={styles.img}
               />
-              <Text style={buttons.btnText2}>Move</Text>
+              <Text style={buttons.btnText2}>Move note</Text>
             </Pressable>
           </View>
         </Popover>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   popover: {
     borderRadius: BORDER.radius,
     minHeight: 115,
-    width: 140,
+    width: 170,
   },
   popoverContainer: {
     flex: 1,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   button: {
     ...buttons.btn3,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     height: 40,
     paddingHorizontal: 10,
     marginVertical: 0,

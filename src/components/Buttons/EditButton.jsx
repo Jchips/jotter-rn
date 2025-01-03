@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, View } from 'react-native';
+import { Image, Pressable, StyleSheet } from 'react-native';
 import { BORDER } from '../../styles/constants/styles';
 import COLORS from '../../styles/constants/colors';
 
@@ -23,13 +23,11 @@ const EditButton = ({ navigation, note }) => {
 const styles = StyleSheet.create({
   button: {
     borderRadius: '100%',
-    // paddingVertical: 4,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 45,
-    height: 45,
+    width: 60,
+    height: 60,
     backgroundColor: COLORS.themePurple,
-    // marginHorizontal: 15,
     margin: 15,
     position: 'absolute',
     bottom: 0,

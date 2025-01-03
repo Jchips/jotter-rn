@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-reanimated';
 import { useMarkdown } from '../../contexts/MDContext';
 import Preview from './Preview';
+import EditNote from './EditNote';
 import SaveButton from '../Buttons/SaveButton';
+import TogglePreview from '../Buttons/TogglePreview';
+import getWordCount from '../../util/getWordCount';
 import app from '../../styles/default';
+import COLORS from '../../styles/constants/colors';
+import { FONTSIZE } from '../../styles/constants/styles';
 
 const Editor = ({ navigation, route }) => {
   const { note } = route.params;
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [noteDB, setNoteDB] = useState(note);
+  const [words, setWords] = useState(getWordCount(note.content));
+  const [isEditable, setIsEditable] = useState(false);
+  const [showPreview, setShowPreview] = useState(true);
   const { markdown, setMarkdown } = useMarkdown();
 
   useEffect(() => {
@@ -24,16 +38,31 @@ const Editor = ({ navigation, route }) => {
       headerTitle: note.title,
       headerRight: () => {
         return (
-          <SaveButton
-            note={note}
-            markdown={markdown}
-            setNoteDB={setNoteDB}
-            setError={setError}
-          />
+          <>
+            <Text style={styles.words}>{words} words</Text>
+            <Pressable
+              onPress={() => setShowPreview(!showPreview)}
+              style={styles.showPreviewBtn}
+            >
+              <TogglePreview showPreview={showPreview} />
+            </Pressable>
+            <SaveButton
+              note={note}
+              markdown={markdown}
+              setNoteDB={setNoteDB}
+              setError={setError}
+            />
+          </>
         );
       },
     });
-  }, [navigation, markdown]);
+  }, [navigation, markdown, showPreview]);
+
+  const doubleTap = Gesture.Tap()
+    .numberOfTaps(2)
+    .onEnd(() => {
+      runOnJS(setIsEditable)(true);
+    });
 
   const update = (value) => {
     const lines = value.split('\n');
@@ -71,44 +100,52 @@ const Editor = ({ navigation, route }) => {
     }
 
     setMarkdown(value);
+    setWords(getWordCount(value));
   };
 
-  return (
-    <View style={styles.container}>
-      {!loading ? (
-        <>
-          {error ? (
-            <View style={app.errorAlert}>
-              <Text>{error}</Text>
-            </View>
-          ) : null}
-          <Preview markdown={markdown} />
-          <View style={styles.editorContainer}>
-            <TextInput
-              style={styles.editor}
-              multiline
-              value={markdown}
-              onChangeText={update}
-              placeholder='Write your markdown here...'
-            />
-          </View>
-        </>
+  return !loading ? (
+    <GestureHandlerRootView style={styles.container}>
+      {error ? (
+        <View style={app.errorAlert}>
+          <Text>{error}</Text>
+        </View>
       ) : null}
-    </View>
-  );
+      {showPreview ? <Preview markdown={markdown} /> : null}
+      <GestureDetector gesture={doubleTap}>
+        <View style={styles.editorContainer}>
+          <EditNote
+            isEditable={isEditable}
+            markdown={markdown}
+            setIsEditable={setIsEditable}
+            update={update}
+            doubleTap={doubleTap}
+          />
+        </View>
+      </GestureDetector>
+    </GestureHandlerRootView>
+  ) : null;
 };
 
 const styles = StyleSheet.create({
   container: {
     ...app.container,
+    paddingTop: 10,
     flexDirection: 'column',
+  },
+  showPreviewBtn: {
+    marginHorizontal: 10,
   },
   editorContainer: {
     flex: 1,
-    // margin: 10,
-    // padding: 10,
+    padding: 5,
+    borderTopWidth: 1,
+    borderColor: COLORS.graySubtle,
   },
-  editor: {},
+  words: {
+    textAlign: 'center',
+    fontSize: FONTSIZE.smaller,
+    marginHorizontal: 10,
+  },
 });
 
 export default Editor;

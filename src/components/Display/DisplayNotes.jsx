@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, FlatList, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NoteCard from './NoteCard';
 import Rename from '../Modals/Rename';
+import app from '../../styles/default';
 
 const DisplayNotes = ({ notes, setNotes, folders, error }) => {
   const [openRename, setOpenRename] = useState(false);
