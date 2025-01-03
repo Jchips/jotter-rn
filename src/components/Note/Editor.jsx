@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-reanimated';
 import { useMarkdown } from '../../contexts/MDContext';
 import Preview from './Preview';
+import EditNote from './EditNote';
 import SaveButton from '../Buttons/SaveButton';
 import TogglePreview from '../Buttons/TogglePreview';
+import getWordCount from '../../util/getWordCount';
 import app from '../../styles/default';
 import COLORS from '../../styles/constants/colors';
-import buttons from '../../styles/constants/buttons';
-import { BORDER } from '../../styles/constants/styles';
+import { FONTSIZE } from '../../styles/constants/styles';
 
 const Editor = ({ navigation, route }) => {
   const { note } = route.params;
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [noteDB, setNoteDB] = useState(note);
+  const [words, setWords] = useState(getWordCount(note.content));
+  const [isEditable, setIsEditable] = useState(false);
   const [showPreview, setShowPreview] = useState(true);
   const { markdown, setMarkdown } = useMarkdown();
 
@@ -30,6 +39,7 @@ const Editor = ({ navigation, route }) => {
       headerRight: () => {
         return (
           <>
+            <Text style={styles.words}>{words} words</Text>
             <Pressable
               onPress={() => setShowPreview(!showPreview)}
               style={styles.showPreviewBtn}
@@ -47,6 +57,12 @@ const Editor = ({ navigation, route }) => {
       },
     });
   }, [navigation, markdown, showPreview]);
+
+  const doubleTap = Gesture.Tap()
+    .numberOfTaps(2)
+    .onEnd(() => {
+      runOnJS(setIsEditable)(true);
+    });
 
   const update = (value) => {
     const lines = value.split('\n');
@@ -84,36 +100,36 @@ const Editor = ({ navigation, route }) => {
     }
 
     setMarkdown(value);
+    setWords(getWordCount(value));
   };
 
-  return (
-    <View style={styles.container}>
-      {!loading ? (
-        <>
-          {error ? (
-            <View style={app.errorAlert}>
-              <Text>{error}</Text>
-            </View>
-          ) : null}
-          {showPreview ? <Preview markdown={markdown} /> : null}
-          <View style={styles.editorContainer}>
-            <TextInput
-              style={styles.editor}
-              multiline
-              value={markdown}
-              onChangeText={update}
-              placeholder='Write your markdown here...'
-            />
-          </View>
-        </>
+  return !loading ? (
+    <GestureHandlerRootView style={styles.container}>
+      {error ? (
+        <View style={app.errorAlert}>
+          <Text>{error}</Text>
+        </View>
       ) : null}
-    </View>
-  );
+      {showPreview ? <Preview markdown={markdown} /> : null}
+      <GestureDetector gesture={doubleTap}>
+        <View style={styles.editorContainer}>
+          <EditNote
+            isEditable={isEditable}
+            markdown={markdown}
+            setIsEditable={setIsEditable}
+            update={update}
+            doubleTap={doubleTap}
+          />
+        </View>
+      </GestureDetector>
+    </GestureHandlerRootView>
+  ) : null;
 };
 
 const styles = StyleSheet.create({
   container: {
     ...app.container,
+    paddingTop: 10,
     flexDirection: 'column',
   },
   showPreviewBtn: {
@@ -121,14 +137,15 @@ const styles = StyleSheet.create({
   },
   editorContainer: {
     flex: 1,
-    backgroundColor: COLORS.graySubtle,
-    borderRadius: BORDER.radius,
     padding: 5,
+    borderTopWidth: 1,
+    borderColor: COLORS.graySubtle,
   },
-  editor: {},
-  // previewWrapper: {
-  //   display:
-  // },
+  words: {
+    textAlign: 'center',
+    fontSize: FONTSIZE.smaller,
+    marginHorizontal: 10,
+  },
 });
 
 export default Editor;

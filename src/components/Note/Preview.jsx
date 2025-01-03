@@ -6,18 +6,15 @@ import MARKDOWN from '../../styles/constants/markdown';
 
 const Preview = ({ markdown }) => {
   return (
-    // <View style={{ flex: 1 }}>
     <ScrollView
       style={noteView.previewContainer}
       contentContainerStyle={{ paddingBottom: 20 }}
-      // contentInsetAdjustmentBehavior='automatic'
       keyboardShouldPersistTaps='handled'
     >
       <Markdown style={{ ...MARKDOWN, ...styles.markdown }}>
         {markdown}
       </Markdown>
     </ScrollView>
-    // </View>
   );
 };
 

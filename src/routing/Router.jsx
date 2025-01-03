@@ -33,12 +33,17 @@ const Routing = () => {
               component={ViewNote}
               options={{
                 headerShadowVisible: false,
-                // headerRight: () => {
-                //   return <EditButton />;
-                // },
               }}
             />
-            <Stack.Screen name='Editor' component={Editor} />
+            <Stack.Screen
+              name='Editor'
+              component={Editor}
+              options={{
+                headerStyle: {
+                  height: 68,
+                },
+              }}
+            />
           </>
         ) : (
           <>

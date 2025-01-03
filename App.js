@@ -19,6 +19,7 @@ export default function App() {
     'Inter-SemiBold': require('./assets/fonts/Inter-SemiBold.ttf'),
     'Inter-ExtraBold': require('./assets/fonts/Inter-ExtraBold.ttf'),
     'Inter-BoldItalic': require('./assets/fonts/Inter-BoldItalic.ttf'),
+    'RobotoMono-Regular': require('./assets/fonts/RobotoMono-Regular.ttf'),
   });
 
   useEffect(() => {

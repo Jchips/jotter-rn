@@ -29,6 +29,16 @@ TLDR: Jotter is a mobile app for Android and IOS designed for note-taking with M
 - Languages used: JavaScript
 - Backend uses MySQL, Sequelize, Nodejs, Jsonwebtoken, Bcrypt, and base-64
 
+## Resources
+
+- [React Navigation](https://reactnavigation.org/)
+- [React hook form](https://react-hook-form.com/)
+- [react-native-markdown-display](https://github.com/iamacup/react-native-markdown-display/tree/master)
+- [react-native-popover-view](https://www.npmjs.com/package/react-native-popover-view?activeTab=readme#from)
+- [icons8](https://icons8.com/)
+- ['Inter' Google font by Rasmus Andersson](https://fonts.google.com/specimen/Inter)
+- ['RobotoMono' Google font by Christian Robertson](https://fonts.google.com/specimen/Roboto+Mono)
+
 ## Changelog
 
 - 0.0.3 (2025-01-02, 2:38pm) - Users can add new notes and folders. Preview toggle.

@@ -26,7 +26,7 @@ const SaveButton = ({ note, markdown, setNoteDB, setError }) => {
     setSaving(false);
   };
   return (
-    <Pressable disabled={saving} onPress={saveNote} style={buttons.outlineBtn1}>
+    <Pressable disabled={saving} onPress={saveNote} style={styles.saveButton}>
       <Image
         source={{
           uri: `https://img.icons8.com/material-outlined/100/save.png`,
@@ -39,6 +39,10 @@ const SaveButton = ({ note, markdown, setNoteDB, setError }) => {
 };
 
 const styles = StyleSheet.create({
+  saveButton: {
+    ...buttons.outlineBtn1,
+    height: 30,
+  },
   img: {
     width: 22,
     height: 22,
