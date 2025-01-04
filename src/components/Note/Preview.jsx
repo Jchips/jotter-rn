@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   markdown: {
     height: '100%',
     paddingBottom: 20,
+    whiteSpace: 'pre-wrap',
   },
 });
 

@@ -24,8 +24,6 @@ const EditNote = ({ isEditable, markdown, update, setIsEditable }) => {
           multiline
           value={markdown}
           onChangeText={update}
-          // placeholder='Add markdown...'
-          // onBlur={() => setIsEditable(false)}
         />
       )}
     </View>
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
     fontFamily: FONT.code,
     fontSize: FONTSIZE.mid,
     marginBottom: 5,
-    // height: '100%',
+    whiteSpace: 'pre-wrap',
   },
   placeholderText: {
     color: COLORS.mutedtext,

@@ -41,7 +41,7 @@ const Routing = () => {
               options={{
                 headerShadowVisible: false,
                 headerStyle: {
-                  height: 68,
+                  // height: 68,
                 },
               }}
             />

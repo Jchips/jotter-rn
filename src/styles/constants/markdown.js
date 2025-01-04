@@ -13,27 +13,32 @@ const MARKDOWN = {
   heading2: {
     flexDirection: 'row',
     fontSize: 24,
-    fontFamily: FONT.bold
+    fontFamily: FONT.bold,
+    marginVertical: 5,
   },
   heading3: {
     flexDirection: 'row',
     fontSize: 18,
-    fontFamily: FONT.semiBold
+    fontFamily: FONT.semiBold,
+    marginVertical: 5,
   },
   heading4: {
     flexDirection: 'row',
     fontSize: 16,
-    fontFamily: FONT.semiBold
+    fontFamily: FONT.semiBold,
+    marginVertical: 5,
   },
   heading5: {
     flexDirection: 'row',
     fontSize: 13,
-    fontFamily: FONT.semiBold
+    fontFamily: FONT.semiBold,
+    marginVertical: 5,
   },
   heading6: {
     flexDirection: 'row',
     fontSize: 11,
-    fontFamily: FONT.semiBold
+    fontFamily: FONT.semiBold,
+    marginVertical: 5,
   },
   strong: {
     fontWeight: 0,
