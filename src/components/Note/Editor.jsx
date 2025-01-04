@@ -65,11 +65,11 @@ const Editor = ({ navigation, route }) => {
 
   const update = (value) => {
     const lines = value.split('\n');
-    const lastLine = lines[lines.length - 1].trim() || '';
-    const secondLastLine = lines[lines.length - 2]?.trim() || '';
-    const thirdLastLine = lines[lines.length - 3]?.trim() || '';
-    const thirdLastLineMatchDash = thirdLastLine.match(/^(-\s+)/);
-    const thirdLastLineMatchBullet = thirdLastLine.match(/^(\*\s+)/);
+    const lastLine = lines[lines.length - 1] || '';
+    const secondLastLine = lines[lines.length - 2] || '';
+    const thirdLastLine = lines[lines.length - 3] || '';
+    const thirdLastLineMatchDash = thirdLastLine.match(/^(-\s+)$/);
+    const thirdLastLineMatchBullet = thirdLastLine.match(/^(\*\s+)$/);
     let digit = /^(\d+)\.$/;
 
     if (lines.length > 1) {
@@ -95,15 +95,12 @@ const Editor = ({ navigation, route }) => {
 
       if (
         lastLine === '' &&
-        secondLastLine ===
-          ''(
-            thirdLastLineMatchBullet ||
-              thirdLastLineMatchDash ||
-              digit.test(thirdLastLine)
-          )
+        secondLastLine === '' &&
+        (thirdLastLineMatchBullet ||
+          thirdLastLineMatchDash ||
+          digit.test(thirdLastLine))
       ) {
         lines.splice(lines.length - 3, 1);
-        console.log('here'); // delete later
         const newValue = lines.join('\n');
         setMarkdown(newValue);
         return;
