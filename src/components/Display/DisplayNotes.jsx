@@ -12,6 +12,11 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
   const [selectedNote, setSelectedNote] = useState(null);
   const navigation = useNavigation();
 
+  /**
+   * Renders a list of notes
+   * @param {Object} param0 - The note item to be rendered
+   * @returns - a note card that navigates to the note
+   */
   const renderItem = ({ item }) => {
     const note = item;
     return (
@@ -29,6 +34,7 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
       </Pressable>
     );
   };
+
   return (
     <View>
       {notes.length === 0 && folders.length === 0 ? (

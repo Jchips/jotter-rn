@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   Gesture,
   GestureDetector,
@@ -14,6 +15,7 @@ import TogglePreview from '../Buttons/TogglePreview';
 import getWordCount from '../../util/getWordCount';
 import app from '../../styles/default';
 import COLORS from '../../styles/constants/colors';
+import buttons from '../../styles/constants/buttons';
 import { FONTSIZE } from '../../styles/constants/styles';
 
 const Editor = ({ navigation, route }) => {
@@ -26,12 +28,21 @@ const Editor = ({ navigation, route }) => {
   const [showPreview, setShowPreview] = useState(true);
   const { markdown, setMarkdown } = useMarkdown();
 
-  useEffect(() => {
-    setLoading(true);
-    setNoteDB(note);
-    setMarkdown(noteDB.content);
-    setLoading(false);
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setNoteDB(note);
+  //   setMarkdown(noteDB.content);
+  //   setLoading(false);
+  // }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      setLoading(true);
+      setNoteDB(note);
+      setMarkdown(noteDB.content);
+      setLoading(false);
+    }, [])
+  );
 
   useEffect(() => {
     navigation.setOptions({
@@ -40,23 +51,11 @@ const Editor = ({ navigation, route }) => {
         return (
           <>
             <Text style={styles.words}>{words} words</Text>
-            <Pressable
-              onPress={() => setShowPreview(!showPreview)}
-              style={styles.showPreviewBtn}
-            >
-              <TogglePreview showPreview={showPreview} />
-            </Pressable>
-            <SaveButton
-              note={note}
-              markdown={markdown}
-              setNoteDB={setNoteDB}
-              setError={setError}
-            />
           </>
         );
       },
     });
-  }, [navigation, markdown, showPreview]);
+  }, [navigation]);
 
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)
@@ -66,15 +65,22 @@ const Editor = ({ navigation, route }) => {
 
   const update = (value) => {
     const lines = value.split('\n');
-    const lastLine = lines[lines.length - 1].trim();
+    const lastLine = lines[lines.length - 1].trim() || '';
     const secondLastLine = lines[lines.length - 2]?.trim() || '';
     const thirdLastLine = lines[lines.length - 3]?.trim() || '';
+    const thirdLastLineMatchDash = thirdLastLine.match(/^(-\s+)/);
+    const thirdLastLineMatchBullet = thirdLastLine.match(/^(\*\s+)/);
     let digit = /^(\d+)\.$/;
 
     if (lines.length > 1) {
       if (lastLine === '' && secondLastLine !== '') {
         if (secondLastLine.startsWith('* ')) {
           const newValue = value + '* ';
+          setMarkdown(newValue);
+          return;
+        }
+        if (secondLastLine.startsWith('- ')) {
+          const newValue = value + '- ';
           setMarkdown(newValue);
           return;
         }
@@ -89,10 +95,15 @@ const Editor = ({ navigation, route }) => {
 
       if (
         lastLine === '' &&
-        secondLastLine === '' &&
-        (thirdLastLine === '* ' || digit.test(thirdLastLine))
+        secondLastLine ===
+          ''(
+            thirdLastLineMatchBullet ||
+              thirdLastLineMatchDash ||
+              digit.test(thirdLastLine)
+          )
       ) {
         lines.splice(lines.length - 3, 1);
+        console.log('here'); // delete later
         const newValue = lines.join('\n');
         setMarkdown(newValue);
         return;
@@ -122,6 +133,20 @@ const Editor = ({ navigation, route }) => {
           />
         </View>
       </GestureDetector>
+      <View style={styles.footer}>
+        <Pressable
+          onPress={() => setShowPreview(!showPreview)}
+          style={styles.showPreviewBtn}
+        >
+          <TogglePreview showPreview={showPreview} />
+        </Pressable>
+        <SaveButton
+          note={note}
+          markdown={markdown}
+          setNoteDB={setNoteDB}
+          setError={setError}
+        />
+      </View>
     </GestureHandlerRootView>
   ) : null;
 };
@@ -133,7 +158,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   showPreviewBtn: {
+    ...buttons.outlineBtn1,
+    flex: 1,
     marginHorizontal: 10,
+    height: 40,
+    marginVertical: 0,
   },
   editorContainer: {
     flex: 1,
@@ -145,6 +174,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: FONTSIZE.smaller,
     marginHorizontal: 10,
+  },
+  footer: {
+    height: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 

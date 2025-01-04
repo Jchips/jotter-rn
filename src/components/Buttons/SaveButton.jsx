@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Image, Pressable, StyleSheet, View } from 'react-native';
 import api from '../../util/api';
 import buttons from '../../styles/constants/buttons';
+import COLORS from '../../styles/constants/colors';
 
 const SaveButton = ({ note, markdown, setNoteDB, setError }) => {
   const [saving, setSaving] = useState(false);
@@ -26,7 +27,16 @@ const SaveButton = ({ note, markdown, setNoteDB, setError }) => {
     setSaving(false);
   };
   return (
-    <Pressable disabled={saving} onPress={saveNote} style={styles.saveButton}>
+    <Pressable
+      disabled={saving}
+      onPress={saveNote}
+      style={{
+        ...styles.saveButton,
+        backgroundColor: saving
+          ? `${COLORS.graySubtle}`
+          : `${COLORS.themeWhite}`,
+      }}
+    >
       <Image
         source={{
           uri: `https://img.icons8.com/material-outlined/100/save.png`,
@@ -41,7 +51,10 @@ const SaveButton = ({ note, markdown, setNoteDB, setError }) => {
 const styles = StyleSheet.create({
   saveButton: {
     ...buttons.outlineBtn1,
-    height: 30,
+    height: 40,
+    flex: 1,
+    marginVertical: 0,
+    marginHorizontal: 10,
   },
   img: {
     width: 22,

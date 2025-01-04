@@ -39,6 +39,7 @@ const Routing = () => {
               name='Editor'
               component={Editor}
               options={{
+                headerShadowVisible: false,
                 headerStyle: {
                   height: 68,
                 },
