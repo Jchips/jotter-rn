@@ -24,8 +24,8 @@ const EditNote = ({ isEditable, markdown, update, setIsEditable }) => {
           multiline
           value={markdown}
           onChangeText={update}
-          placeholder='Double tap to add markdown...'
-          onBlur={() => setIsEditable(false)}
+          // placeholder='Add markdown...'
+          // onBlur={() => setIsEditable(false)}
         />
       )}
     </View>
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   editor: {
     fontFamily: FONT.code,
     fontSize: FONTSIZE.mid,
+    marginBottom: 5,
     // height: '100%',
   },
   placeholderText: {

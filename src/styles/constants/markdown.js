@@ -75,6 +75,7 @@ const MARKDOWN = {
   td: {
     flex: 1,
     padding: 5,
+    fontFamily: FONT.regular,
   },
   paragraph: {
     marginTop: 10,

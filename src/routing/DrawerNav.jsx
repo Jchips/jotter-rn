@@ -1,16 +1,43 @@
-import { StyleSheet, Text, View, Button, Pressable, Image } from 'react-native';
-import Account from '../components/Account';
-import Dashboard from '../components/Dashboard';
+import { useEffect, useState, useCallback } from 'react';
+import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
+import { useRoute, useFocusEffect } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import { useFolder } from '../hooks/useFolder.js';
 import { useAuth } from '../contexts/AuthContext';
+import Account from '../components/Account';
+import Dashboard from '../components/Dashboard';
 import COLORS from '../styles/constants/colors';
+import buttons from '../styles/constants/buttons.js';
 import { BORDER, FONT, FONTSIZE } from '../styles/constants/styles';
 
 const Drawer = createDrawerNavigator();
 
 function DrawerNav({ navigation }) {
-  const { user } = useAuth();
+  const [currentFolder, setCurrentFolder] = useState(null);
+  const { user, logout } = useAuth();
+  const route = useRoute();
+  const { folder } = useFolder(route?.params?.params?.folderId);
+
+  useEffect(() => {
+    if (folder?.data) {
+      setCurrentFolder(folder.data);
+    }
+  }, [folder]);
+
+  useFocusEffect(
+    useCallback(() => {
+      navigation.setOptions({
+        headerTitle: currentFolder ? currentFolder.title : 'Home',
+      });
+    }, [navigation])
+  );
+
+  // log user out
+  const logUserOut = () => {
+    logout();
+  };
+
   const DrawerContent = (props) => {
     const { state, descriptors, navigation } = props;
     return (
@@ -25,6 +52,7 @@ function DrawerNav({ navigation }) {
           <Text style={styles.headerEmail}>{user?.email}</Text>
         </View>
         <DrawerContentScrollView {...props}>
+          {/* Home and Account items */}
           {state.routes.map((route, index) => {
             const isActive = state.index === index;
             return (
@@ -41,17 +69,75 @@ function DrawerNav({ navigation }) {
               </Pressable>
             );
           })}
+          {currentFolder ? (
+            <Text style={styles.foldersTitle}>Folders</Text>
+          ) : null}
+
+          {/* Breadcrumbs */}
+          {currentFolder &&
+          currentFolder?.path &&
+          currentFolder?.path.length !== 0
+            ? JSON.parse(currentFolder.path).map((pathItem, index) => {
+                const isActive = state.index === index + 2;
+                return (
+                  <Pressable
+                    key={pathItem.id}
+                    style={[
+                      styles.drawerItem,
+                      isActive && styles.folderActiveItem,
+                    ]}
+                    onPress={() =>
+                      navigation.navigate('Drawer', {
+                        screen: 'Home',
+                        params: {
+                          folderId: pathItem.id,
+                          folderTitle: pathItem.title,
+                        },
+                      })
+                    }
+                  >
+                    <Text
+                      style={[
+                        styles.drawerLabel,
+                        isActive && styles.activeLabel,
+                      ]}
+                    >
+                      {pathItem.title}
+                    </Text>
+                  </Pressable>
+                );
+              })
+            : null}
+          {/* current folder */}
+          {currentFolder ? (
+            <Pressable
+              key={currentFolder.id}
+              style={[styles.drawerItem, styles.folderActiveItem]}
+              onPress={() =>
+                navigation.navigate('Drawer', {
+                  screen: 'Home',
+                  params: {
+                    folderId: currentFolder.id,
+                    folderTitle: currentFolder.title,
+                  },
+                })
+              }
+            >
+              <Text style={[styles.drawerLabel, styles.activeLabel]}>
+                {currentFolder.title}
+              </Text>
+            </Pressable>
+          ) : null}
+          <Pressable style={buttons.outlineBtn1} onPress={logUserOut}>
+            <Text>Log Out</Text>
+          </Pressable>
         </DrawerContentScrollView>
       </View>
     );
   };
 
   const headerOptions = {
-    // headerTintColor: COLORS.themePurpleText,
     headerShadowVisible: false,
-    // headerRight: () => {
-    //   return <SettingsBtn navigation={navigation} />;
-    // },
   };
 
   return (
@@ -131,6 +217,20 @@ const styles = StyleSheet.create({
   },
   activeLabel: {
     color: COLORS.themePurpleText, // Active label (text) color
+  },
+  foldersTitle: {
+    fontFamily: FONT.bold,
+    fontSize: FONTSIZE.smaller,
+    textAlign: 'center',
+    marginVertical: 10,
+    color: COLORS.mutedtext,
+  },
+  folderActiveItem: {
+    backgroundColor: COLORS.graySubtle,
+    borderRadius: BORDER.radius,
+  },
+  activeLabel: {
+    color: COLORS.darkTheme, // Active label (text) color
   },
 });
 

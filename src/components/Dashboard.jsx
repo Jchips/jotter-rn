@@ -25,7 +25,7 @@ const Dashboard = ({ route }) => {
   const [type, setType] = useState(null);
   const [openAddTitle, setOpenAddTitle] = useState(false);
   const { token, logout } = useAuth();
-  const { setMarkdown } = useMarkdown();
+  const { markdown, setMarkdown } = useMarkdown();
   const navigation = useNavigation();
   // const theRoute = useRoute();
   // const { name = {} } = useRoute();
@@ -43,14 +43,18 @@ const Dashboard = ({ route }) => {
       navigation.setOptions({
         headerTitle: folderTitle,
       });
-    }, [navigation])
+    }, [navigation, route])
   );
+
+  useEffect(() => {
+    setMarkdown('');
+  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
       const fetchContent = async () => {
         setLoading(true);
-        setMarkdown('');
+        // setMarkdown('');
         let folder_id = !folderId ? null : folderId;
         try {
           setError('');
@@ -73,7 +77,7 @@ const Dashboard = ({ route }) => {
         }
       };
       fetchContent();
-    }, [setMarkdown, folderId])
+    }, [folderId])
   );
 
   const logUserOut = () => {

@@ -15,7 +15,7 @@ const DisplayFolders = ({ folders, setFolders, error, childFolders }) => {
   /**
    * Renders list of folders
    * @param {Object} param0 - The folder item to be rendered
-   * @returns - a folder button that navigates inside folder
+   * @returns - a folder card that navigates inside folder
    */
   const renderItem = ({ item }) => {
     const folder = item;
