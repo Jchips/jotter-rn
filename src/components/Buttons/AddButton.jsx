@@ -23,7 +23,6 @@ const AddButton = ({ setOpenAddTitle, setType }) => {
       }
       arrowSize={{ width: 0, height: 0 }}
       offset={7}
-      // arrowSize={{ width: 20, height: 6 }}
       popoverStyle={styles.popover}
     >
       <View style={styles.popoverContainer}>

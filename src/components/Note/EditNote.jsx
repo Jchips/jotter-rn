@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
 import { FONT, FONTSIZE } from '../../styles/constants/styles';
+import COLORS from '../../styles/constants/colors';
 
 const EditNote = ({ isEditable, markdown, update, setIsEditable }) => {
   return (
@@ -8,7 +9,13 @@ const EditNote = ({ isEditable, markdown, update, setIsEditable }) => {
       {!isEditable ? (
         <ScrollView style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.editor}>{markdown}</Text>
+            {markdown ? (
+              <Text style={styles.editor}>{markdown}</Text>
+            ) : (
+              <Text style={styles.placeholderText}>
+                Double tap to add markdown...
+              </Text>
+            )}
           </View>
         </ScrollView>
       ) : (
@@ -17,7 +24,7 @@ const EditNote = ({ isEditable, markdown, update, setIsEditable }) => {
           multiline
           value={markdown}
           onChangeText={update}
-          placeholder='Double tap here to add markdown...'
+          placeholder='Double tap to add markdown...'
           onBlur={() => setIsEditable(false)}
         />
       )}
@@ -29,7 +36,12 @@ const styles = StyleSheet.create({
   editor: {
     fontFamily: FONT.code,
     fontSize: FONTSIZE.mid,
-    height: '100%',
+    // height: '100%',
+  },
+  placeholderText: {
+    color: COLORS.mutedtext,
+    fontFamily: FONT.code,
+    fontSize: FONTSIZE.mid,
   },
 });
 

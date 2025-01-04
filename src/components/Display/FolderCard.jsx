@@ -6,7 +6,12 @@ import COLORS from '../../styles/constants/colors';
 import buttons from '../../styles/constants/buttons';
 import app from '../../styles/default';
 
-const FolderCard = ({ folder, setSelectedFolder, setOpenRename }) => {
+const FolderCard = ({
+  folder,
+  setSelectedFolder,
+  setOpenRename,
+  setOpenMove,
+}) => {
   const popoverRef = useRef();
   return (
     <View style={styles.container}>
@@ -54,7 +59,14 @@ const FolderCard = ({ folder, setSelectedFolder, setOpenRename }) => {
             />
             <Text style={buttons.btnText2}>Rename folder</Text>
           </Pressable>
-          <Pressable style={styles.button}>
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              setSelectedFolder(folder);
+              setOpenMove(true);
+              popoverRef.current.requestClose();
+            }}
+          >
             <Image
               source={{
                 uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/reorder.png`,

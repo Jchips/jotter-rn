@@ -2,7 +2,7 @@
 
 <center><img src='./assets/imgs/jotter-circle.png#jotter' alt='Jotter logo' height='50px' width='50px'/></center>
 
-Tired of searching for the perfect private, accessible tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking app that combines the simplicity of Markdown with the power of organization.
+Tired of searching for the perfect private, accessible tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking Android app that combines the simplicity of Markdown with the power of organization.
 
 **Why Choose Jotter?**
 
@@ -17,11 +17,13 @@ Whether you're a student, professional, or creative thinker, **Jotter** empowers
 
 Try **Jotter** today and elevate your note-taking game!
 
-TLDR: Jotter is a mobile app for Android and IOS designed for note-taking with Markdown.
+TLDR: Jotter is a mobile app for Android designed for note-taking with Markdown.
+
+[View the web version of the app here!](https://github.com/Jchips/jotter)
 
 ## Creator & developer: Jelani R
 
-## Version: 0.0.3
+## Version: 0.0.4
 
 ## Architecture
 
@@ -41,6 +43,7 @@ TLDR: Jotter is a mobile app for Android and IOS designed for note-taking with M
 
 ## Changelog
 
+- 0.0.4 (2025-01-03, 9:33pm) - Users can move notes and folders to other folders.
 - 0.0.3 (2025-01-02, 2:38pm) - Users can add new notes and folders. Preview toggle.
 - 0.0.2 (2025-01-01, 11:11pm) - Users can preview and edit notes.
 - 0.0.1 (2024-12-28, 9:48pm) - Auth.

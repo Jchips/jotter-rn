@@ -2,14 +2,21 @@ import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FolderCard from './FolderCard';
+import Move from '../Modals/Move';
 import Rename from '../Modals/Rename';
 import app from '../../styles/default';
 
-const DisplayFolders = ({ folders, setFolders, error }) => {
+const DisplayFolders = ({ folders, setFolders, error, childFolders }) => {
+  const [openMove, setOpenMove] = useState(false);
   const [openRename, setOpenRename] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const navigation = useNavigation();
 
+  /**
+   * Renders list of folders
+   * @param {Object} param0 - The folder item to be rendered
+   * @returns - a folder button that navigates inside folder
+   */
   const renderItem = ({ item }) => {
     const folder = item;
     return (
@@ -25,10 +32,12 @@ const DisplayFolders = ({ folders, setFolders, error }) => {
           folder={folder}
           setSelectedFolder={setSelectedFolder}
           setOpenRename={setOpenRename}
+          setOpenMove={setOpenMove}
         />
       </Pressable>
     );
   };
+
   return folders.length > 0 ? (
     <View>
       {error ? (
@@ -48,6 +57,15 @@ const DisplayFolders = ({ folders, setFolders, error }) => {
         folders={folders}
         setFolders={setFolders}
         folder={selectedFolder}
+      />
+      <Move
+        navigation={navigation}
+        openMove={openMove}
+        setOpenMove={setOpenMove}
+        type='folder'
+        folder={selectedFolder}
+        allFolders={folders}
+        setFolders={setFolders}
       />
     </View>
   ) : null;
