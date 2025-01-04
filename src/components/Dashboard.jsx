@@ -29,9 +29,9 @@ const Dashboard = ({ route }) => {
   const navigation = useNavigation();
   // const theRoute = useRoute();
   // const { name = {} } = useRoute();
-  const { folder } = useFolder(folderId);
+  const { folder, childFolders } = useFolder(folderId);
 
-  console.log('folder', folder?.data); // delete later
+  // console.log('folder', folder?.data); // delete later
 
   // Set up bearer auth for user
   useEffect(() => {
@@ -46,7 +46,6 @@ const Dashboard = ({ route }) => {
     }, [navigation])
   );
 
-  // Loads all the surveys in the current user's feed.
   useFocusEffect(
     React.useCallback(() => {
       const fetchContent = async () => {
@@ -92,6 +91,7 @@ const Dashboard = ({ route }) => {
         <DisplayFolders
           folders={folders}
           setFolders={setFolders}
+          childFolders={childFolders?.data}
           error={error}
         />
       ) : null}

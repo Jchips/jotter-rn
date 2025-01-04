@@ -33,6 +33,10 @@ const Rename = ({
     formState: { errors },
   } = useForm();
 
+  /**
+   * Changes the title of a note or folder
+   * @param {Object} title - The input the user types as a title
+   */
   const onSubmit = async (title) => {
     try {
       setError('');

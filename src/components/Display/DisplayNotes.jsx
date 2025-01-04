@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, FlatList, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NoteCard from './NoteCard';
+import Move from '../Modals/Move';
 import Rename from '../Modals/Rename';
 import app from '../../styles/default';
 
 const DisplayNotes = ({ notes, setNotes, folders, error }) => {
+  const [openMove, setOpenMove] = useState(false);
   const [openRename, setOpenRename] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
   const navigation = useNavigation();
@@ -22,6 +24,7 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
           note={note}
           setSelectedNote={setSelectedNote}
           setOpenRename={setOpenRename}
+          setOpenMove={setOpenMove}
         />
       </Pressable>
     );
@@ -53,6 +56,16 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
         notes={notes}
         setNotes={setNotes}
         note={selectedNote}
+      />
+      <Move
+        navigation={navigation}
+        openMove={openMove}
+        setOpenMove={setOpenMove}
+        type='note'
+        note={selectedNote}
+        allNotes={notes}
+        setNotes={setNotes}
+        folders={{}}
       />
     </View>
   );
