@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
 import { FONT, FONTSIZE } from '../../styles/constants/styles';
 import COLORS from '../../styles/constants/colors';
 
-const EditNote = ({ isEditable, markdown, update, setIsEditable }) => {
+const EditNote = ({ isEditable, markdown, update }) => {
   return (
     <View style={{ flex: 1 }}>
       {!isEditable ? (
@@ -24,6 +24,7 @@ const EditNote = ({ isEditable, markdown, update, setIsEditable }) => {
           multiline
           value={markdown}
           onChangeText={update}
+          placeholder='Add markdown...'
         />
       )}
     </View>

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Pressable } from 'react-native';
+import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import {
   Gesture,
@@ -21,41 +21,56 @@ import { FONTSIZE } from '../../styles/constants/styles';
 const Editor = ({ navigation, route }) => {
   const { note } = route.params;
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [noteDB, setNoteDB] = useState(note);
   const [words, setWords] = useState(getWordCount(note.content));
   const [isEditable, setIsEditable] = useState(false);
   const [showPreview, setShowPreview] = useState(true);
+  const [undoStack, setUndoStack] = useState([]);
+  const [redoStack, setRedoStack] = useState([]);
   const { markdown, setMarkdown } = useMarkdown();
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setNoteDB(note);
-  //   setMarkdown(noteDB.content);
-  //   setLoading(false);
-  // }, []);
-
-  useFocusEffect(
-    useCallback(() => {
-      setLoading(true);
-      setNoteDB(note);
-      setMarkdown(noteDB.content);
-      setLoading(false);
-    }, [])
-  );
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: note.title,
+      headerTitle:
+        note.title.length > 13
+          ? note.title.substring(0, 13) + '...'
+          : note.title,
       headerRight: () => {
         return (
           <>
             <Text style={styles.words}>{words} words</Text>
+            <View style={styles.headerBtns}>
+              <Pressable onPress={undo} style={styles.headerBtn}>
+                <Image
+                  source={{
+                    uri: 'https://img.icons8.com/material-outlined/100/undo.png',
+                  }}
+                  alt='undo-button'
+                  style={styles.img}
+                />
+              </Pressable>
+              <Pressable onPress={redo} style={styles.headerBtn}>
+                <Image
+                  source={{
+                    uri: 'https://img.icons8.com/material-outlined/100/redo.png',
+                  }}
+                  alt='redo-button'
+                  style={styles.img}
+                />
+              </Pressable>
+            </View>
           </>
         );
       },
     });
-  }, [navigation]);
+  }, [navigation, undoStack, redoStack]);
+
+  // Clean up function to reset undo and redo stacks
+  useEffect(() => {
+    return () => {
+      setUndoStack([]);
+      setRedoStack([]);
+    };
+  }, []);
 
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)
@@ -67,13 +82,16 @@ const Editor = ({ navigation, route }) => {
     const lines = value.split('\n');
     const lastLine = lines[lines.length - 1] || '';
     const secondLastLine = lines[lines.length - 2] || '';
-    const thirdLastLine = lines[lines.length - 3] || '';
-    const thirdLastLineMatchDash = thirdLastLine.match(/^(-\s+)$/);
-    const thirdLastLineMatchBullet = thirdLastLine.match(/^(\*\s+)$/);
     let digit = /^(\d+)\.$/;
 
     if (lines.length > 1) {
-      if (lastLine === '' && secondLastLine !== '') {
+      if (
+        lastLine === '' &&
+        secondLastLine !== '-' &&
+        secondLastLine !== '*' &&
+        !secondLastLine.match(digit) &&
+        secondLastLine !== ''
+      ) {
         if (secondLastLine.startsWith('* ')) {
           const newValue = value + '* ';
           setMarkdown(newValue);
@@ -91,16 +109,18 @@ const Editor = ({ navigation, route }) => {
           setMarkdown(newValue);
           return;
         }
-      }
-
-      if (
-        lastLine === '' &&
-        secondLastLine === '' &&
-        (thirdLastLineMatchBullet ||
-          thirdLastLineMatchDash ||
-          digit.test(thirdLastLine))
-      ) {
-        lines.splice(lines.length - 3, 1);
+      } else if (secondLastLine === '-' && lastLine === '') {
+        lines.splice(lines.length - 2, 1);
+        const newValue = lines.join('\n');
+        setMarkdown(newValue);
+        return;
+      } else if (secondLastLine === '*' && lastLine === '') {
+        lines.splice(lines.length - 2, 1);
+        const newValue = lines.join('\n');
+        setMarkdown(newValue);
+        return;
+      } else if (secondLastLine.match(digit) && lastLine === '') {
+        lines.splice(lines.length - 2, 1);
         const newValue = lines.join('\n');
         setMarkdown(newValue);
         return;
@@ -108,10 +128,43 @@ const Editor = ({ navigation, route }) => {
     }
 
     setMarkdown(value);
+    setUndoStack([...undoStack, value]);
+    setRedoStack([]);
     setWords(getWordCount(value));
   };
 
-  return !loading ? (
+  /**
+   * (LIFO)
+   * Add current markdown to redo stack
+   * Set markdown to previous update
+   * Remove last item (previous update) from undo stack
+   */
+  const undo = () => {
+    if (undoStack.length > 0) {
+      undoStack.pop();
+      const prev = undoStack.pop();
+      setRedoStack([markdown, ...redoStack]);
+      setMarkdown(prev);
+      setUndoStack([...undoStack]);
+    }
+  };
+
+  /**
+   * (LIFO)
+   * Add current markdown to undo stack
+   * Set markdown to next update
+   * Remove the first item (next update) from redo stack
+   */
+  const redo = () => {
+    if (redoStack.length > 0) {
+      const next = redoStack[0];
+      setUndoStack([...undoStack, markdown]);
+      setMarkdown(next);
+      setRedoStack(redoStack.slice(1));
+    }
+  };
+
+  return (
     <GestureHandlerRootView style={styles.container}>
       {error ? (
         <View style={app.errorAlert}>
@@ -137,15 +190,10 @@ const Editor = ({ navigation, route }) => {
         >
           <TogglePreview showPreview={showPreview} />
         </Pressable>
-        <SaveButton
-          note={note}
-          markdown={markdown}
-          setNoteDB={setNoteDB}
-          setError={setError}
-        />
+        <SaveButton note={note} markdown={markdown} setError={setError} />
       </View>
     </GestureHandlerRootView>
-  ) : null;
+  );
 };
 
 const styles = StyleSheet.create({
@@ -172,10 +220,27 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZE.smaller,
     marginHorizontal: 10,
   },
+  headerBtns: {
+    height: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    paddingRight: 5,
+  },
+  headerBtn: {
+    ...buttons.outlineBtn1,
+    height: 30,
+    width: 50,
+    marginHorizontal: 2,
+  },
   footer: {
     height: 20,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  img: {
+    height: 22,
+    width: 22,
   },
 });
 
