@@ -11,10 +11,10 @@ import { useMarkdown } from '../contexts/MDContext';
 import Loading from './Loading';
 import DisplayFolders from './Display/DisplayFolders';
 import DisplayNotes from './Display/DisplayNotes';
-import api from '../util/api';
-import COLORS from '../styles/constants/colors';
 import AddButton from './Buttons/AddButton';
 import AddTitle from './Modals/AddTitle';
+import COLORS from '../styles/constants/colors';
+import api from '../util/api';
 
 const Dashboard = ({ route }) => {
   const { folderId, folderTitle } = route.params;

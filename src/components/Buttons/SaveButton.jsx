@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Image, Pressable, StyleSheet, View } from 'react-native';
+import { Image, Pressable, StyleSheet } from 'react-native';
 import api from '../../util/api';
 import buttons from '../../styles/constants/buttons';
 import COLORS from '../../styles/constants/colors';
 
-const SaveButton = ({ note, markdown, setNoteDB, setError }) => {
+const SaveButton = ({ note, markdown, setError }) => {
   const [saving, setSaving] = useState(false);
   const saveNote = async () => {
     try {
@@ -17,9 +17,7 @@ const SaveButton = ({ note, markdown, setNoteDB, setError }) => {
         },
         note.id
       );
-      // note = res.data;
       console.log('res.data:', res.data); // delete later
-      setNoteDB(res.data);
     } catch (err) {
       setError('Failed to save changes');
       console.error('Failed to save changes', err);

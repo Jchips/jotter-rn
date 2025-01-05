@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import Markdown from 'react-native-markdown-display';
+import { StyleSheet, View } from 'react-native';
 import { useMarkdown } from '../../contexts/MDContext';
 import app from '../../styles/default';
-import noteView from '../../styles/constants/note';
-import MARKDOWN from '../../styles/constants/markdown';
 import EditButton from '../Buttons/EditButton';
 import Preview from './Preview';
 
@@ -17,14 +14,11 @@ const ViewNote = ({ navigation, route }) => {
 
   useEffect(() => {
     setMarkdown(note.content);
-  }, []);
+  }, [note]);
 
   return (
     <View style={app.container}>
       <Preview note={note} markdown={markdown} />
-      {/* <ScrollView style={noteView.previewContainer}>
-        <Markdown style={MARKDOWN}>{note.content}</Markdown>
-      </ScrollView> */}
       <EditButton navigation={navigation} note={note} />
     </View>
   );
