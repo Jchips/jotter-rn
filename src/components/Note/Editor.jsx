@@ -27,6 +27,11 @@ const Editor = ({ navigation, route }) => {
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
   const { markdown, setMarkdown } = useMarkdown();
+  const doubleTap = Gesture.Tap()
+    .numberOfTaps(2)
+    .onEnd(() => {
+      runOnJS(setIsEditable)(true);
+    });
 
   useEffect(() => {
     navigation.setOptions({
@@ -72,12 +77,13 @@ const Editor = ({ navigation, route }) => {
     };
   }, []);
 
-  const doubleTap = Gesture.Tap()
-    .numberOfTaps(2)
-    .onEnd(() => {
-      runOnJS(setIsEditable)(true);
-    });
-
+  /**
+   * Updates the markdown content with every change the user makes
+   * Auto-generates bullet points and number lists
+   * Adds to the undo/redo stacks
+   * @param {String} value - The current markdown content
+   * @returns - exits the function
+   */
   const update = (value) => {
     const lines = value.split('\n');
     const lastLine = lines[lines.length - 1] || '';

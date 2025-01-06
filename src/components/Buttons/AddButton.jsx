@@ -7,6 +7,7 @@ import COLORS from '../../styles/constants/colors';
 
 const AddButton = ({ setOpenAddTitle, setType }) => {
   const popoverRef = useRef();
+
   return (
     <Popover
       ref={popoverRef}
@@ -87,14 +88,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
+    paddingVertical: '4%',
   },
   popoverButton: {
     ...buttons.btn3,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 40,
+    height: 50,
     paddingHorizontal: 10,
-    marginVertical: 0,
+    marginVertical: '2%',
   },
   img: {
     width: 22,
