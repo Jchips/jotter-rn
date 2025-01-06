@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Pressable } from 'react-native';
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native';
+import { StyleSheet, View } from 'react-native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext';
 import { useFolder } from '../hooks/useFolder';
 import { useMarkdown } from '../contexts/MDContext';
@@ -13,8 +9,8 @@ import DisplayFolders from './Display/DisplayFolders';
 import DisplayNotes from './Display/DisplayNotes';
 import AddButton from './Buttons/AddButton';
 import AddTitle from './Modals/AddTitle';
-import COLORS from '../styles/constants/colors';
 import api from '../util/api';
+import COLORS from '../styles/constants/colors';
 
 const Dashboard = ({ route }) => {
   const { folderId, folderTitle } = route.params;
@@ -25,13 +21,9 @@ const Dashboard = ({ route }) => {
   const [type, setType] = useState(null);
   const [openAddTitle, setOpenAddTitle] = useState(false);
   const { token, logout } = useAuth();
-  const { markdown, setMarkdown } = useMarkdown();
+  const { setMarkdown } = useMarkdown();
   const navigation = useNavigation();
-  // const theRoute = useRoute();
-  // const { name = {} } = useRoute();
-  const { folder, childFolders } = useFolder(folderId);
-
-  // console.log('folder', folder?.data); // delete later
+  const { folder } = useFolder(folderId);
 
   // Set up bearer auth for user
   useEffect(() => {
@@ -54,7 +46,6 @@ const Dashboard = ({ route }) => {
     React.useCallback(() => {
       const fetchContent = async () => {
         setLoading(true);
-        // setMarkdown('');
         let folder_id = !folderId ? null : folderId;
         try {
           setError('');
@@ -62,7 +53,6 @@ const Dashboard = ({ route }) => {
             api.getFolders(folder_id),
             folder_id ? api.getNotes(folder_id) : api.getRootNotes(),
           ]);
-          // console.log('folders:', foldersRes.data); // delete later
           setFolders(foldersRes.data);
           setNotes(notesRes.data);
         } catch (err) {
@@ -96,7 +86,6 @@ const Dashboard = ({ route }) => {
         <DisplayFolders
           folders={folders}
           setFolders={setFolders}
-          childFolders={childFolders?.data}
           error={error}
         />
       ) : null}

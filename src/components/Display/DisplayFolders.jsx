@@ -7,7 +7,7 @@ import Move from '../Modals/Move';
 import Rename from '../Modals/Rename';
 import app from '../../styles/default';
 
-const DisplayFolders = ({ folders, setFolders, error, childFolders }) => {
+const DisplayFolders = ({ folders, setFolders, error }) => {
   const [openMove, setOpenMove] = useState(false);
   const [openRename, setOpenRename] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);

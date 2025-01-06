@@ -1,3 +1,13 @@
+const HOVER = {
+  btn1Hover: '#000abc',
+}
+
+const NO_HASH = {
+  textNoHash: '646cff',
+  warningYellowNH: 'eed202',
+  whiteNoHash: 'ffffff',
+}
+
 const COLORS = {
   themePurple: '#3b45ff',
   themePurpleText: '#646cff',
@@ -8,9 +18,8 @@ const COLORS = {
   mutedtext: '#a1a1aa',
   graySubtle: '#f4f4f5',
   danger: '#dc3545',
-  textNoHash: '646cff',
-  warningYellowNH: 'eed202',
-  whiteNoHash: 'ffffff',
+  ...HOVER,
+  ...NO_HASH,
 }
 
 export default COLORS;

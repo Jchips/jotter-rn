@@ -1,29 +1,15 @@
 import React from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  Pressable,
-  Image,
-} from 'react-native';
+import { StyleSheet, SafeAreaView, Text, Pressable } from 'react-native';
 import LoginForm from './LoginForm';
-import { FONT, FONTSIZE } from '../styles/constants/styles';
+import JotterText from '../components/JotterText';
 import app from '../styles/default';
 import buttons from '../styles/constants/buttons';
+import { FONT, FONTSIZE } from '../styles/constants/styles';
 
 const Login = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.header}>J</Text>
-        <Image
-          style={styles.img}
-          source={require('../../assets/imgs/jotter-circle.png')}
-          alt='Jotter logo'
-        />
-        <Text style={styles.header}>tter</Text>
-      </View>
+      <JotterText />
       <Text style={styles.formHeader}>Log in</Text>
       <LoginForm />
       <Text
@@ -40,7 +26,7 @@ const Login = ({ navigation }) => {
         onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{ name: 'Sign up' }],
+            routes: [{ name: 'Signup' }],
           })
         }
       >
@@ -53,28 +39,9 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     ...app.container,
-    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-  },
-  img: {
-    width: 28,
-    height: 28,
-    marginLeft: 3,
-    marginRight: 4,
-    marginTop: 4,
-  },
-  header: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 40,
-    fontWeight: 'bold',
   },
   formHeader: {
     fontSize: FONTSIZE.large,

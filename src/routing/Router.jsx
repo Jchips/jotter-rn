@@ -1,18 +1,18 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth } from '../contexts/AuthContext';
 import DrawerNav from './DrawerNav';
 import Login from '../auth/Login';
 import ViewNote from '../components/Note/ViewNote';
-import EditButton from '../components/Buttons/EditButton';
 import Editor from '../components/Note/Editor';
+import Signup from '../auth/Signup';
 // import Settings from './Settings';
 
 const Stack = createStackNavigator();
 
-const Routing = () => {
+const Router = () => {
   const { isLoggedIn, token } = useAuth();
   console.log('signed in:', isLoggedIn); // delete later
   console.log('token:', token); // delete later
@@ -40,9 +40,6 @@ const Routing = () => {
               component={Editor}
               options={{
                 headerShadowVisible: false,
-                headerStyle: {
-                  // paddingRight: 10,
-                },
               }}
             />
           </>
@@ -56,10 +53,14 @@ const Routing = () => {
                 headerShown: false,
               }}
             />
-            {/* <Stack.Screen
-              name='Sign Up'
-              component={S}
-            /> */}
+            <Stack.Screen
+              name='Signup'
+              component={Signup}
+              options={{
+                headerShadowVisible: false,
+                headerShown: false,
+              }}
+            />
           </>
         )}
       </Stack.Navigator>
@@ -71,9 +72,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });
 
-export default Routing;
+export default Router;

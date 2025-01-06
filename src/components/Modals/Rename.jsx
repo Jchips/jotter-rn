@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import api from '../../util/api';
-import { BORDER } from '../../styles/constants/styles';
 import app from '../../styles/default';
 import buttons from '../../styles/constants/buttons';
 import COLORS from '../../styles/constants/colors';
+import { BORDER } from '../../styles/constants/styles';
 
 const Rename = ({
   openRename,
@@ -135,7 +135,11 @@ const Rename = ({
               <Text style={buttons.btnText2}>Cancel</Text>
             </Pressable>
             <Pressable
-              style={[buttons.btn1, styles.button]}
+              style={{
+                ...buttons.btn1,
+                ...styles.button,
+                backgroundColor: saving ? COLORS.btn1Hover : COLORS.themePurple,
+              }}
               onPress={handleSubmit(onSubmit)}
               disabled={saving}
             >
