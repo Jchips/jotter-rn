@@ -4,10 +4,12 @@ import { useAuth } from '../contexts/AuthContext';
 import app from '../styles/default';
 import COLORS from '../styles/constants/colors';
 import { FONT, FONTSIZE } from '../styles/constants/styles';
+import buttons from '../styles/constants/buttons';
 
 const Account = () => {
   const { user, logout } = useAuth();
 
+  // logs user out
   const logUserOut = () => {
     logout();
   };
@@ -15,8 +17,8 @@ const Account = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.h1}>{user?.email}</Text>
-      <Pressable style={app.button} onPress={logUserOut}>
-        <Text style={app.buttonText}>Log Out</Text>
+      <Pressable style={styles.button} onPress={logUserOut}>
+        <Text style={buttons.btnText1}>Log Out</Text>
       </Pressable>
     </View>
   );
@@ -24,16 +26,19 @@ const Account = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    ...app.container,
     alignItems: 'center',
-    padding: 20,
-    backgroundColor: COLORS.themeWhite,
+    padding: 30,
   },
   h1: {
     fontFamily: FONT.bold,
     fontSize: FONTSIZE.xlarge,
     textAlign: 'center',
     marginBottom: 20,
+  },
+  button: {
+    ...buttons.btn2,
+    width: '100%',
   },
 });
 

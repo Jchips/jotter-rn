@@ -18,25 +18,25 @@ const MARKDOWN = {
   },
   heading3: {
     flexDirection: 'row',
-    fontSize: 18,
+    fontSize: 22,
     fontFamily: FONT.semiBold,
     marginVertical: 5,
   },
   heading4: {
     flexDirection: 'row',
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: FONT.semiBold,
     marginVertical: 5,
   },
   heading5: {
     flexDirection: 'row',
-    fontSize: 13,
+    fontSize: 15,
     fontFamily: FONT.semiBold,
     marginVertical: 5,
   },
   heading6: {
     flexDirection: 'row',
-    fontSize: 11,
+    fontSize: 13,
     fontFamily: FONT.semiBold,
     marginVertical: 5,
   },
@@ -94,7 +94,8 @@ const MARKDOWN = {
     lineHeight: 20,
   },
   hr: {
-    marginBottom: 20,
+    marginVertical: 20,
+    marginTop: 25,
     backgroundColor: '#84848424',
   }
 }

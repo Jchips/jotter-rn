@@ -44,7 +44,16 @@ const Editor = ({ navigation, route }) => {
           <>
             <Text style={styles.words}>{words} words</Text>
             <View style={styles.headerBtns}>
-              <Pressable onPress={undo} style={styles.headerBtn}>
+              <Pressable
+                onPress={undo}
+                style={{
+                  ...styles.headerBtn,
+                  backgroundColor:
+                    undoStack?.length < 1
+                      ? COLORS.graySubtle
+                      : COLORS.themeWhite,
+                }}
+              >
                 <Image
                   source={{
                     uri: 'https://img.icons8.com/material-outlined/100/undo.png',
@@ -53,7 +62,16 @@ const Editor = ({ navigation, route }) => {
                   style={styles.img}
                 />
               </Pressable>
-              <Pressable onPress={redo} style={styles.headerBtn}>
+              <Pressable
+                onPress={redo}
+                style={{
+                  ...styles.headerBtn,
+                  backgroundColor:
+                    redoStack?.length < 1
+                      ? COLORS.graySubtle
+                      : COLORS.themeWhite,
+                }}
+              >
                 <Image
                   source={{
                     uri: 'https://img.icons8.com/material-outlined/100/redo.png',

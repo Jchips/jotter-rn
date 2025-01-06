@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, StyleSheet, View, Text } from 'react-native';
+import {
+  Modal,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import { useFolder } from '../../hooks/useFolder';
 import api from '../../util/api';
 import app from '../../styles/default';
 import COLORS from '../../styles/constants/colors';
 import { BORDER, FONT, FONTSIZE } from '../../styles/constants/styles';
-import { useFolder } from '../../hooks/useFolder';
 
 const Move = (props) => {
   const { navigation, openMove, setOpenMove, type, note, folder } = props;
   const [error, setError] = useState('');
+  const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
   const [formattedFolders, setFormattedFolders] = useState([]);
   const { childFolders } = useFolder(folder ? folder.id : null);
@@ -66,6 +74,7 @@ const Move = (props) => {
    */
   const move = async (folderTarget) => {
     try {
+      setSaving(true);
       let moveToFolder = await getFolder(folderTarget.value);
       switch (type) {
         case 'note':
@@ -116,6 +125,7 @@ const Move = (props) => {
       setError('Failed to move folder');
       console.error('Failed to move folder - ', err);
     }
+    setSaving(false);
   };
 
   /**
@@ -216,7 +226,12 @@ const Move = (props) => {
    */
   const renderButton = (selectedItem, isOpened) => {
     return (
-      <View style={styles.dropdownButtonStyle}>
+      <View
+        style={{
+          ...styles.dropdownButtonStyle,
+          backgroundColor: saving ? COLORS.graySubtle : COLORS.themeWhite,
+        }}
+      >
         <Text style={styles.dropdownButtonTxtStyle}>
           {(selectedItem && selectedItem.label) || (
             <Text>
@@ -228,6 +243,23 @@ const Move = (props) => {
             </Text>
           )}
         </Text>
+        {!isOpened ? (
+          <Image
+            source={{
+              uri: 'https://img.icons8.com/material-outlined/100/expand-arrow--v1.png',
+            }}
+            alt='dropdown arrow'
+            style={styles.img}
+          />
+        ) : (
+          <Image
+            source={{
+              uri: 'https://img.icons8.com/material-outlined/100/collapse-arrow.png',
+            }}
+            alt='dropdown arrow'
+            style={styles.img}
+          />
+        )}
       </View>
     );
   };
@@ -286,6 +318,13 @@ const Move = (props) => {
               showsVerticalScrollIndicator={false}
               dropdownStyle={styles.dropdownMenuStyle}
             />
+            {saving ? (
+              <ActivityIndicator
+                size='large'
+                color={COLORS.black}
+                style={{ marginBottom: 5 }}
+              />
+            ) : null}
           </View>
         </View>
       </Modal>
@@ -297,7 +336,7 @@ const styles = StyleSheet.create({
   dropdownButtonStyle: {
     width: '95%',
     height: 50,
-    backgroundColor: COLORS.themeWhite,
+    // backgroundColor: COLORS.themeWhite,
     borderWidth: 1,
     borderColor: BORDER.color,
     borderRadius: BORDER.radius,
@@ -329,16 +368,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 15,
   },
   dropdownItemTxtStyle: {
     flex: 1,
-    fontFamily: FONT.regular,
+    fontFamily: FONT.semiBold,
     fontSize: FONTSIZE.regular,
   },
   dropdownItemIconStyle: {
     fontSize: 28,
     marginRight: 8,
+  },
+  img: {
+    width: 22,
+    height: 22,
   },
 });
 

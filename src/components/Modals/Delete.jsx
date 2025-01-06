@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Modal, StyleSheet, View, Text, Pressable, Image } from 'react-native';
+import api from '../../util/api';
 import app from '../../styles/default';
 import buttons from '../../styles/constants/buttons';
 import COLORS from '../../styles/constants/colors';
-import api from '../../util/api';
-import { FONT, FONTSIZE } from '../../styles/constants/styles';
+import { FONTSIZE } from '../../styles/constants/styles';
 
 const Delete = (props) => {
   const [error, setError] = useState('');
@@ -106,7 +106,11 @@ const Delete = (props) => {
               <Text style={buttons.btnText2}>Cancel</Text>
             </Pressable>
             <Pressable
-              style={[buttons.btn1, styles.button]}
+              style={{
+                ...buttons.btn1,
+                ...styles.button,
+                backgroundColor: saving ? COLORS.btn1Hover : COLORS.themePurple,
+              }}
               onPress={handleSubmit}
               disabled={saving}
             >

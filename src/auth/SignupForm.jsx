@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import {
   StyleSheet,
@@ -9,12 +10,13 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../contexts/AuthContext';
+import { API_URL } from '@env';
 import app from '../styles/default';
 import buttons from '../styles/constants/buttons';
 import COLORS from '../styles/constants/colors';
 import { BORDER, FONT, FONTSIZE } from '../styles/constants/styles';
 
-const LoginForm = () => {
+const SignupForm = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login, setIsLoggedIn } = useAuth();
@@ -28,47 +30,61 @@ const LoginForm = () => {
     defaultValues: {
       email: '',
       password: '',
+      confirmPassword: '',
     },
   });
 
   /**
-   * Logs user into Jotter
+   * Creates an account for new user
    * @param {Object} formData - The form data the user submits (email and password)
    */
   const onSubmit = async (formData) => {
     try {
       setLoading(true);
       setError('');
-      let res = await login(formData.email, formData.password);
-      if (res?.response?.data === 'Invalid login') {
-        setIsLoggedIn(false);
-        setError('Incorrect email or password');
+      if (formData.password !== formData.confirmPassword) {
+        setLoading(false);
+        return setError('Passwords do not match');
       }
+      const isEmailAddr =
+        /^[a-zA-z]+(\.)*(-)*(_)*[a-zA-z]*(@)[a-zA-z]+(\.)[a-zA-z]+$/gm;
+      if (!isEmailAddr.test(formData.email)) {
+        setLoading(false);
+        return setError('Must use an email address');
+      }
+      const signupInfo = {
+        email: formData.email,
+        password: formData.password,
+      };
+      let requestUrl = `${API_URL}/jotter/signup`;
+      let res = await axios.post(requestUrl, signupInfo);
+      if (res.data.message) {
+        return setError(res.data.message);
+      }
+      await login(signupInfo.email, signupInfo.password); // log user in
     } catch (err) {
       setIsLoggedIn(false);
-      setError(
-        error.message === 'Request failed with status code 403'
-          ? 'Incorrect username or password'
-          : 'Sorry, there has been a server error :('
-      );
-      console.error(err);
+      setError('Failed to sign up');
+      console.error('Failed to sign up', err);
     } finally {
       reset({
         email: '',
         password: '',
+        confirmPassword: '',
       });
       setLoading(false);
       Keyboard.dismiss();
     }
   };
+
   return (
     <View style={styles.container}>
+      {error ? (
+        <View style={styles.errorAlert}>
+          <Text>{error}</Text>
+        </View>
+      ) : null}
       <View style={styles.controllerContainer}>
-        {error ? (
-          <View style={styles.errorAlert}>
-            <Text>{error}</Text>
-          </View>
-        ) : null}
         <Controller
           name='email'
           control={control}
@@ -107,7 +123,6 @@ const LoginForm = () => {
               textContentType='password'
               autoCapitalize='none'
               autoCorrect={false}
-              onSubmitEditing={handleSubmit(onSubmit)}
               secureTextEntry
             />
           )}
@@ -116,13 +131,38 @@ const LoginForm = () => {
           <Text style={styles.errorText}>{fieldRequired}</Text>
         )}
       </View>
-
+      <View style={styles.controllerContainer}>
+        <Controller
+          name='confirmPassword'
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              placeholder='Confirm password'
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              style={styles.input}
+              textContentType='password'
+              autoCapitalize='none'
+              autoCorrect={false}
+              onSubmitEditing={handleSubmit(onSubmit)}
+              secureTextEntry
+            />
+          )}
+        />
+        {errors.confirmPassword && (
+          <Text style={styles.errorText}>{fieldRequired}</Text>
+        )}
+      </View>
       <Pressable
         onPress={handleSubmit(onSubmit)}
         style={styles.button}
         disabled={loading}
       >
-        <Text style={buttons.btnText1}>Log in</Text>
+        <Text style={buttons.btnText1}>Sign up</Text>
       </Pressable>
     </View>
   );
@@ -158,4 +198,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginForm;
+export default SignupForm;

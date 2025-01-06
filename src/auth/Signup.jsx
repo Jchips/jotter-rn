@@ -1,17 +1,17 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView, Text, Pressable } from 'react-native';
-import LoginForm from './LoginForm';
 import JotterText from '../components/JotterText';
+import SignupForm from './SignupForm';
 import app from '../styles/default';
 import buttons from '../styles/constants/buttons';
 import { FONT, FONTSIZE } from '../styles/constants/styles';
 
-const Login = ({ navigation }) => {
+const Signup = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <JotterText />
-      <Text style={styles.formHeader}>Log in</Text>
-      <LoginForm />
+      <Text style={styles.formHeader}>Sign up</Text>
+      <SignupForm />
       <Text
         style={{
           fontFamily: FONT.bold,
@@ -26,11 +26,11 @@ const Login = ({ navigation }) => {
         onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{ name: 'Signup' }],
+            routes: [{ name: 'Login' }],
           })
         }
       >
-        <Text style={buttons.btnText2}>Create an account</Text>
+        <Text style={buttons.btnText2}>Log in to account</Text>
       </Pressable>
     </SafeAreaView>
   );
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Signup;

@@ -10,8 +10,8 @@ import Router from './src/routing/Router';
 SplashScreen.preventAutoHideAsync();
 export default function App() {
   Text.defaultProps = Text.defaultProps || {};
-  Text.defaultProps.allowFontScaling = false; // Disable font scaling
-  Text.defaultProps.textBreakStrategy = 'simple'; // Adjust text break strategy
+  Text.defaultProps.allowFontScaling = false;
+  Text.defaultProps.textBreakStrategy = 'simple';
   const [fontsLoaded, error] = useFonts({
     'Inter-Regular': require('./assets/fonts/Inter-Regular.ttf'),
     'Inter-Italic': require('./assets/fonts/Inter-Italic.ttf'),
