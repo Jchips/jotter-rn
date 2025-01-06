@@ -23,7 +23,7 @@ TLDR: Jotter is a mobile app for Android designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 0.0.6
+## Version: 0.0.7
 
 ## Architecture
 
@@ -43,6 +43,7 @@ TLDR: Jotter is a mobile app for Android designed for note-taking with Markdown.
 
 ## Changelog
 
+- 0.0.7 (2025-01-05, 11:16pm) - Users can delete notes and folders.
 - 0.0.6 (2025-01-05, 6:23am) - Added undo/redo functionality in editor. Fixed editor bug when making lists.
 - 0.0.5 (2025-01-04, 5:13am) - Improved editor. Added breadcrumbs to drawer.
 - 0.0.4 (2025-01-03, 9:33pm) - Users can move notes and folders to other folders.

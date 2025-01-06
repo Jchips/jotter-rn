@@ -5,10 +5,12 @@ import NoteCard from './NoteCard';
 import Move from '../Modals/Move';
 import Rename from '../Modals/Rename';
 import app from '../../styles/default';
+import Delete from '../Modals/Delete';
 
 const DisplayNotes = ({ notes, setNotes, folders, error }) => {
   const [openMove, setOpenMove] = useState(false);
   const [openRename, setOpenRename] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
   const navigation = useNavigation();
 
@@ -29,6 +31,7 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
           note={note}
           setSelectedNote={setSelectedNote}
           setOpenRename={setOpenRename}
+          setOpenDelete={setOpenDelete}
           setOpenMove={setOpenMove}
         />
       </Pressable>
@@ -72,6 +75,14 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
         allNotes={notes}
         setNotes={setNotes}
         folders={{}}
+      />
+      <Delete
+        openDelete={openDelete}
+        setOpenDelete={setOpenDelete}
+        notes={notes}
+        setNotes={setNotes}
+        note={selectedNote}
+        navigation={navigation}
       />
     </View>
   );

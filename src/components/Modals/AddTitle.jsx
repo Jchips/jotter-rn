@@ -172,6 +172,10 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
   },
+  button: {
+    flex: 1,
+    marginHorizontal: 5,
+  },
 });
 
 export default AddTitle;

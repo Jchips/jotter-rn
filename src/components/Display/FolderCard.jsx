@@ -6,13 +6,16 @@ import COLORS from '../../styles/constants/colors';
 import buttons from '../../styles/constants/buttons';
 import app from '../../styles/default';
 
-const FolderCard = ({
-  folder,
-  setSelectedFolder,
-  setOpenRename,
-  setOpenMove,
-}) => {
+const FolderCard = (props) => {
+  const {
+    folder,
+    setSelectedFolder,
+    setOpenRename,
+    setOpenDelete,
+    setOpenMove,
+  } = props;
   const popoverRef = useRef();
+
   return (
     <View style={styles.container}>
       <View style={styles.h1Container}>
@@ -76,6 +79,23 @@ const FolderCard = ({
             />
             <Text style={buttons.btnText2}>Move folder</Text>
           </Pressable>
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              setSelectedFolder(folder);
+              setOpenDelete(true);
+              popoverRef.current.requestClose();
+            }}
+          >
+            <Image
+              source={{
+                uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/trash--v1.png`,
+              }}
+              alt='delete-icon'
+              style={styles.img}
+            />
+            <Text style={buttons.btnText2}>Delete folder</Text>
+          </Pressable>
         </View>
       </Popover>
     </View>
@@ -104,21 +124,22 @@ const styles = StyleSheet.create({
   },
   popover: {
     borderRadius: BORDER.radius,
-    minHeight: 115,
+    minHeight: 140,
     width: 180,
   },
   popoverContainer: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
+    paddingVertical: '4%',
   },
   button: {
     ...buttons.btn3,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    height: 40,
+    height: 50,
     paddingHorizontal: 10,
-    marginVertical: 0,
+    marginVertical: '2%',
   },
 });
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Delete from '../Modals/Delete';
 import FolderCard from './FolderCard';
 import Move from '../Modals/Move';
 import Rename from '../Modals/Rename';
@@ -10,6 +11,7 @@ const DisplayFolders = ({ folders, setFolders, error, childFolders }) => {
   const [openMove, setOpenMove] = useState(false);
   const [openRename, setOpenRename] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
+  const [openDelete, setOpenDelete] = useState(false);
   const navigation = useNavigation();
 
   /**
@@ -32,6 +34,7 @@ const DisplayFolders = ({ folders, setFolders, error, childFolders }) => {
           folder={folder}
           setSelectedFolder={setSelectedFolder}
           setOpenRename={setOpenRename}
+          setOpenDelete={setOpenDelete}
           setOpenMove={setOpenMove}
         />
       </Pressable>
@@ -66,6 +69,14 @@ const DisplayFolders = ({ folders, setFolders, error, childFolders }) => {
         folder={selectedFolder}
         allFolders={folders}
         setFolders={setFolders}
+      />
+      <Delete
+        openDelete={openDelete}
+        setOpenDelete={setOpenDelete}
+        folders={folders}
+        setFolders={setFolders}
+        folder={selectedFolder}
+        navigation={navigation}
       />
     </View>
   ) : null;

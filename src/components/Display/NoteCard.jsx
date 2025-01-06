@@ -7,7 +7,9 @@ import COLORS from '../../styles/constants/colors';
 import app from '../../styles/default';
 import buttons from '../../styles/constants/buttons';
 
-const NoteCard = ({ note, setSelectedNote, setOpenRename, setOpenMove }) => {
+const NoteCard = (props) => {
+  const { note, setSelectedNote, setOpenRename, setOpenMove, setOpenDelete } =
+    props;
   const popoverRef = useRef();
 
   return (
@@ -65,6 +67,23 @@ const NoteCard = ({ note, setSelectedNote, setOpenRename, setOpenMove }) => {
               />
               <Text style={buttons.btnText2}>Move note</Text>
             </Pressable>
+            <Pressable
+              style={styles.button}
+              onPress={() => {
+                setSelectedNote(note);
+                setOpenDelete(true);
+                popoverRef.current.requestClose();
+              }}
+            >
+              <Image
+                source={{
+                  uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/trash--v1.png`,
+                }}
+                alt='delete-icon'
+                style={styles.img}
+              />
+              <Text style={buttons.btnText2}>Delete note</Text>
+            </Pressable>
           </View>
         </Popover>
       </View>
@@ -99,21 +118,22 @@ const styles = StyleSheet.create({
   },
   popover: {
     borderRadius: BORDER.radius,
-    minHeight: 115,
+    minHeight: 140,
     width: 170,
   },
   popoverContainer: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
+    paddingVertical: '4%',
   },
   button: {
     ...buttons.btn3,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    height: 40,
+    height: 50,
     paddingHorizontal: 10,
-    marginVertical: 0,
+    marginVertical: '2%',
   },
 });
 
