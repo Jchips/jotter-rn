@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
+    height: 40,
   },
   button: {
     flex: 1,
