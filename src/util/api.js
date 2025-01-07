@@ -4,6 +4,7 @@ import { API_URL } from '@env';
 const api = axios.create({
   baseURL: `${API_URL}/jotter`,
   headers: {
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   },
 });
