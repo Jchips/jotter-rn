@@ -4,11 +4,11 @@
     "slug": "jotter-rn",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/imgs/jotter-round.png",
+    "icon": "./assets/imgs/jotter-circle.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/imgs/jotter4.gif",
+      "image": "./assets/imgs/jotter-circle.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,8 +17,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/imgs/jotter.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/imgs/jotter-squircle2.png",
+        "backgroundColor": "#000000"
       },
       "package": "com.javacow.jotter"
     },
