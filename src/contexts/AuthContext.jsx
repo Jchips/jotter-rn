@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
 import { Buffer } from 'buffer';
 import { API_URL } from '@env';
+import axios from 'axios';
 import api from '../util/api';
 
 const AuthContext = React.createContext();
@@ -25,8 +25,13 @@ export function AuthProvider({ children }) {
     const authenticate = async () => {
       try {
         let res = await api.authenticate();
-        setUser(res.data);
-        setIsLoggedIn(true);
+        if (res.data) {
+          setUser(res.data);
+          setIsLoggedIn(true);
+        } else {
+          setUser(null);
+          setIsLoggedIn(false);
+        }
       } catch (err) {
         console.error('Failed to authenticate user ' + err);
         setUser(null);

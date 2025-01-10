@@ -44,7 +44,6 @@ const AddTitle = (props) => {
   const onSubmit = async (titleControl) => {
     if (currentFolder === null) return;
     currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
-    console.log('currentFolder', currentFolder); // delete later
     let path = currentFolder === ROOT_FOLDER ? [] : [ROOT_FOLDER];
     let currentFolderPath =
       currentFolder !== ROOT_FOLDER ? JSON.parse(currentFolder.path) : path; // parse from db

@@ -48,7 +48,7 @@ const LoginForm = () => {
       setIsLoggedIn(false);
       setError(
         error.message === 'Request failed with status code 403'
-          ? 'Incorrect username or password'
+          ? 'Incorrect email or password'
           : 'Sorry, there has been a server error :('
       );
       console.error(err);
@@ -63,12 +63,12 @@ const LoginForm = () => {
   };
   return (
     <View style={styles.container}>
+      {error ? (
+        <View style={styles.errorAlert}>
+          <Text>{error}</Text>
+        </View>
+      ) : null}
       <View style={styles.controllerContainer}>
-        {error ? (
-          <View style={styles.errorAlert}>
-            <Text>{error}</Text>
-          </View>
-        ) : null}
         <Controller
           name='email'
           control={control}

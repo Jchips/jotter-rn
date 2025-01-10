@@ -50,7 +50,6 @@ const Rename = ({
           },
           note.id
         );
-        console.log('res.data:', res.data); // delete later
         let notesCopy = [...notes];
         notesCopy.splice(notes.indexOf(note), 1, res.data);
         setNotes(notesCopy);
@@ -62,7 +61,6 @@ const Rename = ({
           },
           folder.id
         );
-        console.log('res.data:', res.data); // delete later
         let foldersCopy = [...folders];
         foldersCopy.splice(folders.indexOf(folder), 1, res.data);
         setFolders(foldersCopy);

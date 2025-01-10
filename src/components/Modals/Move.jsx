@@ -307,17 +307,23 @@ const Move = (props) => {
                 <Text>{error}</Text>
               </View>
             ) : null}
-            <SelectDropdown
-              data={folderOpts}
-              onSelect={(selection, index) => {
-                console.log(selection, index); // delete later
-                move(selection);
-              }}
-              renderButton={renderButton}
-              renderItem={renderItem}
-              showsVerticalScrollIndicator={false}
-              dropdownStyle={styles.dropdownMenuStyle}
-            />
+            {folderOpts.length < 1 ? (
+              <View style={styles.noMoveOptions}>
+                <Text>No folder options</Text>
+              </View>
+            ) : (
+              <SelectDropdown
+                data={folderOpts}
+                onSelect={(selection, index) => {
+                  console.log(selection, index); // delete later
+                  move(selection);
+                }}
+                renderButton={renderButton}
+                renderItem={renderItem}
+                showsVerticalScrollIndicator={false}
+                dropdownStyle={styles.dropdownMenuStyle}
+              />
+            )}
             {saving ? (
               <ActivityIndicator
                 size='large'
@@ -382,6 +388,9 @@ const styles = StyleSheet.create({
   img: {
     width: 22,
     height: 22,
+  },
+  noMoveOptions: {
+    padding: 10,
   },
 });
 

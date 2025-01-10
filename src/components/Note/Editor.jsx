@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import {
   Gesture,
   GestureDetector,
@@ -46,6 +45,7 @@ const Editor = ({ navigation, route }) => {
             <View style={styles.headerBtns}>
               <Pressable
                 onPress={undo}
+                disabled={undoStack.length < 1}
                 style={{
                   ...styles.headerBtn,
                   backgroundColor:
@@ -64,6 +64,7 @@ const Editor = ({ navigation, route }) => {
               </Pressable>
               <Pressable
                 onPress={redo}
+                disabled={redoStack.length < 1}
                 style={{
                   ...styles.headerBtn,
                   backgroundColor:
@@ -151,8 +152,8 @@ const Editor = ({ navigation, route }) => {
       }
     }
 
+    setUndoStack([...undoStack, markdown]);
     setMarkdown(value);
-    setUndoStack([...undoStack, value]);
     setRedoStack([]);
     setWords(getWordCount(value));
   };
@@ -165,7 +166,6 @@ const Editor = ({ navigation, route }) => {
    */
   const undo = () => {
     if (undoStack.length > 0) {
-      undoStack.pop();
       const prev = undoStack.pop();
       setRedoStack([markdown, ...redoStack]);
       setMarkdown(prev);
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
   },
   footer: {
-    height: 20,
+    height: 15,
     flexDirection: 'row',
     alignItems: 'center',
   },
