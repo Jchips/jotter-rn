@@ -48,7 +48,7 @@ const LoginForm = () => {
       setIsLoggedIn(false);
       setError(
         error.message === 'Request failed with status code 403'
-          ? 'Incorrect username or password'
+          ? 'Incorrect email or password'
           : 'Sorry, there has been a server error :('
       );
       console.error(err);
