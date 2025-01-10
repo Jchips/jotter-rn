@@ -63,12 +63,12 @@ const LoginForm = () => {
   };
   return (
     <View style={styles.container}>
+      {error ? (
+        <View style={styles.errorAlert}>
+          <Text>{error}</Text>
+        </View>
+      ) : null}
       <View style={styles.controllerContainer}>
-        {error ? (
-          <View style={styles.errorAlert}>
-            <Text>{error}</Text>
-          </View>
-        ) : null}
         <Controller
           name='email'
           control={control}

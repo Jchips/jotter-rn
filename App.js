@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { AuthProvider } from './src/contexts/AuthContext';
 import { MarkdownProvider } from './src/contexts/MDContext';
 import Router from './src/routing/Router';
@@ -35,6 +36,7 @@ export default function App() {
   return fontsLoaded ? (
     <AuthProvider>
       <MarkdownProvider>
+        <StatusBar style='dark' />
         <Router />
       </MarkdownProvider>
     </AuthProvider>

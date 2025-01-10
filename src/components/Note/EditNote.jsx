@@ -7,7 +7,7 @@ const EditNote = ({ isEditable, markdown, update }) => {
   return (
     <View style={{ flex: 1 }}>
       {!isEditable ? (
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1, marginBottom: 15 }}>
           <View style={{ flex: 1 }}>
             {markdown ? (
               <Text style={styles.editor}>{markdown}</Text>
