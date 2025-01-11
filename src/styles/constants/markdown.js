@@ -1,4 +1,4 @@
-import { BORDER, FONT, FONTSIZE } from './styles';
+import { BORDER, FONT } from './styles';
 
 const MARKDOWN = {
   heading1: {
@@ -56,11 +56,6 @@ const MARKDOWN = {
     fontFamily: FONT.regular,
     lineHeight: 20,
   },
-
-  // list_item: {
-  //   lineHeight: FONTSIZE.regular,
-  //   padding: 5
-  // },
   table: {
     borderWidth: 1,
     borderColor: BORDER.color,
