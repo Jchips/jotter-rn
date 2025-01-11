@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
   },
   listItemContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'flex-start',
     fontFamily: FONT.regular,
   },
@@ -105,6 +104,7 @@ const styles = StyleSheet.create({
   bulletText: {
     fontFamily: FONT.regular,
     lineHeight: 20,
+    paddingRight: 20,
   },
 });
 

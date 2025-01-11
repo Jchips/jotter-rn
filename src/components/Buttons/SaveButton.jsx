@@ -10,14 +10,13 @@ const SaveButton = ({ note, markdown, setError }) => {
     try {
       setError('');
       setSaving(true);
-      let res = await api.updateNote(
+      await api.updateNote(
         {
           content: markdown,
           updatedAt: Date.now(),
         },
         note.id
       );
-      console.log('res.data:', res.data); // delete later
     } catch (err) {
       setError('Failed to save changes');
       console.error('Failed to save changes', err);
