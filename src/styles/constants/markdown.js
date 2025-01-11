@@ -51,10 +51,12 @@ const MARKDOWN = {
   bullet_list: {
     fontFamily: FONT.regular,
     lineHeight: 20,
+    paddingRight: 20,
   },
   ordered_list: {
     fontFamily: FONT.regular,
     lineHeight: 20,
+    paddingRight: 20,
   },
   table: {
     borderWidth: 1,
