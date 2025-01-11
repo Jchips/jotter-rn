@@ -20,7 +20,7 @@ const EditNote = ({ isEditable, markdown, update }) => {
         </ScrollView>
       ) : (
         <TextInput
-          style={styles.editor}
+          style={styles.textInput}
           multiline
           value={markdown}
           onChangeText={update}
@@ -42,6 +42,13 @@ const styles = StyleSheet.create({
     color: COLORS.mutedtext,
     fontFamily: FONT.code,
     fontSize: FONTSIZE.mid,
+  },
+  textInput: {
+    fontFamily: FONT.code,
+    fontSize: FONTSIZE.mid,
+    marginBottom: 5,
+    paddingBottom: 10,
+    whiteSpace: 'pre-wrap',
   },
 });
 

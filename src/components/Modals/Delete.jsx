@@ -139,15 +139,17 @@ const styles = StyleSheet.create({
   warningNote: {
     fontSize: FONTSIZE.smaller,
     marginVertical: 25,
+    marginHorizontal: 3,
   },
   warningContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
   img: {
-    height: 30,
-    width: 30,
-    marginHorizontal: 5,
+    height: 27,
+    width: 27,
+    marginHorizontal: 3,
   },
   button: {
     flex: 1,

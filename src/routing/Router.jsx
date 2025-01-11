@@ -14,8 +14,7 @@ const Stack = createStackNavigator();
 
 const Router = () => {
   const { isLoggedIn, token } = useAuth();
-  console.log('signed in:', isLoggedIn); // delete later
-  console.log('token:', token); // delete later
+  // console.log('signed in:', isLoggedIn); // delete later
   return (
     <NavigationContainer>
       <Stack.Navigator>

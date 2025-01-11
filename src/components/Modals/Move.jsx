@@ -315,7 +315,6 @@ const Move = (props) => {
               <SelectDropdown
                 data={folderOpts}
                 onSelect={(selection, index) => {
-                  console.log(selection, index); // delete later
                   move(selection);
                 }}
                 renderButton={renderButton}
