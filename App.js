@@ -14,12 +14,12 @@ export default function App() {
   Text.defaultProps.allowFontScaling = false;
   Text.defaultProps.textBreakStrategy = 'simple';
   const [fontsLoaded, error] = useFonts({
-    'Inter-Regular': require('./assets/fonts/Inter-Regular.ttf'),
-    'Inter-Italic': require('./assets/fonts/Inter-Italic.ttf'),
-    'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
-    'Inter-SemiBold': require('./assets/fonts/Inter-SemiBold.ttf'),
-    'Inter-ExtraBold': require('./assets/fonts/Inter-ExtraBold.ttf'),
-    'Inter-BoldItalic': require('./assets/fonts/Inter-BoldItalic.ttf'),
+    'Inter-Regular': require('./assets/fonts/Inter-Regular2.ttf'),
+    'Inter-Italic': require('./assets/fonts/Inter-Italic2.ttf'),
+    'Inter-Bold': require('./assets/fonts/Inter-Bold2.ttf'),
+    'Inter-SemiBold': require('./assets/fonts/Inter-SemiBold2.ttf'),
+    'Inter-ExtraBold': require('./assets/fonts/Inter-ExtraBold2.ttf'),
+    'Inter-BoldItalic': require('./assets/fonts/Inter-BoldItalic2.ttf'),
     'RobotoMono-Regular': require('./assets/fonts/RobotoMono-Regular.ttf'),
   });
 

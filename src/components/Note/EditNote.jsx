@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: FONT.code,
-    fontSize: FONTSIZE.mid,
+    fontSize: FONTSIZE.regular,
     marginBottom: 5,
     paddingBottom: 10,
     whiteSpace: 'pre-wrap',
