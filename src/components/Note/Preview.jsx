@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, View, ScrollView, Text, Platform } from 'react-native';
 import Markdown from 'react-native-markdown-display';
 import noteView from '../../styles/constants/note';
 import MARKDOWN from '../../styles/constants/markdown';
@@ -20,31 +14,63 @@ const Preview = ({ markdown }) => {
     }
     return '';
   };
+
+  /**
+   * Flattens all the styles into one array
+   * Filters out all undefined or null values
+   * @param {Object[]} allStyles - All the styles on list item
+   * @returns {Object[]} - All the styling with null/undefined values removed
+   */
+  const combineStyles = (allStyles) => {
+    return allStyles.flat().filter(Boolean);
+  };
+
   const rules = {
     list_item: (node, children, parent) => {
       const content = extractText(node).trim();
+      const allStyles = [];
 
       // Match checkboxes: - [ ] or - [x]
-      const checkboxMatch = content.match(/^\[( |x)\]\s*(.*)$/i);
+      const checkboxMatch = content.match(/^\[( |x)\]\s*/i);
       if (checkboxMatch) {
         const isChecked = checkboxMatch[1].toLowerCase() === 'x';
-        const label = checkboxMatch[2];
 
+        // Get styling for checkbox label
+        children.forEach((child) => {
+          if (child?.props?.children) {
+            child.props.children.forEach((nestedChild) => {
+              if (nestedChild?.props?.style) {
+                allStyles.push(nestedChild.props.style);
+              }
+            });
+          }
+          if (child?.props?.style) {
+            allStyles.push(child.props.style);
+          }
+        });
+        const finalStyles = combineStyles(allStyles);
+        const filteredChildren = content.replace(/^\[( |x)\]\s*/, ''); // Removes checbox
         return (
-          <TouchableOpacity key={node.key} style={styles.checkboxContainer}>
+          <View key={node.key} style={styles.checkboxContainer}>
             <View
               style={[styles.checkbox, isChecked && styles.checkedCheckbox]}
             />
-            <Text style={styles.bulletText}>{label}</Text>
-          </TouchableOpacity>
+            <Text style={finalStyles}>{filteredChildren}</Text>
+          </View>
         );
       }
 
       // Fallback for regular list items (without checkboxes)
       return (
         <View key={node.key} style={styles.listItemContainer}>
-          <Text style={styles.bullet}>•</Text>
-          <Text style={styles.bulletText}>{content}</Text>
+          <Text style={styles.bullet}>
+            {Platform.select({
+              android: '\u2022',
+              ios: '\u00B7',
+              default: '\u2022',
+            })}
+          </Text>
+          <View>{children}</View>
         </View>
       );
     },
@@ -81,7 +107,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     lineHeight: 20,
     borderColor: '#000',
-    marginLeft: 10,
+    marginLeft: 5,
     marginRight: 10,
     fontFamily: FONT.regular,
   },
