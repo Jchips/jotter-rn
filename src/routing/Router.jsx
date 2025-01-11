@@ -8,6 +8,7 @@ import Login from '../auth/Login';
 import ViewNote from '../components/Note/ViewNote';
 import Editor from '../components/Note/Editor';
 import Signup from '../auth/Signup';
+import COLORS from '../styles/constants/colors';
 // import Settings from './Settings';
 
 const Stack = createStackNavigator();
@@ -31,6 +32,7 @@ const Router = () => {
               name='View'
               component={ViewNote}
               options={{
+                headerTintColor: COLORS.themePurpleText,
                 headerShadowVisible: false,
               }}
             />
@@ -38,6 +40,7 @@ const Router = () => {
               name='Editor'
               component={Editor}
               options={{
+                headerTintColor: COLORS.themePurpleText,
                 headerShadowVisible: false,
               }}
             />
