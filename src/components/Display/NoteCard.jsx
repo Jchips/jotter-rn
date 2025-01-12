@@ -8,8 +8,14 @@ import app from '../../styles/default';
 import buttons from '../../styles/constants/buttons';
 
 const NoteCard = (props) => {
-  const { note, setSelectedNote, setOpenRename, setOpenMove, setOpenDelete } =
-    props;
+  const {
+    note,
+    setSelectedNote,
+    setOpenRename,
+    setOpenMove,
+    setOpenDelete,
+    setOpenDetails,
+  } = props;
   const popoverRef = useRef();
 
   return (
@@ -49,6 +55,23 @@ const NoteCard = (props) => {
                 style={styles.img}
               />
               <Text style={buttons.btnText2}>Rename note</Text>
+            </Pressable>
+            <Pressable
+              style={styles.button}
+              onPress={() => {
+                setSelectedNote(note);
+                setOpenDetails(true);
+                popoverRef.current.requestClose();
+              }}
+            >
+              <Image
+                source={{
+                  uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/info--v1.png`,
+                }}
+                alt='details-icon'
+                style={styles.img}
+              />
+              <Text style={buttons.btnText2}>View details</Text>
             </Pressable>
             <Pressable
               style={styles.button}

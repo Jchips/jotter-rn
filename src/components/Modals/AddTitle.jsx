@@ -41,6 +41,12 @@ const AddTitle = (props) => {
     },
   });
 
+  /**
+   * Adds a title to a note or folder
+   * Then creates the note or folder
+   * @param {Object} titleControl - The input the user types as a title
+   * @returns - exits the function if there is no current folder
+   */
   const onSubmit = async (titleControl) => {
     if (currentFolder === null) return;
     currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
@@ -92,6 +98,7 @@ const AddTitle = (props) => {
     });
     setSaving(false);
   };
+
   return (
     <Modal
       animationType='fade'

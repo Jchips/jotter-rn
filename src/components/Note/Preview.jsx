@@ -11,6 +11,7 @@ import { extractText } from '../../util/extract';
 import noteView from '../../styles/constants/note';
 import MARKDOWN from '../../styles/constants/markdown';
 import { FONT } from '../../styles/constants/styles';
+
 const Preview = ({ markdown }) => {
   /**
    * Flattens all the styles into one array
@@ -48,7 +49,10 @@ const Preview = ({ markdown }) => {
         const finalStyles = combineStyles(allStyles);
         const filteredChildren = content.replace(/^\[( |x)\]\s*/, ''); // Removes checbox
         return (
-          <TouchableOpacity key={node.key} style={styles.checkboxContainer}>
+          <TouchableOpacity
+            key={node.key}
+            style={[styles.checkboxContainer, style.list_item]}
+          >
             <View
               style={[styles.checkbox, isChecked && styles.checkedCheckbox]}
             />

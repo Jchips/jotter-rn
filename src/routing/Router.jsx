@@ -15,7 +15,7 @@ import { FONT } from '../styles/constants/styles';
 const Stack = createStackNavigator();
 
 const Router = () => {
-  const { isLoggedIn, token } = useAuth();
+  const { isLoggedIn } = useAuth();
   // console.log('signed in:', isLoggedIn); // delete later
   return (
     <NavigationContainer>
