@@ -20,12 +20,12 @@ import { FONTSIZE } from '../../styles/constants/styles';
 const Editor = ({ navigation, route }) => {
   const { note } = route.params;
   const [error, setError] = useState('');
-  const [words, setWords] = useState(getWordCount(note.content));
   const [isEditable, setIsEditable] = useState(false);
   const [showPreview, setShowPreview] = useState(true);
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
   const { markdown, setMarkdown } = useMarkdown();
+  const [words, setWords] = useState(getWordCount(markdown));
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)
     .onEnd(() => {

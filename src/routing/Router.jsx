@@ -9,6 +9,7 @@ import ViewNote from '../components/Note/ViewNote';
 import Editor from '../components/Note/Editor';
 import Signup from '../auth/Signup';
 import COLORS from '../styles/constants/colors';
+import { FONT } from '../styles/constants/styles';
 // import Settings from './Settings';
 
 const Stack = createStackNavigator();
@@ -34,6 +35,12 @@ const Router = () => {
               options={{
                 headerTintColor: COLORS.themePurpleText,
                 headerShadowVisible: false,
+                headerStyle: {
+                  height: 90,
+                },
+                headerTitleStyle: {
+                  fontFamily: FONT.semiBold,
+                },
               }}
             />
             <Stack.Screen
@@ -42,6 +49,12 @@ const Router = () => {
               options={{
                 headerTintColor: COLORS.themePurpleText,
                 headerShadowVisible: false,
+                headerStyle: {
+                  height: 90,
+                },
+                headerTitleStyle: {
+                  fontFamily: FONT.semiBold,
+                },
               }}
             />
           </>
