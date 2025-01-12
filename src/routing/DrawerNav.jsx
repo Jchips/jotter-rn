@@ -138,6 +138,9 @@ function DrawerNav({ navigation }) {
 
   const headerOptions = {
     headerShadowVisible: false,
+    headerTitleStyle: {
+      fontFamily: FONT.semiBold,
+    },
   };
 
   return (

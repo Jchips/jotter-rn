@@ -1,20 +1,17 @@
-import React from 'react';
-import { StyleSheet, View, ScrollView, Text, Platform } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import Markdown from 'react-native-markdown-display';
+import { extractText } from '../../util/extract';
 import noteView from '../../styles/constants/note';
 import MARKDOWN from '../../styles/constants/markdown';
 import { FONT } from '../../styles/constants/styles';
-
 const Preview = ({ markdown }) => {
-  const extractText = (node) => {
-    if (!node) return '';
-    if (node.content) return node.content;
-    if (node.children && node.children.length > 0) {
-      return node.children.map(extractText).join('');
-    }
-    return '';
-  };
-
   /**
    * Flattens all the styles into one array
    * Filters out all undefined or null values
@@ -26,7 +23,7 @@ const Preview = ({ markdown }) => {
   };
 
   const rules = {
-    list_item: (node, children, parent) => {
+    list_item: (node, children, parent, style) => {
       const content = extractText(node).trim();
       const allStyles = [];
 
@@ -37,7 +34,7 @@ const Preview = ({ markdown }) => {
 
         // Get styling for checkbox label
         children.forEach((child) => {
-          if (child?.props?.children) {
+          if (child?.props?.children && Array.isArray(child?.props?.children)) {
             child.props.children.forEach((nestedChild) => {
               if (nestedChild?.props?.style) {
                 allStyles.push(nestedChild.props.style);
@@ -51,18 +48,39 @@ const Preview = ({ markdown }) => {
         const finalStyles = combineStyles(allStyles);
         const filteredChildren = content.replace(/^\[( |x)\]\s*/, ''); // Removes checbox
         return (
-          <View key={node.key} style={styles.checkboxContainer}>
+          <TouchableOpacity key={node.key} style={styles.checkboxContainer}>
             <View
               style={[styles.checkbox, isChecked && styles.checkedCheckbox]}
             />
             <Text style={finalStyles}>{filteredChildren}</Text>
+          </TouchableOpacity>
+        );
+      }
+
+      if (parent[1]?.sourceType === 'list_item') {
+        return (
+          <View
+            key={node.key}
+            style={[styles.listItemContainer, style.list_item]}
+          >
+            <Text style={styles.innerBullet}>
+              {Platform.select({
+                android: '\u25E6',
+                ios: '\u25E6',
+                default: '\u25E6',
+              })}
+            </Text>
+            <View>{children}</View>
           </View>
         );
       }
 
-      // Fallback for regular list items (without checkboxes)
+      // Fallback for regular list items (without checkboxes and not nested)
       return (
-        <View key={node.key} style={styles.listItemContainer}>
+        <View
+          key={node.key}
+          style={[styles.listItemContainer, style.list_item]}
+        >
           <Text style={styles.bullet}>
             {Platform.select({
               android: '\u2022',
@@ -92,6 +110,7 @@ const Preview = ({ markdown }) => {
 const styles = StyleSheet.create({
   markdown: {
     height: '100%',
+    width: '100%',
     paddingBottom: 20,
     whiteSpace: 'pre-wrap',
   },
@@ -116,9 +135,11 @@ const styles = StyleSheet.create({
     fontFamily: FONT.regular,
   },
   listItemContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     fontFamily: FONT.regular,
+    maxWidth: '100%',
   },
   bullet: {
     fontFamily: FONT.regular,
@@ -127,10 +148,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
     color: '#000',
   },
-  bulletText: {
+  innerBullet: {
     fontFamily: FONT.regular,
     lineHeight: 20,
-    paddingRight: 20,
+    marginLeft: 0,
+    marginRight: 10,
+    color: '#000',
   },
 });
 

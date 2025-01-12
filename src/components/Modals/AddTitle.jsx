@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     height: 40,
+    padding: 5,
   },
   button: {
     flex: 1,

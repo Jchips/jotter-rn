@@ -1,5 +1,6 @@
 import { StyleSheet, Platform } from 'react-native';
 import { BORDER, FONT, FONTSIZE } from './constants/styles';
+import { scale, moderateScale, verticalScale } from '../util/scaling';
 import COLORS from './constants/colors';
 
 const app = StyleSheet.create({
@@ -29,12 +30,6 @@ const app = StyleSheet.create({
       },
     }),
   },
-  text: {
-    fontSize: FONTSIZE.regular,
-    marginVertical: 3,
-    fontFamily: FONT.regular,
-    lineHeight: 20
-  },
   smallText: {
     fontSize: FONTSIZE.xsmall,
     marginVertical: 1,
@@ -42,7 +37,6 @@ const app = StyleSheet.create({
     lineHeight: 20
   },
   boldText: {
-    // color: COLORS.primary,
     fontFamily: FONT.bold,
   },
   header: {
@@ -79,20 +73,6 @@ const app = StyleSheet.create({
       width: 0,
       height: 2,
     },
-  },
-  singleLineInput: {
-    // backgroundColor: COLORS.white,
-    borderColor: 'none',
-    height: 48,
-    padding: 10,
-    borderRadius: 8,
-  },
-  multilineInput: {
-    // backgroundColor: COLORS.white,
-    borderColor: 'none',
-    padding: 10,
-    borderRadius: 8,
-    textAlignVertical: 'top',
   },
   controllerContainer: {
     margin: 10,
