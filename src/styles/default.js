@@ -1,6 +1,6 @@
 import { StyleSheet, Platform } from 'react-native';
 import { BORDER, FONT, FONTSIZE } from './constants/styles';
-import { scale, moderateScale, verticalScale } from '../util/scaling';
+import { moderateScale } from '../util/scaling';
 import COLORS from './constants/colors';
 
 const app = StyleSheet.create({
@@ -11,7 +11,8 @@ const app = StyleSheet.create({
   },
   itemCard: {
     flex: 1,
-    padding: 15,
+    padding: moderateScale(15, 0.3),
+    // padding: 15,
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: BORDER.color, // change based on theme
@@ -30,8 +31,18 @@ const app = StyleSheet.create({
       },
     }),
   },
+  input: {
+    width: '100%',
+    height: moderateScale(38),
+    // height: 40,
+    padding: 5,
+  },
+  icon: {
+    height: moderateScale(23),
+    width: moderateScale(23)
+  },
   smallText: {
-    fontSize: FONTSIZE.xsmall,
+    fontSize: moderateScale(FONTSIZE.xsmall),
     marginVertical: 1,
     fontFamily: FONT.regular,
     lineHeight: 20
@@ -40,13 +51,9 @@ const app = StyleSheet.create({
     fontFamily: FONT.bold,
   },
   header: {
-    fontSize: FONTSIZE.large,
+    fontSize: moderateScale(FONTSIZE.large),
     margin: 10,
     fontFamily: FONT.bold
-  },
-  icon: {
-    height: 25,
-    width: 25,
   },
   errorAlert: {
     backgroundColor: 'rgb(248, 215, 218)',
@@ -66,7 +73,8 @@ const app = StyleSheet.create({
     width: '90%',
     backgroundColor: COLORS.themeWhite,
     borderRadius: BORDER.radius,
-    padding: 10,
+    padding: moderateScale(15),
+    // padding: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {

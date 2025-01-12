@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 const TogglePreview = ({ showPreview }) => {
   return showPreview ? (
@@ -8,7 +8,7 @@ const TogglePreview = ({ showPreview }) => {
         uri: 'https://img.icons8.com/material-outlined/100/invisible.png',
       }}
       alt='show-preview'
-      style={styles.img}
+      style={styles.icon}
     />
   ) : (
     <Image
@@ -16,13 +16,13 @@ const TogglePreview = ({ showPreview }) => {
         uri: 'https://img.icons8.com/material-outlined/100/visible--v1.png',
       }}
       alt='hide-preview'
-      style={styles.img}
+      style={styles.icon}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  img: {
+  icon: {
     width: 22,
     height: 22,
   },

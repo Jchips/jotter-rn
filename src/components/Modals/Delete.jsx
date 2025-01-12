@@ -4,7 +4,8 @@ import api from '../../util/api';
 import app from '../../styles/default';
 import buttons from '../../styles/constants/buttons';
 import COLORS from '../../styles/constants/colors';
-import { FONTSIZE } from '../../styles/constants/styles';
+import { FONT, FONTSIZE } from '../../styles/constants/styles';
+import { moderateScale } from '../../util/scaling';
 
 const Delete = (props) => {
   const [error, setError] = useState('');
@@ -55,44 +56,40 @@ const Delete = (props) => {
       <View style={app.centeredView}>
         <View style={app.modal}>
           <Text style={styles.header}>Delete</Text>
-          <View>
+          <View style={styles.modalContainer}>
             {error ? (
               <View style={app.errorAlert}>
-                <Text>{error}</Text>
+                <Text style={app.errorText}>{error}</Text>
               </View>
             ) : null}
-            <View style={styles.modalContainer}>
-              <Text>
-                Are you sure that you want to delete{' '}
-                <Text
-                  style={{ color: COLORS.themePurpleText, ...app.boldText }}
-                >
-                  {note?.title || folder?.title}
-                </Text>
-                ?
+            <Text style={styles.modalText}>
+              Are you sure that you want to delete{' '}
+              <Text style={{ color: COLORS.themePurpleText, ...app.boldText }}>
+                {note?.title || folder?.title}
               </Text>
-              <View style={styles.warningContainer}>
-                <Image
-                  source={{
-                    uri: `https://img.icons8.com/material-outlined/100/${COLORS.warningYellowNH}/error--v1.png`,
-                  }}
-                  alt='warning-icon'
-                  style={styles.img}
-                />
-                {folder ? (
-                  <Text style={styles.warningNote}>
-                    This will delete all folders and notes stored within{' '}
-                    <Text style={app.boldText}>
-                      {note?.title || folder?.title}
-                    </Text>
-                    .
+              ?
+            </Text>
+            <View style={styles.warningContainer}>
+              <Image
+                source={{
+                  uri: `https://img.icons8.com/material-outlined/100/${COLORS.warningYellowNH}/error--v1.png`,
+                }}
+                alt='warning-icon'
+                style={styles.icon}
+              />
+              {folder ? (
+                <Text style={styles.warningNote}>
+                  This will delete all folders and notes stored within{' '}
+                  <Text style={app.boldText}>
+                    {note?.title || folder?.title}
                   </Text>
-                ) : (
-                  <Text style={styles.warningNote}>
-                    This action cannot be undone.
-                  </Text>
-                )}
-              </View>
+                  .
+                </Text>
+              ) : (
+                <Text style={styles.warningNote}>
+                  This action cannot be undone.
+                </Text>
+              )}
             </View>
           </View>
           <View style={styles.buttons}>
@@ -129,7 +126,13 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   modalContainer: {
-    paddingHorizontal: 20,
+    width: '100%',
+    paddingHorizontal: 10,
+  },
+  modalText: {
+    fontFamily: FONT.regular,
+    lineHeight: moderateScale(19),
+    width: '100%',
   },
   buttons: {
     alignItems: 'center',
@@ -137,7 +140,8 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   warningNote: {
-    fontSize: FONTSIZE.smaller,
+    fontFamily: FONT.regular,
+    fontSize: moderateScale(FONTSIZE.smaller),
     marginVertical: 25,
     marginHorizontal: 3,
   },
@@ -146,7 +150,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
   },
-  img: {
+  icon: {
     height: 27,
     width: 27,
     marginHorizontal: 3,

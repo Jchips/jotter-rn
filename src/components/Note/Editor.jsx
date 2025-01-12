@@ -15,7 +15,8 @@ import getWordCount from '../../util/getWordCount';
 import app from '../../styles/default';
 import COLORS from '../../styles/constants/colors';
 import buttons from '../../styles/constants/buttons';
-import { FONTSIZE } from '../../styles/constants/styles';
+import { moderateScale } from '../../util/scaling';
+import { FONT, FONTSIZE } from '../../styles/constants/styles';
 
 const Editor = ({ navigation, route }) => {
   const { note } = route.params;
@@ -241,7 +242,9 @@ const styles = StyleSheet.create({
   },
   words: {
     textAlign: 'center',
-    fontSize: FONTSIZE.smaller,
+    fontSize: moderateScale(FONTSIZE.small),
+    // fontSize: FONTSIZE.smaller,
+    fontFamily: FONT.regular,
     marginHorizontal: 10,
   },
   headerBtns: {
@@ -253,8 +256,10 @@ const styles = StyleSheet.create({
   },
   headerBtn: {
     ...buttons.outlineBtn1,
-    height: 30,
-    width: 50,
+    // height: 30,
+    height: moderateScale(30),
+    width: moderateScale(48),
+    // width: 50,
     marginHorizontal: 2,
   },
   footer: {

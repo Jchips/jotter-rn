@@ -12,6 +12,7 @@ import { useFolder } from '../../hooks/useFolder';
 import api from '../../util/api';
 import app from '../../styles/default';
 import COLORS from '../../styles/constants/colors';
+import { moderateScale } from '../../util/scaling';
 import { BORDER, FONT, FONTSIZE } from '../../styles/constants/styles';
 
 const Move = (props) => {
@@ -249,7 +250,7 @@ const Move = (props) => {
               uri: 'https://img.icons8.com/material-outlined/100/expand-arrow--v1.png',
             }}
             alt='dropdown arrow'
-            style={styles.img}
+            style={styles.icon}
           />
         ) : (
           <Image
@@ -257,7 +258,7 @@ const Move = (props) => {
               uri: 'https://img.icons8.com/material-outlined/100/collapse-arrow.png',
             }}
             alt='dropdown arrow'
-            style={styles.img}
+            style={styles.icon}
           />
         )}
       </View>
@@ -341,7 +342,6 @@ const styles = StyleSheet.create({
   dropdownButtonStyle: {
     width: '95%',
     height: 50,
-    // backgroundColor: COLORS.themeWhite,
     borderWidth: 1,
     borderColor: BORDER.color,
     borderRadius: BORDER.radius,
@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
   dropdownButtonTxtStyle: {
     flex: 1,
     fontFamily: FONT.regular,
-    fontSize: FONTSIZE.regular,
+    fontSize: moderateScale(FONTSIZE.regular),
   },
   dropdownButtonArrowStyle: {
     fontSize: 28,
@@ -378,13 +378,9 @@ const styles = StyleSheet.create({
   dropdownItemTxtStyle: {
     flex: 1,
     fontFamily: FONT.semiBold,
-    fontSize: FONTSIZE.regular,
+    fontSize: moderateScale(FONTSIZE.regular),
   },
-  dropdownItemIconStyle: {
-    fontSize: 28,
-    marginRight: 8,
-  },
-  img: {
+  icon: {
     width: 22,
     height: 22,
   },

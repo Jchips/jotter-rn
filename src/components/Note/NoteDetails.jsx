@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, StyleSheet, Text, View, Pressable } from 'react-native';
+import { scale, moderateScale, verticalScale } from '../../util/scaling';
 import getWordCount from '../../util/getWordCount';
 import formatDate from '../../util/formatDate';
 import app from '../../styles/default';
@@ -54,6 +55,7 @@ const NoteDetails = ({ openDetails, setOpenDetails, note }) => {
 const styles = StyleSheet.create({
   button: {
     width: '90%',
+    marginTop: 20,
   },
   modal: {
     ...app.modal,
@@ -64,6 +66,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontFamily: FONT.regular,
+    fontSize: moderateScale(FONTSIZE.regular),
     color: COLORS.themePurpleText,
     lineHeight: 25,
   },

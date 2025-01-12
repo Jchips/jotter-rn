@@ -39,7 +39,7 @@ const SaveButton = ({ note, markdown, setError }) => {
           uri: `https://img.icons8.com/material-outlined/100/save.png`,
         }}
         alt='save-button'
-        style={styles.img}
+        style={styles.icon}
       />
     </Pressable>
   );
@@ -48,12 +48,12 @@ const SaveButton = ({ note, markdown, setError }) => {
 const styles = StyleSheet.create({
   saveButton: {
     ...buttons.outlineBtn1,
-    height: 40,
     flex: 1,
+    height: 40,
     marginVertical: 0,
     marginHorizontal: 10,
   },
-  img: {
+  icon: {
     width: 22,
     height: 22,
   },

@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
+import { moderateScale } from '../../util/scaling';
 import { FONT, FONTSIZE } from '../../styles/constants/styles';
 import COLORS from '../../styles/constants/colors';
 
@@ -34,18 +35,18 @@ const EditNote = ({ isEditable, markdown, update }) => {
 const styles = StyleSheet.create({
   editor: {
     fontFamily: FONT.code,
-    fontSize: FONTSIZE.mid,
+    fontSize: moderateScale(FONTSIZE.mid),
     marginBottom: 5,
     whiteSpace: 'pre-wrap',
   },
   placeholderText: {
     color: COLORS.mutedtext,
     fontFamily: FONT.code,
-    fontSize: FONTSIZE.mid,
+    fontSize: moderateScale(FONTSIZE.small),
   },
   textInput: {
     fontFamily: FONT.code,
-    fontSize: FONTSIZE.regular,
+    fontSize: moderateScale(FONTSIZE.mid),
     marginBottom: 5,
     paddingBottom: 10,
     whiteSpace: 'pre-wrap',

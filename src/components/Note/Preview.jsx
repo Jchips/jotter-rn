@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Markdown from 'react-native-markdown-display';
+import { moderateScale } from '../../util/scaling';
 import { extractText } from '../../util/extract';
 import noteView from '../../styles/constants/note';
 import MARKDOWN from '../../styles/constants/markdown';
@@ -128,7 +129,8 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
     borderWidth: 1,
-    lineHeight: 20,
+    // lineHeight: 20,
+    lineHeight: moderateScale(19),
     borderColor: '#000',
     marginLeft: 5,
     marginRight: 10,
@@ -147,14 +149,16 @@ const styles = StyleSheet.create({
   },
   bullet: {
     fontFamily: FONT.regular,
-    lineHeight: 20,
+    // lineHeight: 20,
+    lineHeight: moderateScale(19),
     marginLeft: 10,
     marginRight: 10,
     color: '#000',
   },
   innerBullet: {
     fontFamily: FONT.regular,
-    lineHeight: 20,
+    // lineHeight: 20,
+    lineHeight: moderateScale(19),
     marginLeft: 0,
     marginRight: 10,
     color: '#000',

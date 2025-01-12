@@ -1,11 +1,13 @@
 import React, { useRef } from 'react';
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import Popover from 'react-native-popover-view';
+import { moderateScale } from '../../util/scaling';
 import formatDate from '../../util/formatDate';
-import { BORDER, FONT, FONTSIZE } from '../../styles/constants/styles';
-import COLORS from '../../styles/constants/colors';
 import app from '../../styles/default';
 import buttons from '../../styles/constants/buttons';
+import COLORS from '../../styles/constants/colors';
+import POPOVER from '../../styles/constants/popover';
+import { BORDER, FONT, FONTSIZE } from '../../styles/constants/styles';
 
 const NoteCard = (props) => {
   const {
@@ -31,16 +33,16 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/more.png`,
                 }}
                 alt='more-icon'
-                style={styles.img}
+                style={app.icon}
               />
             </Pressable>
           }
           arrowSize={{ width: 0, height: 0 }}
           popoverStyle={styles.popover}
         >
-          <View style={styles.popoverContainer}>
+          <View style={POPOVER.popoverContainer}>
             <Pressable
-              style={styles.button}
+              style={POPOVER.button}
               onPress={() => {
                 setSelectedNote(note);
                 setOpenRename(true);
@@ -52,12 +54,12 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/rename.png`,
                 }}
                 alt='rename-icon'
-                style={styles.img}
+                style={app.icon}
               />
               <Text style={buttons.btnText2}>Rename note</Text>
             </Pressable>
             <Pressable
-              style={styles.button}
+              style={POPOVER.button}
               onPress={() => {
                 setSelectedNote(note);
                 setOpenDetails(true);
@@ -69,12 +71,12 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/info--v1.png`,
                 }}
                 alt='details-icon'
-                style={styles.img}
+                style={app.icon}
               />
               <Text style={buttons.btnText2}>View details</Text>
             </Pressable>
             <Pressable
-              style={styles.button}
+              style={POPOVER.button}
               onPress={() => {
                 setSelectedNote(note);
                 setOpenMove(true);
@@ -86,12 +88,12 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/reorder.png`,
                 }}
                 alt='move-icon'
-                style={styles.img}
+                style={app.icon}
               />
               <Text style={buttons.btnText2}>Move note</Text>
             </Pressable>
             <Pressable
-              style={styles.button}
+              style={POPOVER.button}
               onPress={() => {
                 setSelectedNote(note);
                 setOpenDelete(true);
@@ -103,7 +105,7 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/trash--v1.png`,
                 }}
                 alt='delete-icon'
-                style={styles.img}
+                style={app.icon}
               />
               <Text style={buttons.btnText2}>Delete note</Text>
             </Pressable>
@@ -127,36 +129,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   h1: {
-    fontSize: FONTSIZE.regular,
+    fontSize: moderateScale(FONTSIZE.regular),
     fontFamily: FONT.bold,
   },
-  img: {
-    height: 23,
-    width: 23,
-  },
   metaData: {
-    fontSize: FONTSIZE.smaller,
+    fontSize: moderateScale(FONTSIZE.smaller),
     fontFamily: FONT.regular,
     color: COLORS.mutedtext,
   },
   popover: {
     borderRadius: BORDER.radius,
-    minHeight: 140,
-    width: 170,
-  },
-  popoverContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    paddingVertical: '4%',
-  },
-  button: {
-    ...buttons.btn3,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    height: 50,
-    paddingHorizontal: 10,
-    marginVertical: '2%',
+    minHeight: moderateScale(190),
+    width: moderateScale(170),
   },
 });
 

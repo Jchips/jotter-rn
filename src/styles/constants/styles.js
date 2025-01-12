@@ -9,13 +9,13 @@ const FONT = {
 }
 
 const FONTSIZE = {
-  xlarge: 20, // 25
-  large: 18, // 20
-  regular: 15, // 13
-  mid: 14,
-  small: 13,
-  smaller: 12,
-  xsmall: 10 // 8
+  xlarge: 19, // 20
+  large: 17, // 18
+  regular: 14, // 15
+  mid: 13, // 14
+  small: 12, // 13
+  smaller: 11, // 12
+  xsmall: 10
 }
 
 const BORDER = {

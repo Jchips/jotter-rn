@@ -129,7 +129,7 @@ const AddTitle = (props) => {
                   onChangeText={onChange}
                   onBlur={onBlur}
                   placeholder={`Give ${type} a title`}
-                  style={styles.input}
+                  style={app.input}
                   autoCapitalize='none'
                   autoCorrect={false}
                   onSubmitEditing={handleSubmit(onSubmit)}
@@ -177,11 +177,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: BORDER.color,
     borderRadius: BORDER.radius,
-    padding: 5,
-  },
-  input: {
-    width: '100%',
-    height: 40,
     padding: 5,
   },
   button: {

@@ -18,7 +18,7 @@ const Account = () => {
     <View style={styles.container}>
       <Text style={styles.h1}>{user?.email}</Text>
       <Pressable style={styles.button} onPress={logUserOut}>
-        <Text style={buttons.btnText1}>Log Out</Text>
+        <Text style={buttons.btnText1}>Log out</Text>
       </Pressable>
     </View>
   );
