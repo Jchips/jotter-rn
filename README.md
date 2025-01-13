@@ -18,7 +18,7 @@ Try **Jotter** today and elevate your note-taking game!
 
 TLDR: Jotter is a mobile app for Android designed for note-taking with Markdown.
 
-[View the web version of the app here!](https://github.com/Jchips/jotter)
+[View the web version of the app here!](https://github.com/jchips/jotter)
 
 ## Creator & developer: Jelani R
 
@@ -39,6 +39,7 @@ TLDR: Jotter is a mobile app for Android designed for note-taking with Markdown.
 - [react-native-select-dropdown](https://github.com/AdelRedaa97/react-native-select-dropdown?tab=readme-ov-file)
 - [Scaling by Soluto](https://medium.com/soluto-engineering/size-matters-5aeeb462900a)
 - [icons8](https://icons8.com/)
+- [Web Dev Simplified](https://youtu.be/6XTRElVAZ9Y)
 - ['Inter' font by Rasmus Andersson](https://github.com/rsms/inter)
 - ['RobotoMono' Google font by Christian Robertson](https://fonts.google.com/specimen/Roboto+Mono)
 

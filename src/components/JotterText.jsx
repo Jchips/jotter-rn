@@ -1,4 +1,6 @@
 import { StyleSheet, View, Text, Image } from 'react-native';
+import { moderateScale } from '../util/scaling';
+import { FONT } from '../styles';
 
 const JotterText = () => {
   return (
@@ -23,12 +25,12 @@ const styles = StyleSheet.create({
   header: {
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 40,
-    fontWeight: 'bold',
+    fontSize: moderateScale(40),
+    fontFamily: FONT.bold,
   },
   img: {
-    width: 27,
-    height: 27,
+    width: moderateScale(27),
+    height: moderateScale(27),
     marginLeft: 3,
     marginRight: 4,
     marginTop: 4,
