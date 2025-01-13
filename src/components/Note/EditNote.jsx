@@ -33,7 +33,7 @@ const EditNote = ({ isEditable, markdown, update }) => {
 const styles = StyleSheet.create({
   editor: {
     fontFamily: FONT.code,
-    fontSize: moderateScale(FONTSIZE.mid),
+    fontSize: moderateScale(FONTSIZE.regular),
     marginBottom: 5,
     whiteSpace: 'pre-wrap',
   },
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: FONT.code,
-    fontSize: moderateScale(FONTSIZE.mid),
+    fontSize: moderateScale(FONTSIZE.regular),
     marginBottom: 5,
     paddingBottom: 10,
     whiteSpace: 'pre-wrap',
