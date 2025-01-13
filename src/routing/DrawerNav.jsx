@@ -8,9 +8,10 @@ import { useAuth } from '../contexts/AuthContext';
 import { moderateScale } from '../util/scaling.js';
 import Account from '../components/Account';
 import Dashboard from '../components/Dashboard';
-import COLORS from '../styles/constants/colors';
-import buttons from '../styles/constants/buttons.js';
-import { BORDER, FONT, FONTSIZE } from '../styles/constants/styles';
+// import COLORS from '../styles/constants/colors';
+// import buttons from '../styles/constants/buttons.js';
+// import { BORDER, FONT, FONTSIZE } from '../styles/constants/constants';
+import { COLORS, FONT, FONTSIZE, BORDER, buttons } from '../styles';
 
 const Drawer = createDrawerNavigator();
 

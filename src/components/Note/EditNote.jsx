@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
 import { moderateScale } from '../../util/scaling';
-import { FONT, FONTSIZE } from '../../styles/constants/styles';
-import COLORS from '../../styles/constants/colors';
+// import { FONT, FONTSIZE } from '../../styles/constants/constants';
+// import COLORS from '../../styles/constants/colors';
+import { FONT, FONTSIZE, COLORS } from '../../styles';
 
 const EditNote = ({ isEditable, markdown, update }) => {
   return (

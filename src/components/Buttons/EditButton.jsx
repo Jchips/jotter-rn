@@ -1,7 +1,8 @@
 import React from 'react';
 import { Image, Pressable, StyleSheet } from 'react-native';
-import COLORS from '../../styles/constants/colors';
-import buttons from '../../styles/constants/buttons';
+// import COLORS from '../../styles/constants/colors';
+// import buttons from '../../styles/constants/buttons';
+import { COLORS, buttons } from '../../styles';
 
 const EditButton = ({ navigation, note }) => {
   return (

@@ -12,11 +12,12 @@ import EditNote from './EditNote';
 import SaveButton from '../Buttons/SaveButton';
 import TogglePreview from '../Buttons/TogglePreview';
 import getWordCount from '../../util/getWordCount';
-import app from '../../styles/default';
-import COLORS from '../../styles/constants/colors';
-import buttons from '../../styles/constants/buttons';
+import { app, COLORS, buttons, FONT, FONTSIZE } from '../../styles';
+// import app from '../../styles/appDefault';
+// import COLORS from '../../styles/constants/colors';
+// import buttons from '../../styles/constants/buttons';
 import { moderateScale } from '../../util/scaling';
-import { FONT, FONTSIZE } from '../../styles/constants/styles';
+// import { FONT, FONTSIZE } from '../../styles/constants/constants';
 
 const Editor = ({ navigation, route }) => {
   const { note } = route.params;

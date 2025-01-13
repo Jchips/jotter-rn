@@ -10,7 +10,8 @@ import DisplayNotes from './Display/DisplayNotes';
 import AddButton from './Buttons/AddButton';
 import AddTitle from './Modals/AddTitle';
 import api from '../util/api';
-import COLORS from '../styles/constants/colors';
+// import COLORS from '../styles/constants/colors';
+import { COLORS } from '../styles';
 
 const Dashboard = ({ route }) => {
   const { folderId, folderTitle } = route.params;

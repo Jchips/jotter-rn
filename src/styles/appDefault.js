@@ -1,7 +1,7 @@
 import { StyleSheet, Platform } from 'react-native';
-import { BORDER, FONT, FONTSIZE } from './constants/styles';
+import COLORS from './colors';
 import { moderateScale } from '../util/scaling';
-import COLORS from './constants/colors';
+import { BORDER, FONT, FONTSIZE } from './constants';
 
 const app = StyleSheet.create({
   container: {

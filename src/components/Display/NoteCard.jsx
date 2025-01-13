@@ -1,13 +1,22 @@
 import React, { useRef } from 'react';
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import Popover from 'react-native-popover-view';
-import { moderateScale } from '../../util/scaling';
 import formatDate from '../../util/formatDate';
-import app from '../../styles/default';
-import buttons from '../../styles/constants/buttons';
-import COLORS from '../../styles/constants/colors';
-import POPOVER from '../../styles/constants/popover';
-import { BORDER, FONT, FONTSIZE } from '../../styles/constants/styles';
+// import app from '../../styles/appDefault';
+// import buttons from '../../styles/constants/buttons';
+// import COLORS from '../../styles/constants/colors';
+// import POPOVER from '../../styles/constants/popover';
+import { moderateScale } from '../../util/scaling';
+// import { BORDER, FONT, FONTSIZE } from '../../styles/constants/constants';
+import {
+  app,
+  COLORS,
+  FONT,
+  FONTSIZE,
+  BORDER,
+  POPOVER,
+  buttons,
+} from '../../styles';
 
 const NoteCard = (props) => {
   const {

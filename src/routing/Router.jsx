@@ -8,8 +8,9 @@ import Login from '../auth/Login';
 import ViewNote from '../components/Note/ViewNote';
 import Editor from '../components/Note/Editor';
 import Signup from '../auth/Signup';
-import COLORS from '../styles/constants/colors';
-import { FONT } from '../styles/constants/styles';
+// import COLORS from '../styles/constants/colors';
+// import { FONT } from '../styles/constants/constants';
+import { COLORS, FONT } from '../styles';
 // import Settings from './Settings';
 
 const Stack = createStackNavigator();

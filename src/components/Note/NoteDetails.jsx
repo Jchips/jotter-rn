@@ -1,12 +1,12 @@
 import React from 'react';
 import { Modal, StyleSheet, Text, View, Pressable } from 'react-native';
-import { scale, moderateScale, verticalScale } from '../../util/scaling';
+import { moderateScale } from '../../util/scaling';
 import getWordCount from '../../util/getWordCount';
 import formatDate from '../../util/formatDate';
-import app from '../../styles/default';
-import buttons from '../../styles/constants/buttons';
-import COLORS from '../../styles/constants/colors';
-import { FONT, FONTSIZE } from '../../styles/constants/styles';
+import app from '../../styles/appDefault';
+// import buttons from '../../styles/constants/buttons';
+// import COLORS from '../../styles/constants/colors';
+import { COLORS, FONT, FONTSIZE, buttons } from '../../styles';
 
 const NoteDetails = ({ openDetails, setOpenDetails, note }) => {
   return (

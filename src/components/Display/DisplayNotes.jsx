@@ -6,7 +6,8 @@ import Move from '../Modals/Move';
 import Rename from '../Modals/Rename';
 import Delete from '../Modals/Delete';
 import NoteDetails from '../Note/NoteDetails';
-import app from '../../styles/default';
+// import app from '../../styles/appDefault';
+import { app } from '../../styles';
 
 const DisplayNotes = ({ notes, setNotes, folders, error }) => {
   const [openMove, setOpenMove] = useState(false);

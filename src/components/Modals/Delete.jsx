@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Modal, StyleSheet, View, Text, Pressable, Image } from 'react-native';
 import api from '../../util/api';
-import app from '../../styles/default';
-import buttons from '../../styles/constants/buttons';
-import COLORS from '../../styles/constants/colors';
-import { FONT, FONTSIZE } from '../../styles/constants/styles';
+// import app from '../../styles/appDefault';
+// import buttons from '../../styles/constants/buttons';
+// import COLORS from '../../styles/constants/colors';
 import { moderateScale } from '../../util/scaling';
+// import { FONT, FONTSIZE } from '../../styles/constants/constants';
+import { app, COLORS, FONT, FONTSIZE, buttons } from '../../styles';
 
 const Delete = (props) => {
   const [error, setError] = useState('');

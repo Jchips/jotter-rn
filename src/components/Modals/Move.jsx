@@ -10,10 +10,11 @@ import {
 import SelectDropdown from 'react-native-select-dropdown';
 import { useFolder } from '../../hooks/useFolder';
 import api from '../../util/api';
-import app from '../../styles/default';
-import COLORS from '../../styles/constants/colors';
+// import app from '../../styles/appDefault';
+// import COLORS from '../../styles/constants/colors';
 import { moderateScale } from '../../util/scaling';
-import { BORDER, FONT, FONTSIZE } from '../../styles/constants/styles';
+// import { BORDER, FONT, FONTSIZE } from '../../styles/constants/constants';
+import { app, COLORS, BORDER, FONT, FONTSIZE } from '../../styles';
 
 const Move = (props) => {
   const { navigation, openMove, setOpenMove, type, note, folder } = props;
@@ -354,7 +355,7 @@ const styles = StyleSheet.create({
   dropdownButtonTxtStyle: {
     flex: 1,
     fontFamily: FONT.regular,
-    fontSize: moderateScale(FONTSIZE.regular),
+    fontSize: moderateScale(FONTSIZE.mid),
   },
   dropdownButtonArrowStyle: {
     fontSize: 28,
@@ -381,8 +382,8 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(FONTSIZE.regular),
   },
   icon: {
-    width: 22,
-    height: 22,
+    width: moderateScale(22),
+    height: moderateScale(22),
   },
   noMoveOptions: {
     padding: 10,

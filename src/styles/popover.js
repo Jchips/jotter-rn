@@ -1,5 +1,5 @@
-import { moderateScale } from '../../util/scaling';
-import buttons from '../../styles/constants/buttons';
+import { moderateScale } from '../util/scaling';
+import buttons from './buttons';
 
 const POPOVER = {
   popoverContainer: {

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { moderateScale } from '../../util/scaling';
 import COLORS from './colors';
-import { BORDER, FONT, FONTSIZE } from './styles';
+import { moderateScale } from '../util/scaling';
+import { BORDER, FONT, FONTSIZE } from './constants';
 
 const button = {
   alignItems: 'center',

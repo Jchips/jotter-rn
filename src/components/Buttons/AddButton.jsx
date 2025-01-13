@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
 import { StyleSheet, Image, Pressable, View, Text } from 'react-native';
 import Popover from 'react-native-popover-view';
+// import buttons from '../../styles/constants/buttons';
+// import COLORS from '../../styles/constants/colors';
 import { moderateScale } from '../../util/scaling';
-import buttons from '../../styles/constants/buttons';
-import COLORS from '../../styles/constants/colors';
-import { BORDER } from '../../styles/constants/styles';
+// import { BORDER } from '../../styles/constants/constants';
+import { COLORS, BORDER, buttons } from '../../styles';
 
 const AddButton = ({ setOpenAddTitle, setType }) => {
   const popoverRef = useRef();

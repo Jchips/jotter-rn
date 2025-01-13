@@ -11,10 +11,11 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../contexts/AuthContext';
 import { API_URL } from '@env';
-import app from '../styles/default';
-import buttons from '../styles/constants/buttons';
-import COLORS from '../styles/constants/colors';
-import { BORDER, FONT, FONTSIZE } from '../styles/constants/styles';
+// import app from '../styles/appDefault';
+// import buttons from '../styles/constants/buttons';
+// import COLORS from '../styles/constants/colors';
+// import { BORDER, FONT, FONTSIZE } from '../styles/constants/constants';
+import { app, COLORS, FONT, FONTSIZE, BORDER, buttons } from '../styles';
 
 const SignupForm = () => {
   const [error, setError] = useState('');

@@ -11,10 +11,11 @@ import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthContext';
 import { ROOT_FOLDER } from '../../hooks/useFolder';
 import api from '../../util/api';
-import app from '../../styles/default';
-import buttons from '../../styles/constants/buttons';
-import COLORS from '../../styles/constants/colors';
-import { BORDER } from '../../styles/constants/styles';
+// import app from '../../styles/appDefault';
+// import buttons from '../../styles/constants/buttons';
+// import COLORS from '../../styles/constants/colors';
+// import { BORDER } from '../../styles/constants/constants';
+import { app, COLORS, BORDER, buttons } from '../../styles';
 
 const AddTitle = (props) => {
   const {
