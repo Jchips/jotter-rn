@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
 const JotterText = () => {
@@ -28,8 +27,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   img: {
-    width: 28,
-    height: 28,
+    width: 27,
+    height: 27,
     marginLeft: 3,
     marginRight: 4,
     marginTop: 4,

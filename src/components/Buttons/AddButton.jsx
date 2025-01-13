@@ -1,9 +1,8 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { StyleSheet, Image, Pressable, View, Text } from 'react-native';
 import Popover from 'react-native-popover-view';
-import { BORDER } from '../../styles/constants/styles';
-import buttons from '../../styles/constants/buttons';
-import COLORS from '../../styles/constants/colors';
+import { moderateScale } from '../../util/scaling';
+import { app, COLORS, BORDER, buttons } from '../../styles';
 
 const AddButton = ({ setOpenAddTitle, setType }) => {
   const popoverRef = useRef();
@@ -12,13 +11,13 @@ const AddButton = ({ setOpenAddTitle, setType }) => {
     <Popover
       ref={popoverRef}
       from={
-        <Pressable style={styles.button}>
+        <Pressable style={buttons.roundBtn}>
           <Image
             source={{
               uri: `https://img.icons8.com/material-outlined/100/${COLORS.whiteNoHash}/plus-math--v1.png`,
             }}
             alt='add-icon'
-            style={styles.img}
+            style={app.icon}
           />
         </Pressable>
       }
@@ -40,7 +39,7 @@ const AddButton = ({ setOpenAddTitle, setType }) => {
               uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/folder-invoices--v1.png`,
             }}
             alt='folder-icon'
-            style={styles.img}
+            style={app.icon}
           />
           <Text style={buttons.btnText2}>New Folder</Text>
         </Pressable>
@@ -57,7 +56,7 @@ const AddButton = ({ setOpenAddTitle, setType }) => {
               uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/file.png`,
             }}
             alt='note-icon'
-            style={styles.img}
+            style={app.icon}
           />
           <Text style={buttons.btnText2}>New Note</Text>
         </Pressable>
@@ -67,22 +66,10 @@ const AddButton = ({ setOpenAddTitle, setType }) => {
 };
 
 const styles = StyleSheet.create({
-  button: {
-    borderRadius: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 60,
-    height: 60,
-    backgroundColor: COLORS.themePurple,
-    margin: 15,
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-  },
   popover: {
     borderRadius: BORDER.radius,
-    minHeight: 115,
-    width: 160,
+    minHeight: moderateScale(115),
+    width: moderateScale(160),
   },
   popoverContainer: {
     flex: 1,
@@ -94,13 +81,9 @@ const styles = StyleSheet.create({
     ...buttons.btn3,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 50,
+    height: moderateScale(48),
     paddingHorizontal: 10,
     marginVertical: '2%',
-  },
-  img: {
-    width: 22,
-    height: 22,
   },
 });
 

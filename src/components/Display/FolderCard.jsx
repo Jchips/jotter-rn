@@ -1,10 +1,16 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import Popover from 'react-native-popover-view';
-import { BORDER, FONT, FONTSIZE } from '../../styles/constants/styles';
-import COLORS from '../../styles/constants/colors';
-import buttons from '../../styles/constants/buttons';
-import app from '../../styles/default';
+import { moderateScale } from '../../util/scaling';
+import {
+  app,
+  COLORS,
+  FONT,
+  FONTSIZE,
+  BORDER,
+  POPOVER,
+  buttons,
+} from '../../styles';
 
 const FolderCard = (props) => {
   const {
@@ -24,7 +30,7 @@ const FolderCard = (props) => {
             uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/folder-invoices--v1.png`,
           }}
           alt='folder-icon'
-          style={styles.img}
+          style={app.icon2}
         />
         <Text style={styles.h1}>{folder.title}</Text>
       </View>
@@ -37,16 +43,16 @@ const FolderCard = (props) => {
                 uri: `https://img.icons8.com/material-outlined/100/more.png`,
               }}
               alt='more-icon'
-              style={styles.img}
+              style={app.icon2}
             />
           </Pressable>
         }
         arrowSize={{ width: 0, height: 0 }}
         popoverStyle={styles.popover}
       >
-        <View style={styles.popoverContainer}>
+        <View style={POPOVER.popoverContainer}>
           <Pressable
-            style={styles.button}
+            style={POPOVER.button}
             onPress={() => {
               setSelectedFolder(folder);
               setOpenRename(true);
@@ -58,12 +64,12 @@ const FolderCard = (props) => {
                 uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/rename.png`,
               }}
               alt='rename-icon'
-              style={styles.img}
+              style={app.icon2}
             />
             <Text style={buttons.btnText2}>Rename folder</Text>
           </Pressable>
           <Pressable
-            style={styles.button}
+            style={POPOVER.button}
             onPress={() => {
               setSelectedFolder(folder);
               setOpenMove(true);
@@ -75,12 +81,12 @@ const FolderCard = (props) => {
                 uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/reorder.png`,
               }}
               alt='move-icon'
-              style={styles.img}
+              style={app.icon2}
             />
             <Text style={buttons.btnText2}>Move folder</Text>
           </Pressable>
           <Pressable
-            style={styles.button}
+            style={POPOVER.button}
             onPress={() => {
               setSelectedFolder(folder);
               setOpenDelete(true);
@@ -92,7 +98,7 @@ const FolderCard = (props) => {
                 uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/trash--v1.png`,
               }}
               alt='delete-icon'
-              style={styles.img}
+              style={app.icon2}
             />
             <Text style={buttons.btnText2}>Delete folder</Text>
           </Pressable>
@@ -109,37 +115,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  img: {
-    height: 23,
-    width: 23,
-  },
   h1Container: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   h1: {
-    fontSize: FONTSIZE.regular,
+    fontSize: moderateScale(FONTSIZE.regular),
     fontFamily: FONT.bold,
     color: COLORS.themePurpleText,
     marginHorizontal: 10,
   },
   popover: {
     borderRadius: BORDER.radius,
-    minHeight: 140,
-    width: 180,
-  },
-  popoverContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    paddingVertical: '4%',
-  },
-  button: {
-    ...buttons.btn3,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    height: 50,
-    paddingHorizontal: 10,
-    marginVertical: '2%',
+    minHeight: moderateScale(140),
+    width: moderateScale(172),
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -9,10 +9,7 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../contexts/AuthContext';
-import app from '../styles/default';
-import buttons from '../styles/constants/buttons';
-import COLORS from '../styles/constants/colors';
-import { BORDER, FONT, FONTSIZE } from '../styles/constants/styles';
+import { app, COLORS, FONT, FONTSIZE, buttons } from '../styles';
 
 const LoginForm = () => {
   const [error, setError] = useState('');
@@ -68,7 +65,7 @@ const LoginForm = () => {
           <Text>{error}</Text>
         </View>
       ) : null}
-      <View style={styles.controllerContainer}>
+      <View style={app.controllerContainer}>
         <Controller
           name='email'
           control={control}
@@ -81,7 +78,7 @@ const LoginForm = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              style={styles.input}
+              style={app.input}
               autoCapitalize='none'
               autoCorrect={false}
             />
@@ -90,7 +87,7 @@ const LoginForm = () => {
         {errors.email && <Text style={styles.errorText}>{fieldRequired}</Text>}
       </View>
 
-      <View style={styles.controllerContainer}>
+      <View style={app.controllerContainer}>
         <Controller
           name='password'
           control={control}
@@ -103,7 +100,7 @@ const LoginForm = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              style={styles.input}
+              style={app.input}
               textContentType='password'
               autoCapitalize='none'
               autoCorrect={false}
@@ -136,18 +133,6 @@ const styles = StyleSheet.create({
   errorAlert: {
     ...app.errorAlert,
     marginHorizontal: 0,
-  },
-  controllerContainer: {
-    marginVertical: 8,
-    borderWidth: 1,
-    borderColor: BORDER.color,
-    borderRadius: BORDER.radius,
-    padding: 5,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    padding: 5,
   },
   button: {
     ...buttons.btn2,

@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useMarkdown } from '../../contexts/MDContext';
-import app from '../../styles/default';
 import EditButton from '../Buttons/EditButton';
 import Preview from './Preview';
-import COLORS from '../../styles/constants/colors';
+import { app, COLORS } from '../../styles';
 
 const ViewNote = ({ navigation, route }) => {
   const { note } = route.params;

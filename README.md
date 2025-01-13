@@ -22,7 +22,7 @@ TLDR: Jotter is a mobile app for Android designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 1.1.3
+## Version: 1.1.5
 
 ## Architecture
 
@@ -37,12 +37,15 @@ TLDR: Jotter is a mobile app for Android designed for note-taking with Markdown.
 - [react-native-markdown-display](https://github.com/iamacup/react-native-markdown-display/tree/master)
 - [react-native-popover-view](https://www.npmjs.com/package/react-native-popover-view?activeTab=readme#from)
 - [react-native-select-dropdown](https://github.com/AdelRedaa97/react-native-select-dropdown?tab=readme-ov-file)
+- [Scaling by Soluto](https://medium.com/soluto-engineering/size-matters-5aeeb462900a)
 - [icons8](https://icons8.com/)
 - ['Inter' font by Rasmus Andersson](https://github.com/rsms/inter)
 - ['RobotoMono' Google font by Christian Robertson](https://fonts.google.com/specimen/Roboto+Mono)
 
 ## Changelog
 
+- **1.1.5** (2025-01-12, 5:58pm) - Fixed bug where numbers in lists were not showing up.
+- **1.1.4** (2025-01-12, 12:58am) - Added 'view details' option for notes, improved device scaling.
 - **1.1.3** (2025-01-11, 10:19pm) - Support for nested bullet points, fixed cropping bullet point text bug.
 - **1.1.2** (2025-01-11, 3:24am) - Changed font. Minor design improvements.
 - **1.1.1** (2025-01-10, 10:29pm) - Fixed bug where checkboxes removed styling from list items.

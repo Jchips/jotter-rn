@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Modal,
   StyleSheet,
@@ -8,11 +8,10 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import { useFolder } from '../../hooks/useFolder';
 import api from '../../util/api';
-import app from '../../styles/default';
-import COLORS from '../../styles/constants/colors';
-import { BORDER, FONT, FONTSIZE } from '../../styles/constants/styles';
+import { useFolder } from '../../hooks/useFolder';
+import { moderateScale } from '../../util/scaling';
+import { app, COLORS, BORDER, FONT, FONTSIZE, MODAL } from '../../styles';
 
 const Move = (props) => {
   const { navigation, openMove, setOpenMove, type, note, folder } = props;
@@ -249,7 +248,7 @@ const Move = (props) => {
               uri: 'https://img.icons8.com/material-outlined/100/expand-arrow--v1.png',
             }}
             alt='dropdown arrow'
-            style={styles.img}
+            style={app.icon}
           />
         ) : (
           <Image
@@ -257,7 +256,7 @@ const Move = (props) => {
               uri: 'https://img.icons8.com/material-outlined/100/collapse-arrow.png',
             }}
             alt='dropdown arrow'
-            style={styles.img}
+            style={app.icon}
           />
         )}
       </View>
@@ -299,8 +298,8 @@ const Move = (props) => {
           setOpenMove(!openMove);
         }}
       >
-        <View style={app.centeredView}>
-          <View style={app.modal}>
+        <View style={MODAL.centeredView}>
+          <View style={MODAL.modal}>
             <Text style={app.header}>Move {type}</Text>
             {error ? (
               <View style={app.errorAlert}>
@@ -341,7 +340,6 @@ const styles = StyleSheet.create({
   dropdownButtonStyle: {
     width: '95%',
     height: 50,
-    // backgroundColor: COLORS.themeWhite,
     borderWidth: 1,
     borderColor: BORDER.color,
     borderRadius: BORDER.radius,
@@ -354,7 +352,7 @@ const styles = StyleSheet.create({
   dropdownButtonTxtStyle: {
     flex: 1,
     fontFamily: FONT.regular,
-    fontSize: FONTSIZE.regular,
+    fontSize: moderateScale(FONTSIZE.mid),
   },
   dropdownButtonArrowStyle: {
     fontSize: 28,
@@ -378,15 +376,7 @@ const styles = StyleSheet.create({
   dropdownItemTxtStyle: {
     flex: 1,
     fontFamily: FONT.semiBold,
-    fontSize: FONTSIZE.regular,
-  },
-  dropdownItemIconStyle: {
-    fontSize: 28,
-    marginRight: 8,
-  },
-  img: {
-    width: 22,
-    height: 22,
+    fontSize: moderateScale(FONTSIZE.regular),
   },
   noMoveOptions: {
     padding: 10,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -9,10 +9,7 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import api from '../../util/api';
-import app from '../../styles/default';
-import buttons from '../../styles/constants/buttons';
-import COLORS from '../../styles/constants/colors';
-import { BORDER } from '../../styles/constants/styles';
+import { app, COLORS, MODAL, buttons } from '../../styles';
 
 const Rename = ({
   openRename,
@@ -85,8 +82,8 @@ const Rename = ({
         setOpenRename(!openRename);
       }}
     >
-      <View style={app.centeredView}>
-        <View style={app.modal}>
+      <View style={MODAL.centeredView}>
+        <View style={MODAL.modal}>
           <Text style={app.header}>
             Rename{' '}
             <Text style={{ color: COLORS.themePurpleText }}>
@@ -98,7 +95,7 @@ const Rename = ({
               <Text>{error}</Text>
             </View>
           ) : null}
-          <View style={styles.controllerContainer}>
+          <View style={MODAL.controllerContainer}>
             <Controller
               name='rename'
               control={control}
@@ -111,7 +108,7 @@ const Rename = ({
                   defaultValue={note ? note?.title : folder?.title}
                   onChangeText={onChange}
                   onBlur={onBlur}
-                  style={styles.input}
+                  style={app.input}
                   autoCapitalize='none'
                   autoCorrect={false}
                   onSubmitEditing={handleSubmit(onSubmit)}
@@ -122,9 +119,9 @@ const Rename = ({
               <Text style={app.errorText}>This field is required.</Text>
             )}
           </View>
-          <View style={styles.buttons}>
+          <View style={MODAL.buttons}>
             <Pressable
-              style={[buttons.outlineBtn1, styles.button]}
+              style={[buttons.outlineBtn1, MODAL.button]}
               onPress={() => {
                 setOpenRename(!openRename);
                 setError('');
@@ -135,7 +132,7 @@ const Rename = ({
             <Pressable
               style={{
                 ...buttons.btn1,
-                ...styles.button,
+                ...MODAL.button,
                 backgroundColor: saving ? COLORS.btn1Hover : COLORS.themePurple,
               }}
               onPress={handleSubmit(onSubmit)}
@@ -150,29 +147,6 @@ const Rename = ({
   );
 };
 
-const styles = StyleSheet.create({
-  buttons: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    margin: 5,
-  },
-  controllerContainer: {
-    width: '90%',
-    marginVertical: 8,
-    borderWidth: 1,
-    borderColor: BORDER.color,
-    borderRadius: BORDER.radius,
-    padding: 5,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    padding: 5,
-  },
-  button: {
-    flex: 1,
-    marginHorizontal: 5,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default Rename;

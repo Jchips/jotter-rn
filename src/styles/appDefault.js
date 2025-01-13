@@ -1,7 +1,7 @@
 import { StyleSheet, Platform } from 'react-native';
-import { BORDER, FONT, FONTSIZE } from './constants/styles';
-import { scale, moderateScale, verticalScale } from '../util/scaling';
-import COLORS from './constants/colors';
+import COLORS from './colors';
+import { moderateScale } from '../util/scaling';
+import { BORDER, FONT, FONTSIZE } from './constants';
 
 const app = StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ const app = StyleSheet.create({
   },
   itemCard: {
     flex: 1,
-    padding: 15,
+    padding: moderateScale(15),
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: BORDER.color, // change based on theme
@@ -30,8 +30,21 @@ const app = StyleSheet.create({
       },
     }),
   },
+  input: {
+    width: '100%',
+    height: moderateScale(38),
+    padding: 5,
+  },
+  icon: {
+    height: moderateScale(22),
+    width: moderateScale(22),
+  },
+  icon2: {
+    height: moderateScale(23),
+    width: moderateScale(23),
+  },
   smallText: {
-    fontSize: FONTSIZE.xsmall,
+    fontSize: moderateScale(FONTSIZE.xsmall),
     marginVertical: 1,
     fontFamily: FONT.regular,
     lineHeight: 20
@@ -40,13 +53,9 @@ const app = StyleSheet.create({
     fontFamily: FONT.bold,
   },
   header: {
-    fontSize: FONTSIZE.large,
+    fontSize: moderateScale(FONTSIZE.large),
     margin: 10,
     fontFamily: FONT.bold
-  },
-  icon: {
-    height: 25,
-    width: 25,
   },
   errorAlert: {
     backgroundColor: 'rgb(248, 215, 218)',
@@ -55,30 +64,16 @@ const app = StyleSheet.create({
     margin: 10,
     width: '100%'
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  modal: {
-    margin: 20,
-    width: '90%',
-    backgroundColor: COLORS.themeWhite,
-    borderRadius: BORDER.radius,
-    padding: 10,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-  },
-  controllerContainer: {
-    margin: 10,
-  },
   errorText: {
     color: '#dc3545',
+  },
+  controllerContainer: {
+    // width: '90%',
+    marginVertical: 8,
+    borderWidth: 1,
+    borderColor: BORDER.color,
+    borderRadius: BORDER.radius,
+    padding: 5,
   },
 });
 

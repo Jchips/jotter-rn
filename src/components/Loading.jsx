@@ -1,6 +1,5 @@
-import React from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import COLORS from '../styles/constants/colors';
+import { COLORS } from '../styles';
 
 /**
  * Adds a loading symbol while the video is loading.

@@ -1,10 +1,6 @@
-import React from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
-import app from '../styles/default';
-import COLORS from '../styles/constants/colors';
-import { FONT, FONTSIZE } from '../styles/constants/styles';
-import buttons from '../styles/constants/buttons';
+import { app, buttons, FONT, FONTSIZE } from '../styles';
 
 const Account = () => {
   const { user, logout } = useAuth();
@@ -18,7 +14,7 @@ const Account = () => {
     <View style={styles.container}>
       <Text style={styles.h1}>{user?.email}</Text>
       <Pressable style={styles.button} onPress={logUserOut}>
-        <Text style={buttons.btnText1}>Log Out</Text>
+        <Text style={buttons.btnText1}>Log out</Text>
       </Pressable>
     </View>
   );

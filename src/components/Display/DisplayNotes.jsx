@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, View, Text, FlatList, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NoteCard from './NoteCard';
 import Move from '../Modals/Move';
 import Rename from '../Modals/Rename';
-import app from '../../styles/default';
 import Delete from '../Modals/Delete';
+import NoteDetails from '../Note/NoteDetails';
+import { app } from '../../styles';
 
 const DisplayNotes = ({ notes, setNotes, folders, error }) => {
   const [openMove, setOpenMove] = useState(false);
   const [openRename, setOpenRename] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openDetails, setOpenDetails] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
   const navigation = useNavigation();
 
@@ -33,6 +35,7 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
           setOpenRename={setOpenRename}
           setOpenDelete={setOpenDelete}
           setOpenMove={setOpenMove}
+          setOpenDetails={setOpenDetails}
         />
       </Pressable>
     );
@@ -65,6 +68,11 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
         notes={notes}
         setNotes={setNotes}
         note={selectedNote}
+      />
+      <NoteDetails
+        note={selectedNote}
+        openDetails={openDetails}
+        setOpenDetails={setOpenDetails}
       />
       <Move
         navigation={navigation}

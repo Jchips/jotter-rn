@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Modal,
   StyleSheet,
@@ -11,10 +11,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthContext';
 import { ROOT_FOLDER } from '../../hooks/useFolder';
 import api from '../../util/api';
-import app from '../../styles/default';
-import buttons from '../../styles/constants/buttons';
-import COLORS from '../../styles/constants/colors';
-import { BORDER } from '../../styles/constants/styles';
+import { app, COLORS, MODAL, buttons } from '../../styles';
 
 const AddTitle = (props) => {
   const {
@@ -41,6 +38,12 @@ const AddTitle = (props) => {
     },
   });
 
+  /**
+   * Adds a title to a note or folder
+   * Then creates the note or folder
+   * @param {Object} titleControl - The input the user types as a title
+   * @returns - exits the function if there is no current folder
+   */
   const onSubmit = async (titleControl) => {
     if (currentFolder === null) return;
     currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
@@ -92,6 +95,7 @@ const AddTitle = (props) => {
     });
     setSaving(false);
   };
+
   return (
     <Modal
       animationType='fade'
@@ -101,15 +105,15 @@ const AddTitle = (props) => {
         setOpenAddTitle(!openAddTitle);
       }}
     >
-      <View style={app.centeredView}>
-        <View style={app.modal}>
+      <View style={MODAL.centeredView}>
+        <View style={MODAL.modal}>
           <Text style={app.header}>Add {type}</Text>
           {error ? (
             <View style={app.errorAlert}>
               <Text>{error}</Text>
             </View>
           ) : null}
-          <View style={styles.controllerContainer}>
+          <View style={MODAL.controllerContainer}>
             <Controller
               name='title'
               control={control}
@@ -122,7 +126,7 @@ const AddTitle = (props) => {
                   onChangeText={onChange}
                   onBlur={onBlur}
                   placeholder={`Give ${type} a title`}
-                  style={styles.input}
+                  style={app.input}
                   autoCapitalize='none'
                   autoCorrect={false}
                   onSubmitEditing={handleSubmit(onSubmit)}
@@ -133,9 +137,9 @@ const AddTitle = (props) => {
               <Text style={app.errorText}>This field is required.</Text>
             )}
           </View>
-          <View style={styles.buttons}>
+          <View style={MODAL.buttons}>
             <Pressable
-              style={[buttons.outlineBtn1, styles.button]}
+              style={[buttons.outlineBtn1, MODAL.button]}
               onPress={() => setOpenAddTitle(!openAddTitle)}
             >
               <Text style={buttons.btnText2}>Cancel</Text>
@@ -143,7 +147,7 @@ const AddTitle = (props) => {
             <Pressable
               style={{
                 ...buttons.btn1,
-                ...styles.button,
+                ...MODAL.button,
                 backgroundColor: saving ? COLORS.btn1Hover : COLORS.themePurple,
               }}
               onPress={handleSubmit(onSubmit)}
@@ -158,29 +162,6 @@ const AddTitle = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  buttons: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    margin: 5,
-  },
-  controllerContainer: {
-    width: '90%',
-    marginVertical: 8,
-    borderWidth: 1,
-    borderColor: BORDER.color,
-    borderRadius: BORDER.radius,
-    padding: 5,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    padding: 5,
-  },
-  button: {
-    flex: 1,
-    marginHorizontal: 5,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default AddTitle;

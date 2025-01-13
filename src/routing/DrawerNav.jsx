@@ -5,11 +5,10 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { useFolder } from '../hooks/useFolder.js';
 import { useAuth } from '../contexts/AuthContext';
+import { moderateScale } from '../util/scaling.js';
 import Account from '../components/Account';
 import Dashboard from '../components/Dashboard';
-import COLORS from '../styles/constants/colors';
-import buttons from '../styles/constants/buttons.js';
-import { BORDER, FONT, FONTSIZE } from '../styles/constants/styles';
+import { COLORS, FONT, FONTSIZE, BORDER, buttons } from '../styles';
 
 const Drawer = createDrawerNavigator();
 
@@ -129,7 +128,7 @@ function DrawerNav({ navigation }) {
             </Pressable>
           ) : null}
           <Pressable style={buttons.outlineBtn1} onPress={logUserOut}>
-            <Text>Log Out</Text>
+            <Text style={buttons.btnText3}>Log out</Text>
           </Pressable>
         </DrawerContentScrollView>
       </View>
@@ -148,7 +147,7 @@ function DrawerNav({ navigation }) {
       drawerContent={(props) => <DrawerContent {...props} />}
       screenOptions={{
         drawerStyle: {
-          width: 200,
+          width: moderateScale(185),
         },
         cardStyle: {
           backgroundColor: '#fff',
@@ -177,8 +176,8 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   jotterLogo: {
-    width: 50,
-    height: 50,
+    width: moderateScale(50),
+    height: moderateScale(50),
     marginBottom: 10,
   },
   header: {
@@ -189,11 +188,11 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
   },
   headerText: {
-    fontSize: FONTSIZE.xlarge,
+    fontSize: moderateScale(FONTSIZE.xlarge),
     fontFamily: FONT.bold,
   },
   headerEmail: {
-    fontSize: FONTSIZE.xsmall,
+    fontSize: moderateScale(FONTSIZE.xsmall),
     fontFamily: FONT.regular,
   },
   content: {
@@ -201,16 +200,15 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   button: {
-    // backgroundColor: ]
     color: '#000',
   },
   drawerItem: {
-    paddingVertical: 10,
+    paddingVertical: moderateScale(10),
     paddingHorizontal: 15,
     borderRadius: 5,
   },
   drawerLabel: {
-    fontSize: 16,
+    fontSize: moderateScale(15),
     color: '#000', // Inactive label color
     fontFamily: FONT.semiBold,
   },
@@ -223,7 +221,7 @@ const styles = StyleSheet.create({
   },
   foldersTitle: {
     fontFamily: FONT.bold,
-    fontSize: FONTSIZE.smaller,
+    fontSize: moderateScale(FONTSIZE.smaller),
     textAlign: 'center',
     marginVertical: 10,
     color: COLORS.mutedtext,
