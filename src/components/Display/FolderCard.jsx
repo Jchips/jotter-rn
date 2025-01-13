@@ -1,12 +1,7 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import Popover from 'react-native-popover-view';
-// import app from '../../styles/appDefault';
-// import buttons from '../../styles/constants/buttons';
-// import COLORS from '../../styles/constants/colors';
-// import POPOVER from '../../styles/constants/popover';
 import { moderateScale } from '../../util/scaling';
-// import { BORDER, FONT, FONTSIZE } from '../../styles/constants/constants';
 import {
   app,
   COLORS,
@@ -35,7 +30,7 @@ const FolderCard = (props) => {
             uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/folder-invoices--v1.png`,
           }}
           alt='folder-icon'
-          style={app.icon}
+          style={app.icon2}
         />
         <Text style={styles.h1}>{folder.title}</Text>
       </View>
@@ -48,7 +43,7 @@ const FolderCard = (props) => {
                 uri: `https://img.icons8.com/material-outlined/100/more.png`,
               }}
               alt='more-icon'
-              style={app.icon}
+              style={app.icon2}
             />
           </Pressable>
         }
@@ -69,7 +64,7 @@ const FolderCard = (props) => {
                 uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/rename.png`,
               }}
               alt='rename-icon'
-              style={app.icon}
+              style={app.icon2}
             />
             <Text style={buttons.btnText2}>Rename folder</Text>
           </Pressable>
@@ -86,7 +81,7 @@ const FolderCard = (props) => {
                 uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/reorder.png`,
               }}
               alt='move-icon'
-              style={app.icon}
+              style={app.icon2}
             />
             <Text style={buttons.btnText2}>Move folder</Text>
           </Pressable>
@@ -103,7 +98,7 @@ const FolderCard = (props) => {
                 uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/trash--v1.png`,
               }}
               alt='delete-icon'
-              style={app.icon}
+              style={app.icon2}
             />
             <Text style={buttons.btnText2}>Delete folder</Text>
           </Pressable>

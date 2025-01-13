@@ -1,11 +1,8 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { StyleSheet, Image, Pressable, View, Text } from 'react-native';
 import Popover from 'react-native-popover-view';
-// import buttons from '../../styles/constants/buttons';
-// import COLORS from '../../styles/constants/colors';
 import { moderateScale } from '../../util/scaling';
-// import { BORDER } from '../../styles/constants/constants';
-import { COLORS, BORDER, buttons } from '../../styles';
+import { app, COLORS, BORDER, buttons } from '../../styles';
 
 const AddButton = ({ setOpenAddTitle, setType }) => {
   const popoverRef = useRef();
@@ -20,7 +17,7 @@ const AddButton = ({ setOpenAddTitle, setType }) => {
               uri: `https://img.icons8.com/material-outlined/100/${COLORS.whiteNoHash}/plus-math--v1.png`,
             }}
             alt='add-icon'
-            style={styles.icon}
+            style={app.icon}
           />
         </Pressable>
       }
@@ -42,7 +39,7 @@ const AddButton = ({ setOpenAddTitle, setType }) => {
               uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/folder-invoices--v1.png`,
             }}
             alt='folder-icon'
-            style={styles.icon}
+            style={app.icon}
           />
           <Text style={buttons.btnText2}>New Folder</Text>
         </Pressable>
@@ -59,7 +56,7 @@ const AddButton = ({ setOpenAddTitle, setType }) => {
               uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/file.png`,
             }}
             alt='note-icon'
-            style={styles.icon}
+            style={app.icon}
           />
           <Text style={buttons.btnText2}>New Note</Text>
         </Pressable>
@@ -87,10 +84,6 @@ const styles = StyleSheet.create({
     height: moderateScale(48),
     paddingHorizontal: 10,
     marginVertical: '2%',
-  },
-  icon: {
-    width: 22,
-    height: 22,
   },
 });
 

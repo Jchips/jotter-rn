@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Modal,
   StyleSheet,
@@ -8,13 +8,10 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import { useFolder } from '../../hooks/useFolder';
 import api from '../../util/api';
-// import app from '../../styles/appDefault';
-// import COLORS from '../../styles/constants/colors';
+import { useFolder } from '../../hooks/useFolder';
 import { moderateScale } from '../../util/scaling';
-// import { BORDER, FONT, FONTSIZE } from '../../styles/constants/constants';
-import { app, COLORS, BORDER, FONT, FONTSIZE } from '../../styles';
+import { app, COLORS, BORDER, FONT, FONTSIZE, MODAL } from '../../styles';
 
 const Move = (props) => {
   const { navigation, openMove, setOpenMove, type, note, folder } = props;
@@ -251,7 +248,7 @@ const Move = (props) => {
               uri: 'https://img.icons8.com/material-outlined/100/expand-arrow--v1.png',
             }}
             alt='dropdown arrow'
-            style={styles.icon}
+            style={app.icon}
           />
         ) : (
           <Image
@@ -259,7 +256,7 @@ const Move = (props) => {
               uri: 'https://img.icons8.com/material-outlined/100/collapse-arrow.png',
             }}
             alt='dropdown arrow'
-            style={styles.icon}
+            style={app.icon}
           />
         )}
       </View>
@@ -301,8 +298,8 @@ const Move = (props) => {
           setOpenMove(!openMove);
         }}
       >
-        <View style={app.centeredView}>
-          <View style={app.modal}>
+        <View style={MODAL.centeredView}>
+          <View style={MODAL.modal}>
             <Text style={app.header}>Move {type}</Text>
             {error ? (
               <View style={app.errorAlert}>
@@ -380,10 +377,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontFamily: FONT.semiBold,
     fontSize: moderateScale(FONTSIZE.regular),
-  },
-  icon: {
-    width: moderateScale(22),
-    height: moderateScale(22),
   },
   noMoveOptions: {
     padding: 10,

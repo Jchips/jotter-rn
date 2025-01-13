@@ -1,10 +1,6 @@
-import React from 'react';
 import { StyleSheet, SafeAreaView, Text, Pressable } from 'react-native';
 import JotterText from '../components/JotterText';
 import SignupForm from './SignupForm';
-// import app from '../styles/appDefault';
-// import buttons from '../styles/constants/buttons';
-// import { FONT, FONTSIZE } from '../styles/constants/constants';
 import { app, FONT, FONTSIZE, buttons } from '../styles';
 
 const Signup = ({ navigation }) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
 import {
   Gesture,
@@ -12,12 +12,8 @@ import EditNote from './EditNote';
 import SaveButton from '../Buttons/SaveButton';
 import TogglePreview from '../Buttons/TogglePreview';
 import getWordCount from '../../util/getWordCount';
-import { app, COLORS, buttons, FONT, FONTSIZE } from '../../styles';
-// import app from '../../styles/appDefault';
-// import COLORS from '../../styles/constants/colors';
-// import buttons from '../../styles/constants/buttons';
 import { moderateScale } from '../../util/scaling';
-// import { FONT, FONTSIZE } from '../../styles/constants/constants';
+import { app, COLORS, buttons, FONT, FONTSIZE } from '../../styles';
 
 const Editor = ({ navigation, route }) => {
   const { note } = route.params;
@@ -244,7 +240,6 @@ const styles = StyleSheet.create({
   words: {
     textAlign: 'center',
     fontSize: moderateScale(FONTSIZE.small),
-    // fontSize: FONTSIZE.smaller,
     fontFamily: FONT.regular,
     marginHorizontal: 10,
   },
@@ -257,10 +252,8 @@ const styles = StyleSheet.create({
   },
   headerBtn: {
     ...buttons.outlineBtn1,
-    // height: 30,
     height: moderateScale(30),
     width: moderateScale(48),
-    // width: 50,
     marginHorizontal: 2,
   },
   footer: {

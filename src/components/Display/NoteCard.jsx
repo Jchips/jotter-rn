@@ -1,13 +1,8 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import Popover from 'react-native-popover-view';
 import formatDate from '../../util/formatDate';
-// import app from '../../styles/appDefault';
-// import buttons from '../../styles/constants/buttons';
-// import COLORS from '../../styles/constants/colors';
-// import POPOVER from '../../styles/constants/popover';
 import { moderateScale } from '../../util/scaling';
-// import { BORDER, FONT, FONTSIZE } from '../../styles/constants/constants';
 import {
   app,
   COLORS,
@@ -42,7 +37,7 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/more.png`,
                 }}
                 alt='more-icon'
-                style={app.icon}
+                style={app.icon2}
               />
             </Pressable>
           }
@@ -63,7 +58,7 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/rename.png`,
                 }}
                 alt='rename-icon'
-                style={app.icon}
+                style={app.icon2}
               />
               <Text style={buttons.btnText2}>Rename note</Text>
             </Pressable>
@@ -80,7 +75,7 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/info--v1.png`,
                 }}
                 alt='details-icon'
-                style={app.icon}
+                style={app.icon2}
               />
               <Text style={buttons.btnText2}>View details</Text>
             </Pressable>
@@ -97,7 +92,7 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/reorder.png`,
                 }}
                 alt='move-icon'
-                style={app.icon}
+                style={app.icon2}
               />
               <Text style={buttons.btnText2}>Move note</Text>
             </Pressable>
@@ -114,7 +109,7 @@ const NoteCard = (props) => {
                   uri: `https://img.icons8.com/material-outlined/100/${COLORS.textNoHash}/trash--v1.png`,
                 }}
                 alt='delete-icon'
-                style={app.icon}
+                style={app.icon2}
               />
               <Text style={buttons.btnText2}>Delete note</Text>
             </Pressable>

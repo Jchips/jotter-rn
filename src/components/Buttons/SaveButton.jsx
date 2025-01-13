@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Image, Pressable, StyleSheet } from 'react-native';
 import api from '../../util/api';
-// import buttons from '../../styles/constants/buttons';
-// import COLORS from '../../styles/constants/colors';
-import { COLORS, buttons } from '../../styles';
+import { app, COLORS, buttons } from '../../styles';
 
 const SaveButton = ({ note, markdown, setError }) => {
   const [saving, setSaving] = useState(false);
+
+  // Saves note to db
   const saveNote = async () => {
     try {
       setError('');
@@ -24,6 +24,7 @@ const SaveButton = ({ note, markdown, setError }) => {
     }
     setSaving(false);
   };
+
   return (
     <Pressable
       disabled={saving}
@@ -40,7 +41,7 @@ const SaveButton = ({ note, markdown, setError }) => {
           uri: `https://img.icons8.com/material-outlined/100/save.png`,
         }}
         alt='save-button'
-        style={styles.icon}
+        style={app.icon}
       />
     </Pressable>
   );
@@ -53,10 +54,6 @@ const styles = StyleSheet.create({
     height: 40,
     marginVertical: 0,
     marginHorizontal: 10,
-  },
-  icon: {
-    width: 22,
-    height: 22,
   },
 });
 

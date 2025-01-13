@@ -1,9 +1,5 @@
-import React from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
-// import app from '../styles/appDefault';
-// import buttons from '../styles/constants/buttons';
-// import { FONT, FONTSIZE } from '../styles/constants/constants';
 import { app, buttons, FONT, FONTSIZE } from '../styles';
 
 const Account = () => {

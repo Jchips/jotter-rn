@@ -7,8 +7,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Markdown from 'react-native-markdown-display';
-// import noteView from '../../styles/constants/note';
-// import MARKDOWN from '../../styles/constants/markdown';
 import { extractText } from '../../util/extract';
 import { noteView, MARKDOWN } from '../../styles';
 

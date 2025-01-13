@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,10 +7,8 @@ import Login from '../auth/Login';
 import ViewNote from '../components/Note/ViewNote';
 import Editor from '../components/Note/Editor';
 import Signup from '../auth/Signup';
-// import COLORS from '../styles/constants/colors';
-// import { FONT } from '../styles/constants/constants';
-import { COLORS, FONT } from '../styles';
 // import Settings from './Settings';
+import { COLORS, FONT } from '../styles';
 
 const Stack = createStackNavigator();
 

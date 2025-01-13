@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, View, Text, FlatList, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NoteCard from './NoteCard';
@@ -6,7 +6,6 @@ import Move from '../Modals/Move';
 import Rename from '../Modals/Rename';
 import Delete from '../Modals/Delete';
 import NoteDetails from '../Note/NoteDetails';
-// import app from '../../styles/appDefault';
 import { app } from '../../styles';
 
 const DisplayNotes = ({ notes, setNotes, folders, error }) => {

@@ -1,8 +1,5 @@
-import React from 'react';
 import { Image, Pressable, StyleSheet } from 'react-native';
-// import COLORS from '../../styles/constants/colors';
-// import buttons from '../../styles/constants/buttons';
-import { COLORS, buttons } from '../../styles';
+import { app, COLORS, buttons } from '../../styles';
 
 const EditButton = ({ navigation, note }) => {
   return (
@@ -15,17 +12,12 @@ const EditButton = ({ navigation, note }) => {
           uri: `https://img.icons8.com/material-outlined/100/${COLORS.whiteNoHash}/edit--v1.png`,
         }}
         alt='edit button'
-        style={styles.icon}
+        style={app.icon}
       />
     </Pressable>
   );
 };
 
-const styles = StyleSheet.create({
-  icon: {
-    width: 22,
-    height: 22,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default EditButton;
