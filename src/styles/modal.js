@@ -1,5 +1,5 @@
 import { moderateScale } from '../util/scaling';
-import { BORDER } from './constants';
+import { BORDER, FONT, FONTSIZE } from './constants';
 import COLORS from './colors';
 import app from './appDefault';
 
@@ -27,6 +27,23 @@ const MODAL = {
     ...app.controllerContainer,
     width: '90%',
   },
+  dropdownMenuStyle: {
+    backgroundColor: COLORS.themeWhite,
+    borderRadius: BORDER.radius,
+  },
+  dropdownItemStyle: {
+    width: '100%',
+    flexDirection: 'row',
+    paddingHorizontal: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 15,
+  },
+  dropdownItemTxtStyle: {
+    flex: 1,
+    fontFamily: FONT.semiBold,
+    fontSize: moderateScale(FONTSIZE.regular),
+  },
   buttons: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -36,6 +53,10 @@ const MODAL = {
     flex: 1,
     marginHorizontal: 5,
   },
+  wideButton: {
+    width: '90%',
+    marginTop: 20,
+  }
 }
 
 export default MODAL;

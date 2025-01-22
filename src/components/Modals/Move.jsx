@@ -4,14 +4,14 @@ import {
   StyleSheet,
   View,
   Text,
-  Image,
+  Pressable,
   ActivityIndicator,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import api from '../../util/api';
+import DropdownBtn from '../Buttons/DropdownBtn';
 import { useFolder } from '../../hooks/useFolder';
-import { moderateScale } from '../../util/scaling';
-import { app, COLORS, BORDER, FONT, FONTSIZE, MODAL } from '../../styles';
+import { app, buttons, COLORS, FONT, FONTSIZE, MODAL } from '../../styles';
 
 const Move = (props) => {
   const { navigation, openMove, setOpenMove, type, note, folder } = props;
@@ -231,48 +231,16 @@ const Move = (props) => {
     }
   };
 
-  /**
-   * Renders dropdown button for moving items
-   * @param {Object} selectedItem - The selected folder to move to
-   * @returns - The dropdown button for moving items
-   */
-  const renderButton = (selectedItem, isOpened) => {
+  // Dropdown button default text
+  const dropdownBtnText = () => {
     return (
-      <View
-        style={{
-          ...styles.dropdownButtonStyle,
-          backgroundColor: saving ? COLORS.graySubtle : COLORS.themeWhite,
-        }}
-      >
-        <Text style={styles.dropdownButtonTxtStyle}>
-          {(selectedItem && selectedItem.label) || (
-            <Text>
-              Select folder to move{' '}
-              <Text style={{ fontFamily: FONT.bold }}>
-                {type === 'note' ? note.title : folder.title}
-              </Text>{' '}
-              to
-            </Text>
-          )}
-        </Text>
-        {!isOpened ? (
-          <Image
-            source={{
-              uri: 'https://img.icons8.com/material-outlined/100/expand-arrow--v1.png',
-            }}
-            alt='dropdown arrow'
-            style={app.icon}
-          />
-        ) : (
-          <Image
-            source={{
-              uri: 'https://img.icons8.com/material-outlined/100/collapse-arrow.png',
-            }}
-            alt='dropdown arrow'
-            style={app.icon}
-          />
-        )}
-      </View>
+      <Text>
+        Select folder to move{' '}
+        <Text style={{ fontFamily: FONT.bold }}>
+          {type === 'note' ? note.title : folder.title}
+        </Text>{' '}
+        to
+      </Text>
     );
   };
 
@@ -287,11 +255,11 @@ const Move = (props) => {
     return (
       <View
         style={{
-          ...styles.dropdownItemStyle,
-          ...(isSelected && { backgroundColor: '#D2D9DF' }),
+          ...MODAL.dropdownItemStyle,
+          ...(isSelected && { backgroundColor: COLORS.graySubtle }),
         }}
       >
-        <Text style={styles.dropdownItemTxtStyle}>
+        <Text style={MODAL.dropdownItemTxtStyle}>
           {item.label}{' '}
           <Text style={{ color: COLORS.mutedtext, fontSize: FONTSIZE.small }}>
             {item.path.map((pathItem) => pathItem.title).join(' > ')}
@@ -307,7 +275,6 @@ const Move = (props) => {
         animationType='fade'
         transparent={true}
         visible={openMove}
-        statusBarTranslucent={true}
         onRequestClose={() => {
           setOpenMove(!openMove);
         }}
@@ -317,7 +284,7 @@ const Move = (props) => {
             <Text style={app.header}>Move {type}</Text>
             {error ? (
               <View style={app.errorAlert}>
-                <Text>{error}</Text>
+                <Text style={app.errorText}>{error}</Text>
               </View>
             ) : null}
             {folderOpts.length < 1 ? (
@@ -330,10 +297,12 @@ const Move = (props) => {
                 onSelect={(selection, index) => {
                   move(selection);
                 }}
-                renderButton={renderButton}
+                renderButton={(selectedItem, isOpened) =>
+                  DropdownBtn(selectedItem, isOpened, dropdownBtnText, saving)
+                }
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
-                dropdownStyle={styles.dropdownMenuStyle}
+                dropdownStyle={MODAL.dropdownMenuStyle}
               />
             )}
             {saving ? (
@@ -343,6 +312,14 @@ const Move = (props) => {
                 style={{ marginBottom: 5 }}
               />
             ) : null}
+            <Pressable
+              style={[buttons.btn1, MODAL.wideButton]}
+              onPress={() => {
+                setOpenMove(!openMove);
+              }}
+            >
+              <Text style={buttons.btnText1}>Cancel</Text>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -351,47 +328,6 @@ const Move = (props) => {
 };
 
 const styles = StyleSheet.create({
-  dropdownButtonStyle: {
-    width: '95%',
-    height: 50,
-    borderWidth: 1,
-    borderColor: BORDER.color,
-    borderRadius: BORDER.radius,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 12,
-    paddingHorizontal: 12,
-  },
-  dropdownButtonTxtStyle: {
-    flex: 1,
-    fontFamily: FONT.regular,
-    fontSize: moderateScale(FONTSIZE.mid),
-  },
-  dropdownButtonArrowStyle: {
-    fontSize: 28,
-  },
-  dropdownButtonIconStyle: {
-    fontSize: 28,
-    marginRight: 8,
-  },
-  dropdownMenuStyle: {
-    backgroundColor: COLORS.themeWhite,
-    borderRadius: BORDER.radius,
-  },
-  dropdownItemStyle: {
-    width: '100%',
-    flexDirection: 'row',
-    paddingHorizontal: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 15,
-  },
-  dropdownItemTxtStyle: {
-    flex: 1,
-    fontFamily: FONT.semiBold,
-    fontSize: moderateScale(FONTSIZE.regular),
-  },
   noMoveOptions: {
     padding: 10,
   },

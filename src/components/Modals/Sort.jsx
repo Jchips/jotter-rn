@@ -59,6 +59,7 @@ const Sort = (props) => {
     updateSort(sortOption);
   };
 
+  // Fetch sort config from database
   useFocusEffect(
     React.useCallback(() => {
       const fetchConfigs = async () => {
@@ -85,9 +86,8 @@ const Sort = (props) => {
     return (
       <View
         style={{
-          ...styles.dropdownItemStyle,
+          ...MODAL.dropdownItemStyle,
           ...(isSelected && { backgroundColor: COLORS.graySubtle }),
-          // ...(isSelected && { backgroundColor: '#D2D9DF' }),
         }}
       >
         <Text style={styles.dropdownItemTxtStyle}>{item.label}</Text>
@@ -100,7 +100,6 @@ const Sort = (props) => {
       animationType='fade'
       transparent={true}
       visible={openSort}
-      statusBarTranslucent={true}
       onRequestClose={() => {
         setOpenSort(!openSort);
       }}
@@ -130,10 +129,10 @@ const Sort = (props) => {
             }
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
-            dropdownStyle={styles.dropdownMenuStyle}
+            dropdownStyle={MODAL.dropdownMenuStyle}
           />
           <Pressable
-            style={[buttons.btn1, styles.button]}
+            style={[buttons.btn1, MODAL.wideButton]}
             onPress={() => {
               setOpenSort(!openSort);
             }}
@@ -147,27 +146,9 @@ const Sort = (props) => {
 };
 
 const styles = StyleSheet.create({
-  dropdownItemStyle: {
-    width: '100%',
-    flexDirection: 'row',
-    paddingHorizontal: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 15,
-  },
   dropdownItemTxtStyle: {
-    flex: 1,
-    fontFamily: FONT.semiBold,
+    ...MODAL.dropdownItemTxtStyle,
     color: COLORS.themePurpleText,
-    fontSize: moderateScale(FONTSIZE.regular),
-  },
-  dropdownMenuStyle: {
-    backgroundColor: COLORS.themeWhite,
-    borderRadius: BORDER.radius,
-  },
-  button: {
-    width: '90%',
-    marginTop: 20,
   },
 });
 

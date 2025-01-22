@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { moderateScale } from '../../util/scaling';
 import { app, COLORS, FONT, FONTSIZE, BORDER } from '../../styles';
@@ -8,20 +7,11 @@ const DropdownBtn = (selectedItem, isOpened, text, saving) => {
     <View
       style={{
         ...styles.dropdownButtonStyle,
-        // backgroundColor: COLORS.themeWhite,
         backgroundColor: saving ? COLORS.graySubtle : COLORS.themeWhite,
       }}
     >
       <Text style={styles.dropdownButtonTxtStyle}>
-        {(selectedItem && selectedItem.label) ||
-          // <Text>
-          //   Select folder to move{' '}
-          //   <Text style={{ fontFamily: FONT.bold }}>
-          //     {type === 'note' ? note.title : folder.title}
-          //   </Text>{' '}
-          //   to
-          // </Text>
-          text()}
+        {(selectedItem && selectedItem.label) || text()}
       </Text>
       {!isOpened ? (
         <Image
@@ -61,17 +51,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontFamily: FONT.regular,
     fontSize: moderateScale(FONTSIZE.mid),
-  },
-  dropdownButtonArrowStyle: {
-    fontSize: 28,
-  },
-  dropdownButtonIconStyle: {
-    fontSize: 28,
-    marginRight: 8,
-  },
-  dropdownMenuStyle: {
-    backgroundColor: COLORS.themeWhite,
-    borderRadius: BORDER.radius,
   },
 });
 
