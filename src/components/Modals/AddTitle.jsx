@@ -75,7 +75,7 @@ const AddTitle = (props) => {
             userId: user.id,
             folderId: currentFolder.id,
           });
-          setNotes([...notes, res.data]);
+          setNotes([res.data, ...notes]);
           break;
         // add folder
         case 'folder':
@@ -85,7 +85,7 @@ const AddTitle = (props) => {
             parentId: currentFolder.id,
             path,
           });
-          setFolders([...folders, res.data]);
+          setFolders([res.data, ...folders]);
           break;
       }
       setOpenAddTitle(false);

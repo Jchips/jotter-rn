@@ -1,4 +1,5 @@
 import { moderateScale } from '../util/scaling';
+import COLORS from './colors';
 import { BORDER, FONT, FONTSIZE } from './constants';
 
 const MARKDOWN = {
@@ -105,7 +106,11 @@ const MARKDOWN = {
     marginVertical: 20,
     marginTop: 25,
     backgroundColor: '#84848424',
-  }
+  },
+  link: {
+    textDecorationLine: 'none', // 'underline',
+    color: COLORS.themePurpleText,
+  },
 }
 
 export default MARKDOWN;

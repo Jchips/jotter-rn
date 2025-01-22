@@ -69,7 +69,7 @@ const Delete = (props) => {
             <View style={styles.warningContainer}>
               <Image
                 source={{
-                  uri: `https://img.icons8.com/material-outlined/100/${COLORS.warningYellowNH}/error--v1.png`,
+                  uri: `https://img.icons8.com/material-outlined/100/${COLORS.dangerNH}/info--v1.png`,
                 }}
                 alt='warning-icon'
                 style={styles.icon}
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   warningNote: {
-    fontFamily: FONT.regular,
+    fontFamily: FONT.semiBold,
     fontSize: moderateScale(FONTSIZE.smaller),
     marginVertical: 25,
     width: '90%',

@@ -318,7 +318,7 @@ const Move = (props) => {
                 setOpenMove(!openMove);
               }}
             >
-              <Text style={buttons.btnText1}>Cancel</Text>
+              <Text style={buttons.btnText1}>Close</Text>
             </Pressable>
           </View>
         </View>
