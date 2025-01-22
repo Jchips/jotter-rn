@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Pressable, Image } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext';
 import { useFolder } from '../hooks/useFolder';
@@ -8,9 +8,10 @@ import Loading from './Loading';
 import DisplayFolders from './Display/DisplayFolders';
 import DisplayNotes from './Display/DisplayNotes';
 import AddButton from './Buttons/AddButton';
+import Sort from './Modals/Sort';
 import AddTitle from './Modals/AddTitle';
 import api from '../util/api';
-import { COLORS } from '../styles';
+import { app, buttons, COLORS } from '../styles';
 
 const Dashboard = ({ route }) => {
   const { folderId, folderTitle } = route.params;
@@ -19,6 +20,7 @@ const Dashboard = ({ route }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [type, setType] = useState(null);
+  const [openSort, setOpenSort] = useState(false);
   const [openAddTitle, setOpenAddTitle] = useState(false);
   const { token, logout } = useAuth();
   const { setMarkdown } = useMarkdown();
@@ -34,6 +36,26 @@ const Dashboard = ({ route }) => {
     React.useCallback(() => {
       navigation.setOptions({
         headerTitle: folderTitle,
+        headerRight: () => {
+          return (
+            <View>
+              <Pressable
+                onPress={() => {
+                  setOpenSort(true);
+                }}
+                style={styles.sortButton}
+              >
+                <Image
+                  source={{
+                    uri: 'https://img.icons8.com/material-outlined/100/sorting-arrows.png',
+                  }}
+                  alt='sort-button'
+                  style={app.icon}
+                />
+              </Pressable>
+            </View>
+          );
+        },
       });
     }, [navigation, route])
   );
@@ -108,6 +130,14 @@ const Dashboard = ({ route }) => {
         setFolders={setFolders}
         currentFolder={folder}
       />
+      <Sort
+        openSort={openSort}
+        setOpenSort={setOpenSort}
+        folders={folders}
+        notes={notes}
+        setNotes={setNotes}
+        setFolders={setFolders}
+      />
     </View>
   ) : null;
 };
@@ -117,6 +147,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     backgroundColor: COLORS.themeWhite,
+  },
+  sortButton: {
+    ...buttons.btn1,
+    backgroundColor: COLORS.themeWhite,
+    margin: 0,
   },
 });
 

@@ -22,23 +22,12 @@ const setTokenGetter = (tokenGetter) => {
 // Axios interceptor
 api.interceptors.request.use(
   (apiConfig) => {
-    const token = getToken(); // a function? yes
+    const token = getToken();
     if (token) {
       apiConfig.headers['Authorization'] = `Bearer ${token}`;
       apiConfig.withCredentials = true;
     }
     return apiConfig;
-  }
-);
-
-api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    if (error.response.status === 401) {
-      // clearToken();
-      // window.location = '/login'; // Redirect to login
-    }
-    return Promise.reject(error);
   }
 );
 
@@ -57,6 +46,8 @@ const apiService = {
   addFolder: (body) => api.post('/folder', body),
   updateFolder: (body, folderId) => api.patch(`/folder/${folderId}`, body),
   deleteFolder: (folderId) => api.delete(`/folder/${folderId}`),
+  getConfigs: () => api.get('/config'),
+  updateConfigs: (body) => api.patch('/config', body),
 }
 
 export default apiService;

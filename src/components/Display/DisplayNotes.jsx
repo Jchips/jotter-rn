@@ -44,7 +44,7 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
   return (
     <View>
       {notes.length === 0 && folders.length === 0 ? (
-        <View>
+        <View style={{ marginHorizontal: 10 }}>
           <Text>No notes.</Text>
         </View>
       ) : (

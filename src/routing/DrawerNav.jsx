@@ -8,6 +8,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { moderateScale } from '../util/scaling.js';
 import Account from '../components/Account';
 import Dashboard from '../components/Dashboard';
+import Settings from '../components/Settings.jsx';
 import { COLORS, FONT, FONTSIZE, BORDER, buttons } from '../styles';
 
 const Drawer = createDrawerNavigator();
@@ -39,6 +40,13 @@ function DrawerNav({ navigation }) {
 
   const DrawerContent = (props) => {
     const { state, descriptors, navigation } = props;
+    let currentFolderPath;
+    if (currentFolder && currentFolder?.path) {
+      currentFolderPath =
+        typeof currentFolder.path === 'string'
+          ? JSON.parse(currentFolder.path)
+          : currentFolder.path;
+    }
     return (
       <View style={styles.drawerContainer}>
         <View style={styles.header}>
@@ -73,10 +81,8 @@ function DrawerNav({ navigation }) {
           ) : null}
 
           {/* Breadcrumbs */}
-          {currentFolder &&
-          currentFolder?.path &&
-          currentFolder?.path.length !== 0
-            ? JSON.parse(currentFolder.path).map((pathItem, index) => {
+          {currentFolder && currentFolderPath && currentFolderPath.length !== 0
+            ? currentFolderPath.map((pathItem, index) => {
                 const isActive = state.index === index + 2;
                 return (
                   <Pressable
@@ -161,6 +167,7 @@ function DrawerNav({ navigation }) {
         initialParams={{ folderId: null, folderTitle: 'Home' }}
       />
       <Drawer.Screen name='Account' component={Account} />
+      <Drawer.Screen name='Settings' component={Settings} />
     </Drawer.Navigator>
   );
 }

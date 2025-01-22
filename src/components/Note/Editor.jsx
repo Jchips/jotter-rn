@@ -57,7 +57,7 @@ const Editor = ({ navigation, route }) => {
                     uri: 'https://img.icons8.com/material-outlined/100/undo.png',
                   }}
                   alt='undo-button'
-                  style={styles.img}
+                  style={app.icon}
                 />
               </Pressable>
               <Pressable
@@ -76,7 +76,7 @@ const Editor = ({ navigation, route }) => {
                     uri: 'https://img.icons8.com/material-outlined/100/redo.png',
                   }}
                   alt='redo-button'
-                  style={styles.img}
+                  style={app.icon}
                 />
               </Pressable>
             </View>
@@ -261,10 +261,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  img: {
-    height: 22,
-    width: 22,
-  },
+  // img: {
+  //   height: 22,
+  //   width: 22,
+  // },
 });
 
 export default Editor;

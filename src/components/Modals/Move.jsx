@@ -36,10 +36,14 @@ const Move = (props) => {
         let res = await api.getAllFolders(folderId ? folderId : 'null', type);
         let formatFolders = res.data
           .map((folder) => {
+            let parsedPath =
+              typeof folder.path === 'string'
+                ? JSON.parse(folder.path)
+                : folder.path;
             return {
               label: folder.title,
               value: folder.id,
-              path: JSON.parse(folder.path),
+              path: parsedPath,
             };
           })
           .filter((formattedFolder) => formattedFolder.value !== parentId); // filter out parent folder
@@ -75,6 +79,10 @@ const Move = (props) => {
     try {
       setSaving(true);
       let moveToFolder = await getFolder(folderTarget.value);
+      let parsedTargetPath =
+        typeof moveToFolder.path === 'string'
+          ? JSON.parse(moveToFolder.path)
+          : moveToFolder.path;
       switch (type) {
         case 'note':
           await api.updateNote(
@@ -92,7 +100,7 @@ const Move = (props) => {
                 folderTarget.value === 'null' ? null : folderTarget.value,
               path: moveToFolder
                 ? [
-                    ...JSON.parse(moveToFolder.path),
+                    ...parsedTargetPath,
                     { id: moveToFolder.id, title: moveToFolder.title },
                   ]
                 : [],
@@ -156,7 +164,12 @@ const Move = (props) => {
     orgFolderPath
   ) => {
     let path;
-    let childPath = JSON.parse(child.path);
+    let childPath =
+      typeof child.path === 'string' ? JSON.parse(child.path) : child.path;
+    let parsedTargetPath =
+      typeof moveToFolder.path === 'string'
+        ? JSON.parse(moveToFolder.path)
+        : moveToFolder.path;
     let index = childPath.findIndex(
       (pathItem) => pathItem.id === folder.id && pathItem.title === folder.title
     );
@@ -164,7 +177,7 @@ const Move = (props) => {
     if (orgFolderPath.length === 0 && moveToFolder) {
       // Moving from root to a new folder
       path = [
-        ...JSON.parse(moveToFolder.path),
+        ...parsedTargetPath,
         { id: moveToFolder.id, title: moveToFolder.title },
         ...updatedChildPath,
       ];
@@ -294,6 +307,7 @@ const Move = (props) => {
         animationType='fade'
         transparent={true}
         visible={openMove}
+        statusBarTranslucent={true}
         onRequestClose={() => {
           setOpenMove(!openMove);
         }}

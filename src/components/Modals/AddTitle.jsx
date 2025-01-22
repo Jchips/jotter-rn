@@ -48,8 +48,11 @@ const AddTitle = (props) => {
     if (currentFolder === null) return;
     currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
     let path = currentFolder === ROOT_FOLDER ? [] : [ROOT_FOLDER];
-    let currentFolderPath =
-      currentFolder !== ROOT_FOLDER ? JSON.parse(currentFolder.path) : path; // parse from db
+    let parsedPath =
+      typeof currentFolder.path === 'string'
+        ? JSON.parse(currentFolder.path)
+        : currentFolder.path;
+    let currentFolderPath = currentFolder !== ROOT_FOLDER ? parsedPath : path; // parse from db
     path = [...currentFolderPath];
 
     // Adds current folder to the path
