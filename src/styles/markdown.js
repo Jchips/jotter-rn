@@ -54,12 +54,12 @@ const MARKDOWN = {
   },
   bullet_list: {
     fontFamily: FONT.regular,
-    lineHeight: moderateScale(20),
+    lineHeight: moderateScale(21),
     fontSize: moderateScale(FONTSIZE.regular),
   },
   ordered_list: {
     fontFamily: FONT.regular,
-    lineHeight: moderateScale(20),
+    lineHeight: moderateScale(21),
     fontSize: moderateScale(FONTSIZE.regular),
   },
 
@@ -99,7 +99,7 @@ const MARKDOWN = {
     justifyContent: 'flex-start',
     width: '100%',
     fontFamily: FONT.regular,
-    lineHeight: moderateScale(20),
+    lineHeight: moderateScale(21),
     fontSize: moderateScale(FONTSIZE.regular, 0.5),
   },
   hr: {

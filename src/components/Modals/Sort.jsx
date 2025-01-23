@@ -9,16 +9,7 @@ import api from '../../util/api';
 import sortBy from '../../util/sortBy';
 import { setConfigs } from '../../reducers/configReducer';
 import { setLocalConfigs } from '../../util/persist';
-import { moderateScale } from '../../util/scaling';
-import {
-  app,
-  buttons,
-  COLORS,
-  BORDER,
-  FONT,
-  FONTSIZE,
-  MODAL,
-} from '../../styles';
+import { app, buttons, COLORS, MODAL } from '../../styles';
 
 let sortOptions = [
   { label: 'Last created', value: '1' },
