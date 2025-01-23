@@ -47,7 +47,8 @@
             "./assets/fonts/RobotoMono-Regular.ttf"
           ]
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "extra": {
       "eas": {

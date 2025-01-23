@@ -1,4 +1,5 @@
 import { moderateScale } from '../util/scaling';
+import COLORS from './colors';
 import { BORDER, FONT, FONTSIZE } from './constants';
 
 const MARKDOWN = {
@@ -53,12 +54,12 @@ const MARKDOWN = {
   },
   bullet_list: {
     fontFamily: FONT.regular,
-    lineHeight: moderateScale(20),
+    lineHeight: moderateScale(21),
     fontSize: moderateScale(FONTSIZE.regular),
   },
   ordered_list: {
     fontFamily: FONT.regular,
-    lineHeight: moderateScale(20),
+    lineHeight: moderateScale(21),
     fontSize: moderateScale(FONTSIZE.regular),
   },
 
@@ -98,14 +99,18 @@ const MARKDOWN = {
     justifyContent: 'flex-start',
     width: '100%',
     fontFamily: FONT.regular,
-    lineHeight: moderateScale(20),
+    lineHeight: moderateScale(21),
     fontSize: moderateScale(FONTSIZE.regular, 0.5),
   },
   hr: {
     marginVertical: 20,
     marginTop: 25,
     backgroundColor: '#84848424',
-  }
+  },
+  link: {
+    textDecorationLine: 'none', // 'underline',
+    color: COLORS.themePurpleText,
+  },
 }
 
 export default MARKDOWN;

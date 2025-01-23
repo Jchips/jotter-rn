@@ -1,6 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Buffer } from 'buffer';
 import { API_URL } from '@env';
+import { setConfigs } from '../reducers/configReducer';
+import { setLocalConfigs } from '../util/persist';
 import axios from 'axios';
 import api from '../util/api';
 
@@ -14,6 +17,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
+  const dispatch = useDispatch();
 
   // Set up bearer auth for user
   useEffect(() => {
@@ -46,6 +50,7 @@ export function AuthProvider({ children }) {
    * Logs user in
    * Add token to localStorage
    * Creates a cookie to preserve user info until token expires
+   * Sets/stores the user's configurations
    * @param {String} email - User email
    * @param {String} password - User password
    * @returns {Object} - Response object from server
@@ -63,6 +68,10 @@ export function AuthProvider({ children }) {
       setUser(res.data.user);
       setToken(res.data.token);
       setIsLoggedIn(true);
+      api.setTokenGetter(() => res.data.token);
+      let uConfigs = await api.getConfigs();
+      dispatch(setConfigs(uConfigs.data));
+      setLocalConfigs(uConfigs.data);
     } catch (err) {
       console.error(err);
       res = err;
@@ -80,7 +89,6 @@ export function AuthProvider({ children }) {
       setUser(null);
       setIsLoggedIn(false);
       setToken(null);
-      // clearToken();
       delete axios.defaults.headers.common['Authorization'];
     } catch (err) {
       console.error('Failed to log user out:', err);

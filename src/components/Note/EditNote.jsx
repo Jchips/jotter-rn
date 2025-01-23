@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: FONT.code,
-    fontSize: moderateScale(FONTSIZE.regular),
+    fontSize: moderateScale(FONTSIZE.regular + 1),
     marginBottom: 5,
     paddingBottom: 10,
     whiteSpace: 'pre-wrap',

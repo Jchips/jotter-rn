@@ -5,6 +5,7 @@ const HOVER = {
 const NO_HASH = {
   textNoHash: '646cff',
   warningYellowNH: 'eed202',
+  dangerNH: 'dc3545',
   whiteNoHash: 'ffffff',
 }
 
