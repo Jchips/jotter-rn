@@ -46,7 +46,7 @@ TLDR: Jotter is a mobile app for Android designed for note-taking with Markdown.
 
 ## Changelog
 
-- **1.1.7** (2025-01-23, 5:30am) - Edit button fades out--double tap to reappear.
+- **1.1.7** (2025-01-23, 8:10pm) - Edit button fades out--double tap to reappear, improved editor.
 - **1.1.6** (2025-01-21, 10:46pm) - Added note/folder sort.
 - **1.1.5** (2025-01-12, 5:58pm) - Fixed bug where numbers in lists were not showing up.
 - **1.1.4** (2025-01-12, 12:58am) - Added 'view details' option for notes, improved device scaling.

@@ -1,12 +1,34 @@
-import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
+import { useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { moderateScale } from '../../util/scaling';
 import { FONT, FONTSIZE, COLORS } from '../../styles';
 
-const EditNote = ({ isEditable, markdown, update }) => {
+const EditNote = (props) => {
+  const { isEditable, markdown, update } = props;
+  const [selection, setSelection] = useState({
+    start: 0,
+    end: 0,
+  });
+
+  const handleSelectionChange = ({ nativeEvent: { selection } }) => {
+    setSelection(selection);
+  };
+
   return (
-    <View style={{ flex: 1 }}>
+    <KeyboardAvoidingView
+      behavior='position'
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={15}
+    >
       {!isEditable ? (
-        <ScrollView style={{ flex: 1, marginBottom: 15 }}>
+        <ScrollView style={{ marginBottom: 15 }}>
           <View style={{ flex: 1 }}>
             {markdown ? (
               <Text style={styles.editor}>{markdown}</Text>
@@ -18,15 +40,25 @@ const EditNote = ({ isEditable, markdown, update }) => {
           </View>
         </ScrollView>
       ) : (
-        <TextInput
-          style={styles.textInput}
-          multiline
-          value={markdown}
-          onChangeText={update}
-          placeholder='Add markdown...'
-        />
+        <ScrollView style={{ marginBottom: 15 }}>
+          <TextInput
+            style={styles.textInput}
+            multiline
+            value={markdown}
+            onChangeText={update}
+            selection={selection}
+            onSelectionChange={handleSelectionChange}
+            placeholder='Add markdown...'
+            onLayout={() =>
+              setSelection({
+                start: selection,
+                end: selection,
+              })
+            }
+          />
+        </ScrollView>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -44,7 +76,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: FONT.code,
-    fontSize: moderateScale(FONTSIZE.regular + 1),
+    fontSize: moderateScale(FONTSIZE.regular, 0.6),
     marginBottom: 5,
     paddingBottom: 10,
     whiteSpace: 'pre-wrap',

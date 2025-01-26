@@ -24,6 +24,7 @@ const Editor = ({ navigation, route }) => {
   const [redoStack, setRedoStack] = useState([]);
   const { markdown, setMarkdown } = useMarkdown();
   const [words, setWords] = useState(getWordCount(markdown));
+
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)
     .onEnd(() => {
@@ -261,10 +262,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  // img: {
-  //   height: 22,
-  //   width: 22,
-  // },
 });
 
 export default Editor;
