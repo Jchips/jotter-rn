@@ -60,12 +60,13 @@ const styles = StyleSheet.create({
   },
   modalBody: {
     textAlign: 'left',
+    width: '85%',
   },
   modalText: {
     fontFamily: FONT.regular,
     fontSize: moderateScale(FONTSIZE.regular),
     color: COLORS.themePurpleText,
-    lineHeight: 25,
+    lineHeight: moderateScale(25),
   },
 });
 
