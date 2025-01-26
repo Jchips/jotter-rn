@@ -47,7 +47,7 @@ const app = StyleSheet.create({
     fontSize: moderateScale(FONTSIZE.xsmall),
     marginVertical: 1,
     fontFamily: FONT.regular,
-    lineHeight: 20
+    lineHeight: moderateScale(20),
   },
   boldText: {
     fontFamily: FONT.bold,
@@ -55,14 +55,14 @@ const app = StyleSheet.create({
   header: {
     fontSize: moderateScale(FONTSIZE.large),
     margin: 10,
-    fontFamily: FONT.bold
+    fontFamily: FONT.bold,
   },
   errorAlert: {
     backgroundColor: 'rgb(248, 215, 218)',
     padding: 16,
     borderRadius: 8,
     margin: 10,
-    width: '100%'
+    width: '100%',
   },
   errorText: {
     color: '#dc3545',

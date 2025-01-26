@@ -10,15 +10,15 @@ const button = {
   height: moderateScale(45),
   justifyContent: 'center',
   margin: 10,
-  paddingHorizontal: 20
-}
+  paddingHorizontal: 20,
+};
 
 const buttonText = {
   color: COLORS.themeWhite,
   fontSize: moderateScale(FONTSIZE.regular),
   fontFamily: FONT.semiBold,
-  lineHeight: 20,
-}
+  lineHeight: moderateScale(20),
+};
 
 const buttons = StyleSheet.create({
   btn1: {
@@ -26,7 +26,7 @@ const buttons = StyleSheet.create({
   },
   btn2: {
     ...button,
-    backgroundColor: COLORS.black
+    backgroundColor: COLORS.black,
   },
   btn3: {
     ...button,
@@ -60,7 +60,7 @@ const buttons = StyleSheet.create({
   btnText3: {
     ...buttonText,
     color: COLORS.darkTheme,
-  }
-})
+  },
+});
 
 export default buttons;
