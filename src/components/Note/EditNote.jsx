@@ -25,7 +25,7 @@ const EditNote = (props) => {
     <KeyboardAvoidingView
       behavior='position'
       style={{ flex: 1 }}
-      keyboardVerticalOffset={15}
+      // keyboardVerticalOffset={15}
     >
       {!isEditable ? (
         <ScrollView style={{ marginBottom: 15 }}>
@@ -49,6 +49,12 @@ const EditNote = (props) => {
             selection={selection}
             onSelectionChange={handleSelectionChange}
             placeholder='Add markdown...'
+            onBlur={() =>
+              setSelection({
+                start: selection,
+                end: selection,
+              })
+            }
             onLayout={() =>
               setSelection({
                 start: selection,
