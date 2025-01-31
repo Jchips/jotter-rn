@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Pressable, Image } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '../contexts/AuthContext';
 import { useFolder } from '../hooks/useFolder';
 import { useMarkdown } from '../contexts/MDContext';
@@ -9,8 +10,10 @@ import DisplayFolders from './Display/DisplayFolders';
 import DisplayNotes from './Display/DisplayNotes';
 import AddButton from './Buttons/AddButton';
 import Sort from './Modals/Sort';
+import Grid from './Modals/Grid';
 import AddTitle from './Modals/AddTitle';
 import api from '../util/api';
+import { fetchConfigs } from '../reducers/configReducer';
 import { app, buttons, COLORS } from '../styles';
 
 const Dashboard = ({ route }) => {
@@ -21,10 +24,13 @@ const Dashboard = ({ route }) => {
   const [loading, setLoading] = useState(true);
   const [type, setType] = useState(null);
   const [openSort, setOpenSort] = useState(false);
+  const [openGrid, setOpenGrid] = useState(false);
   const [openAddTitle, setOpenAddTitle] = useState(false);
   const { token, logout } = useAuth();
   const { setMarkdown } = useMarkdown();
   const navigation = useNavigation();
+  const { data } = useSelector((state) => state.configs);
+  const dispatch = useDispatch();
   const { folder } = useFolder(folderId);
 
   // Set up bearer auth for user
@@ -32,18 +38,43 @@ const Dashboard = ({ route }) => {
     api.setTokenGetter(() => token);
   }, [token]);
 
+  useEffect(() => {
+    dispatch(fetchConfigs(token));
+  }, [dispatch]);
+
+  useEffect(() => {
+    setMarkdown('');
+  }, []);
+
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
         headerTitle: folderTitle,
         headerRight: () => {
           return (
-            <View>
+            <View style={{ flexDirection: 'row' }}>
+              <Pressable
+                onPress={() => {
+                  setOpenGrid(true);
+                }}
+                style={styles.headerButton}
+              >
+                <Image
+                  source={{
+                    uri:
+                      data?.gridSize === '2'
+                        ? 'https://img.icons8.com/material-outlined/100/rows.png'
+                        : 'https://img.icons8.com/material-outlined/100/grid-2.png',
+                  }}
+                  alt='grid-button'
+                  style={app.icon}
+                />
+              </Pressable>
               <Pressable
                 onPress={() => {
                   setOpenSort(true);
                 }}
-                style={styles.sortButton}
+                style={styles.headerButton}
               >
                 <Image
                   source={{
@@ -57,12 +88,8 @@ const Dashboard = ({ route }) => {
           );
         },
       });
-    }, [navigation, route])
+    }, [navigation, route, data])
   );
-
-  useEffect(() => {
-    setMarkdown('');
-  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -108,6 +135,7 @@ const Dashboard = ({ route }) => {
         <DisplayFolders
           folders={folders}
           setFolders={setFolders}
+          gridSize={data?.gridSize}
           error={error}
         />
       ) : null}
@@ -116,6 +144,7 @@ const Dashboard = ({ route }) => {
           notes={notes}
           setNotes={setNotes}
           folders={folders}
+          gridSize={data?.gridSize}
           error={error}
         />
       ) : null}
@@ -138,20 +167,21 @@ const Dashboard = ({ route }) => {
         setNotes={setNotes}
         setFolders={setFolders}
       />
+      <Grid openGrid={openGrid} setOpenGrid={setOpenGrid} />
     </View>
   ) : null;
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: COLORS.themeWhite,
+    ...app.container,
+    ...app.dashboardContainer,
   },
-  sortButton: {
+  headerButton: {
     ...buttons.btn1,
     backgroundColor: COLORS.themeWhite,
     margin: 0,
+    paddingLeft: 0,
   },
 });
 

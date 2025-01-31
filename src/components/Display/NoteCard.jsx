@@ -1,5 +1,12 @@
 import { useRef } from 'react';
-import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  Image,
+  Dimensions,
+} from 'react-native';
 import Popover from 'react-native-popover-view';
 import formatDate from '../../util/formatDate';
 import { moderateScale } from '../../util/scaling';
@@ -13,6 +20,8 @@ import {
   buttons,
 } from '../../styles';
 
+const screenWidth = Dimensions.get('window').width;
+
 const NoteCard = (props) => {
   const {
     note,
@@ -21,11 +30,16 @@ const NoteCard = (props) => {
     setOpenMove,
     setOpenDelete,
     setOpenDetails,
+    numColumns,
   } = props;
   const popoverRef = useRef();
+  const itemWidth =
+    (screenWidth -
+      app.dashboardContainer.paddingHorizontal * (numColumns + 1)) /
+    numColumns;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width: itemWidth }]}>
       <View style={styles.h1Container}>
         <Text style={styles.h1}>{note.title}</Text>
         <Popover
@@ -125,11 +139,13 @@ const NoteCard = (props) => {
 const styles = StyleSheet.create({
   container: {
     ...app.itemCard,
+    flexWrap: 'wrap',
   },
   h1Container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 1,
+    flexWrap: 'wrap',
     marginBottom: 10,
   },
   h1: {

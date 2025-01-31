@@ -1,5 +1,12 @@
 import { useRef } from 'react';
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+  Dimensions,
+} from 'react-native';
 import Popover from 'react-native-popover-view';
 import { moderateScale } from '../../util/scaling';
 import {
@@ -12,6 +19,8 @@ import {
   buttons,
 } from '../../styles';
 
+const screenWidth = Dimensions.get('window').width;
+
 const FolderCard = (props) => {
   const {
     folder,
@@ -19,11 +28,16 @@ const FolderCard = (props) => {
     setOpenRename,
     setOpenDelete,
     setOpenMove,
+    numColumns,
   } = props;
   const popoverRef = useRef();
+  const itemWidth =
+    (screenWidth -
+      app.dashboardContainer.paddingHorizontal * (numColumns + 1)) /
+    numColumns;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width: itemWidth }]}>
       <View style={styles.h1Container}>
         <Image
           source={{
@@ -114,10 +128,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
   h1Container: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
   h1: {
     fontSize: moderateScale(FONTSIZE.regular),
