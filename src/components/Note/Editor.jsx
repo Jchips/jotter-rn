@@ -42,7 +42,9 @@ const Editor = ({ navigation, route }) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitle:
-        screenWidth < 440 ? note.title.substring(0, 13) + '...' : note.title,
+        screenWidth < 440 && note.title.length > 13
+          ? note.title.substring(0, 13) + '...'
+          : note.title,
       headerRight: () => {
         return (
           <>

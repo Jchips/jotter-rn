@@ -51,7 +51,7 @@ const Dashboard = ({ route }) => {
     React.useCallback(() => {
       navigation.setOptions({
         headerTitle:
-          screenWidth < 440
+          screenWidth < 440 && folderTitle.length > 20
             ? folderTitle.substring(0, 20) + '...'
             : folderTitle,
         headerRight: () => {
