@@ -8,13 +8,14 @@ import Delete from '../Modals/Delete';
 import NoteDetails from '../Note/NoteDetails';
 import { app } from '../../styles';
 
-const DisplayNotes = ({ notes, setNotes, folders, error }) => {
+const DisplayNotes = ({ notes, setNotes, folders, error, gridSize }) => {
   const [openMove, setOpenMove] = useState(false);
   const [openRename, setOpenRename] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openDetails, setOpenDetails] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
   const navigation = useNavigation();
+  const numColumns = Number(gridSize) || 1;
 
   /**
    * Renders a list of notes
@@ -36,6 +37,7 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
           setOpenDelete={setOpenDelete}
           setOpenMove={setOpenMove}
           setOpenDetails={setOpenDetails}
+          numColumns={numColumns}
         />
       </Pressable>
     );
@@ -56,9 +58,13 @@ const DisplayNotes = ({ notes, setNotes, folders, error }) => {
           ) : null}
           <FlatList
             data={notes}
+            key={numColumns}
             renderItem={renderItem}
-            numColumns={1}
+            numColumns={numColumns}
             keyExtractor={(item) => item.id}
+            columnWrapperStyle={
+              numColumns > 1 ? { justifyContent: 'space-between' } : undefined
+            }
           />
         </View>
       )}

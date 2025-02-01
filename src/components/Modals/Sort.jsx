@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Modal, StyleSheet, View, Text, Pressable } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import SelectDropdown from 'react-native-select-dropdown';
 import DropdownBtn from '../Buttons/DropdownBtn';
@@ -22,7 +21,7 @@ let sortOptions = [
 
 const Sort = (props) => {
   const { openSort, setOpenSort, notes, folders, setNotes, setFolders } = props;
-  const configs = useSelector((state) => state.configs.value);
+  const configs = useSelector((state) => state.configs.data);
   const [sort, setSort] = useState(configs?.sort);
   const dispatch = useDispatch();
   const sortMethod = sortMethods;
@@ -49,17 +48,6 @@ const Sort = (props) => {
     };
     updateSort(sortOption);
   };
-
-  // Fetch sort config from database
-  useFocusEffect(
-    React.useCallback(() => {
-      const fetchConfigs = async () => {
-        let uConfigs = await api.getConfigs();
-        setSort(uConfigs?.data?.sort);
-      };
-      fetchConfigs();
-    }, [])
-  );
 
   // Dropdown button default text
   const dropdownBtnText = () => {

@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: moderateScale(48),
-    paddingHorizontal: 10,
+    paddingHorizontal: moderateScale(10),
     marginVertical: '2%',
   },
 });

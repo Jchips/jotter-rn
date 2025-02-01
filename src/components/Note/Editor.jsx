@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  Image,
+  Dimensions,
+} from 'react-native';
 import {
   Gesture,
   GestureDetector,
@@ -24,6 +31,7 @@ const Editor = ({ navigation, route }) => {
   const [redoStack, setRedoStack] = useState([]);
   const { markdown, setMarkdown } = useMarkdown();
   const [words, setWords] = useState(getWordCount(markdown));
+  const screenWidth = Dimensions.get('window').width;
 
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)
@@ -34,7 +42,7 @@ const Editor = ({ navigation, route }) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitle:
-        note.title.length > 13
+        screenWidth < 440 && note.title.length > 13
           ? note.title.substring(0, 13) + '...'
           : note.title,
       headerRight: () => {

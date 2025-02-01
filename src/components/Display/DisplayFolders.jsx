@@ -7,12 +7,13 @@ import Move from '../Modals/Move';
 import Rename from '../Modals/Rename';
 import { app } from '../../styles';
 
-const DisplayFolders = ({ folders, setFolders, error }) => {
+const DisplayFolders = ({ folders, setFolders, error, gridSize }) => {
   const [openMove, setOpenMove] = useState(false);
   const [openRename, setOpenRename] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [openDelete, setOpenDelete] = useState(false);
   const navigation = useNavigation();
+  const numColumns = Number(gridSize) || 1;
 
   /**
    * Renders list of folders
@@ -36,6 +37,7 @@ const DisplayFolders = ({ folders, setFolders, error }) => {
           setOpenRename={setOpenRename}
           setOpenDelete={setOpenDelete}
           setOpenMove={setOpenMove}
+          numColumns={numColumns}
         />
       </Pressable>
     );
@@ -50,9 +52,13 @@ const DisplayFolders = ({ folders, setFolders, error }) => {
       ) : null}
       <FlatList
         data={folders}
+        key={numColumns}
         renderItem={renderItem}
-        numColumns={1}
+        numColumns={numColumns}
         keyExtractor={(item) => item.id}
+        columnWrapperStyle={
+          numColumns > 1 ? { justifyContent: 'space-between' } : undefined
+        }
       />
       <Rename
         openRename={openRename}
