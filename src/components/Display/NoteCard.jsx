@@ -130,8 +130,10 @@ const NoteCard = (props) => {
           </View>
         </Popover>
       </View>
-      <Text style={styles.metaData}>{formatDate(note.createdAt)}</Text>
-      <Text style={styles.metaData}>{formatDate(note.updatedAt)}</Text>
+      <View>
+        <Text style={styles.metaData}>{formatDate(note.createdAt)}</Text>
+        <Text style={styles.metaData}>{formatDate(note.updatedAt)}</Text>
+      </View>
     </View>
   );
 };
@@ -139,7 +141,6 @@ const NoteCard = (props) => {
 const styles = StyleSheet.create({
   container: {
     ...app.itemCard,
-    flexWrap: 'wrap',
   },
   h1Container: {
     flexDirection: 'row',

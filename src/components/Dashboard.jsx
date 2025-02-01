@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Pressable, Image } from 'react-native';
+import { StyleSheet, View, Pressable, Image, Dimensions } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '../contexts/AuthContext';
@@ -32,6 +32,7 @@ const Dashboard = ({ route }) => {
   const { data } = useSelector((state) => state.configs);
   const dispatch = useDispatch();
   const { folder } = useFolder(folderId);
+  const screenWidth = Dimensions.get('window').width;
 
   // Set up bearer auth for user
   useEffect(() => {
@@ -49,7 +50,10 @@ const Dashboard = ({ route }) => {
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
-        headerTitle: folderTitle,
+        headerTitle:
+          screenWidth < 440
+            ? folderTitle.substring(0, 20) + '...'
+            : folderTitle,
         headerRight: () => {
           return (
             <View style={{ flexDirection: 'row' }}>

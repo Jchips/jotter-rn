@@ -131,11 +131,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   h1Container: {
+    flexShrink: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    flexWrap: 'wrap',
   },
   h1: {
+    flexShrink: 1,
     fontSize: moderateScale(FONTSIZE.regular),
     fontFamily: FONT.bold,
     color: COLORS.themePurpleText,
